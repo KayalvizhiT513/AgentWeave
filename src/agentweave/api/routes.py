@@ -11,9 +11,18 @@ from agentweave.api.schemas import (
     ConversationEventResponse,
     ConversationSummaryResponse,
     CreateConversationRequest,
+    FutureAGIDatasetRowResponse,
+    FutureAGIUploadRequest,
+    FutureAGIUploadResponse,
 )
-from agentweave.dependencies import get_orchestrator
+from agentweave.dependencies import get_futureagi_client, get_orchestrator
 from agentweave.core.models import Conversation
+from agentweave.services.futureagi import (
+    FutureAGIConfigurationError,
+    FutureAGISDKUnavailableError,
+    FutureAGIUploadError,
+    build_futureagi_dataset_row,
+)
 
 
 router = APIRouter(prefix="/api/v1", tags=["conversations"])
@@ -135,3 +144,49 @@ async def stream_events(
             orchestrator.event_bus.unsubscribe(conversation_id, queue)
 
     return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+
+@router.get(
+    "/conversations/{conversation_id}/futureagi/row",
+    response_model=FutureAGIDatasetRowResponse,
+)
+async def get_futureagi_row(
+    conversation_id: str,
+    orchestrator=Depends(get_orchestrator),
+) -> FutureAGIDatasetRowResponse:
+    conversation = await orchestrator.get_conversation(conversation_id)
+    if not conversation:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+    row = build_futureagi_dataset_row(conversation, orchestrator.provider.settings.provider_mode if hasattr(orchestrator.provider, "settings") else "simulated")
+    return FutureAGIDatasetRowResponse.model_validate(row)
+
+
+@router.post(
+    "/conversations/{conversation_id}/futureagi/upload",
+    response_model=FutureAGIUploadResponse,
+)
+async def upload_conversation_to_futureagi(
+    conversation_id: str,
+    request: FutureAGIUploadRequest,
+    orchestrator=Depends(get_orchestrator),
+    futureagi_client=Depends(get_futureagi_client),
+) -> FutureAGIUploadResponse:
+    conversation = await orchestrator.get_conversation(conversation_id)
+    if not conversation:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+    try:
+        result = await futureagi_client.upload_conversation_to_dataset(
+            conversation=conversation,
+            dataset_name=request.dataset_name,
+        )
+    except FutureAGIConfigurationError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except FutureAGISDKUnavailableError as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+    except FutureAGIUploadError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    return FutureAGIUploadResponse(
+        dataset_name=request.dataset_name,
+        status=result.status,
+        message=result.message,
+    )

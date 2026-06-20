@@ -3,9 +3,12 @@ from __future__ import annotations
 from fastapi import FastAPI
 
 from agentweave.api.routes import router
+from agentweave.config import get_settings
+from agentweave.dependencies import get_provider_name
 
 
 def create_app() -> FastAPI:
+    settings = get_settings()
     app = FastAPI(
         title="AgentWeave API",
         version="0.1.0",
@@ -15,7 +18,12 @@ def create_app() -> FastAPI:
 
     @app.get("/health")
     async def healthcheck() -> dict[str, str]:
-        return {"status": "ok"}
+        return {
+            "status": "ok",
+            "environment": settings.app_env,
+            "provider_mode": settings.provider_mode,
+            "provider_class": get_provider_name(),
+        }
 
     return app
 

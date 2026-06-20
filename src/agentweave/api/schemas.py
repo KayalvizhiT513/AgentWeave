@@ -125,3 +125,28 @@ class ConversationEventResponse(BaseModel):
     conversation_id: str
     created_at: datetime
     payload: dict
+
+
+class FutureAGIDatasetRowResponse(BaseModel):
+    conversation_id: str
+    topic: str
+    scene: str | None
+    constraints: list[str]
+    status: str
+    current_round: int
+    exchange_count: int
+    evaluation_count: int
+    replacement_count: int
+    provider_mode: str
+    transcript: str
+    final_summary: str | None
+
+
+class FutureAGIUploadRequest(BaseModel):
+    dataset_name: str = Field(min_length=1)
+
+
+class FutureAGIUploadResponse(BaseModel):
+    dataset_name: str
+    status: str
+    message: str
