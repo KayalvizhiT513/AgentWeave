@@ -139,6 +139,7 @@ class ConversationOrchestrator:
         self.event_bus = event_bus
         self.provider = provider
         self._tasks: dict[str, asyncio.Task[None]] = {}
+        self._locks: dict[str, asyncio.Lock] = {}
 
     async def create_conversation(
         self,
@@ -166,79 +167,93 @@ class ConversationOrchestrator:
         return await self.store.get(conversation_id)
 
     async def start_conversation(self, conversation_id: str) -> Conversation:
-        conversation = await self._require_conversation(conversation_id)
-        if conversation.status == ConversationStatus.RUNNING:
-            return conversation
-        if conversation.status == ConversationStatus.COMPLETED:
-            return conversation
+        async with self._conversation_lock(conversation_id):
+            conversation = await self._require_conversation(conversation_id)
+            if conversation.status == ConversationStatus.RUNNING:
+                return conversation
+            if conversation.status == ConversationStatus.COMPLETED:
+                return conversation
 
-        conversation.status = ConversationStatus.RUNNING
-        conversation.updated_at = datetime.now(conversation.updated_at.tzinfo)
-        await self.store.update(conversation)
-        await self._publish(EventType.CONVERSATION_STARTED, conversation, {"status": conversation.status})
+            conversation.status = ConversationStatus.RUNNING
+            conversation.updated_at = datetime.now(conversation.updated_at.tzinfo)
+            await self.store.update(conversation)
+            await self._publish(EventType.CONVERSATION_STARTED, conversation, {"status": conversation.status})
 
-        self._tasks[conversation.id] = asyncio.create_task(self._run_until_complete(conversation.id))
-        return conversation
+            task = self._tasks.get(conversation.id)
+            if task is None or task.done():
+                self._tasks[conversation.id] = asyncio.create_task(
+                    self._run_until_complete(conversation.id)
+                )
+            return conversation
 
     async def stop_conversation(self, conversation_id: str) -> Conversation:
-        conversation = await self._require_conversation(conversation_id)
-        conversation.status = ConversationStatus.STOPPED
-        conversation.updated_at = datetime.now(conversation.updated_at.tzinfo)
-        task = self._tasks.pop(conversation_id, None)
-        if task:
-            task.cancel()
-        await self.store.update(conversation)
-        await self._publish(EventType.CONVERSATION_STOPPED, conversation, {"status": conversation.status})
-        return conversation
+        lock = self._conversation_lock(conversation_id)
+        while lock.locked():
+            task = self._tasks.get(conversation_id)
+            if task:
+                task.cancel()
+            await asyncio.sleep(0)
+
+        async with lock:
+            conversation = await self._require_conversation(conversation_id)
+            conversation.status = ConversationStatus.STOPPED
+            conversation.updated_at = datetime.now(conversation.updated_at.tzinfo)
+            task = self._tasks.pop(conversation_id, None)
+            if task:
+                task.cancel()
+            await self.store.update(conversation)
+            await self._publish(EventType.CONVERSATION_STOPPED, conversation, {"status": conversation.status})
+            return conversation
 
     async def step_conversation(self, conversation_id: str) -> Conversation:
-        conversation = await self._require_conversation(conversation_id)
-        if conversation.status == ConversationStatus.COMPLETED:
+        async with self._conversation_lock(conversation_id):
+            conversation = await self._require_conversation(conversation_id)
+            if conversation.status == ConversationStatus.COMPLETED:
+                return conversation
+            if conversation.status == ConversationStatus.DRAFT:
+                conversation.status = ConversationStatus.RUNNING
+
+            conversation.current_round += 1
+            for agent in conversation.active_agents():
+                if agent.role == AgentRole.EVALUATOR:
+                    continue
+                response = await self.provider.respond(conversation, agent)
+                agent.contribution_score = response.contribution_score
+                agent.novelty_score = response.novelty_score
+                agent.repetition_score = response.repetition_score
+                agent.token_usage += len(response.content.split())
+                agent.replacement_eligibility = min(
+                    1.0,
+                    (agent.repetition_score * 0.55) + ((1.0 - agent.contribution_score) * 0.45),
+                )
+
+                exchange = Exchange(
+                    round_number=conversation.current_round,
+                    agent_id=agent.id,
+                    role=agent.role,
+                    content=response.content,
+                    contribution_score=response.contribution_score,
+                    novelty_score=response.novelty_score,
+                    repetition_score=response.repetition_score,
+                )
+                conversation.exchanges.append(exchange)
+                conversation.shared_context.history.append(exchange.content)
+
+            await self._summarize_if_needed(conversation)
+            await self._evaluate_if_needed(conversation)
+            await self._complete_if_needed(conversation)
+            conversation.updated_at = datetime.now(conversation.updated_at.tzinfo)
+            await self.store.update(conversation)
+            await self._publish(
+                EventType.ROUND_COMPLETED,
+                conversation,
+                {
+                    "round": conversation.current_round,
+                    "exchange_count": len(conversation.exchanges),
+                    "status": conversation.status,
+                },
+            )
             return conversation
-        if conversation.status == ConversationStatus.DRAFT:
-            conversation.status = ConversationStatus.RUNNING
-
-        conversation.current_round += 1
-        for agent in conversation.active_agents():
-            if agent.role == AgentRole.EVALUATOR:
-                continue
-            response = await self.provider.respond(conversation, agent)
-            agent.contribution_score = response.contribution_score
-            agent.novelty_score = response.novelty_score
-            agent.repetition_score = response.repetition_score
-            agent.token_usage += len(response.content.split())
-            agent.replacement_eligibility = min(
-                1.0,
-                (agent.repetition_score * 0.55) + ((1.0 - agent.contribution_score) * 0.45),
-            )
-
-            exchange = Exchange(
-                round_number=conversation.current_round,
-                agent_id=agent.id,
-                role=agent.role,
-                content=response.content,
-                contribution_score=response.contribution_score,
-                novelty_score=response.novelty_score,
-                repetition_score=response.repetition_score,
-            )
-            conversation.exchanges.append(exchange)
-            conversation.shared_context.history.append(exchange.content)
-
-        await self._summarize_if_needed(conversation)
-        await self._evaluate_if_needed(conversation)
-        await self._complete_if_needed(conversation)
-        conversation.updated_at = datetime.now(conversation.updated_at.tzinfo)
-        await self.store.update(conversation)
-        await self._publish(
-            EventType.ROUND_COMPLETED,
-            conversation,
-            {
-                "round": conversation.current_round,
-                "exchange_count": len(conversation.exchanges),
-                "status": conversation.status,
-            },
-        )
-        return conversation
 
     def _initial_agents(self) -> list[AgentProfile]:
         return [
@@ -372,3 +387,10 @@ class ConversationOrchestrator:
                 payload=payload,
             )
         )
+
+    def _conversation_lock(self, conversation_id: str) -> asyncio.Lock:
+        lock = self._locks.get(conversation_id)
+        if lock is None:
+            lock = asyncio.Lock()
+            self._locks[conversation_id] = lock
+        return lock

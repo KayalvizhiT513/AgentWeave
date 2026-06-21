@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 
@@ -7,3 +8,7 @@ SRC = ROOT / "src"
 
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
+
+
+# Keep test execution deterministic and independent of the developer's local .env.
+os.environ["PROVIDER_MODE"] = "simulated"
