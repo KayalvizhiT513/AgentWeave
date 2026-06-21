@@ -271,3 +271,85 @@ def test_stop_running_conversation_cancels_background_task() -> None:
         assert len(latest.exchanges) == 0
 
     asyncio.run(scenario())
+
+
+def test_concurrent_start_creates_only_one_running_task() -> None:
+    async def scenario() -> None:
+        store = ConversationStore()
+        event_bus = EventBus()
+        provider = BlockingProvider()
+        orchestrator = ConversationOrchestrator(store, event_bus, provider)
+        runtime = RuntimeConfig(
+            evaluation_interval=1,
+            restructuring_interval=5,
+            max_rounds=3,
+            max_history_entries=10,
+            summary_window=2,
+            stagnation_threshold=3,
+        )
+
+        conversation = await orchestrator.create_conversation(
+            topic="Concurrent start",
+            scene=None,
+            constraints=[],
+            runtime=runtime,
+        )
+
+        await asyncio.gather(
+            orchestrator.start_conversation(conversation.id),
+            orchestrator.start_conversation(conversation.id),
+        )
+        await asyncio.wait_for(provider.started.wait(), timeout=1.0)
+
+        assert provider.respond_calls == 1
+        assert len(orchestrator._tasks) == 1
+
+        task = orchestrator._tasks[conversation.id]
+        task.cancel()
+        await asyncio.wait_for(provider.cancelled.wait(), timeout=1.0)
+        try:
+            await asyncio.wait_for(task, timeout=1.0)
+        except asyncio.CancelledError:
+            pass
+
+    asyncio.run(scenario())
+
+
+def test_concurrent_step_calls_are_serialized_per_conversation() -> None:
+    async def scenario() -> None:
+        store = ConversationStore()
+        event_bus = EventBus()
+        provider = ScriptedProvider(
+            [EvaluationRecommendation.CONTINUE, EvaluationRecommendation.CONTINUE],
+            response_delay=0.01,
+        )
+        orchestrator = ConversationOrchestrator(store, event_bus, provider)
+        runtime = RuntimeConfig(
+            evaluation_interval=1,
+            restructuring_interval=5,
+            max_rounds=4,
+            max_history_entries=10,
+            summary_window=2,
+            stagnation_threshold=3,
+        )
+
+        conversation = await orchestrator.create_conversation(
+            topic="Concurrent step",
+            scene=None,
+            constraints=[],
+            runtime=runtime,
+        )
+
+        await asyncio.gather(
+            orchestrator.step_conversation(conversation.id),
+            orchestrator.step_conversation(conversation.id),
+        )
+        updated = await orchestrator.get_conversation(conversation.id)
+
+        assert updated is not None
+        assert updated.current_round == 2
+        assert [exchange.round_number for exchange in updated.exchanges] == [1, 1, 1, 2, 2, 2]
+        assert provider.respond_calls == 6
+        assert provider.evaluate_calls == 2
+
+    asyncio.run(scenario())
