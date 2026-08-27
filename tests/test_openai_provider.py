@@ -66,8 +66,8 @@ def test_openai_provider_respond(monkeypatch) -> None:
     settings = Settings(
         provider_mode="openai",
         openai_api_key="test-key",
-        openai_default_model="gpt-4.1-mini",
-        openai_evaluator_model="gpt-4.1-mini",
+        openai_default_model="gpt-5.4-mini",
+        openai_evaluator_model="gpt-5.4-mini",
     )
     provider = OpenAIAgentProvider(settings)
     conversation = make_conversation()
@@ -118,8 +118,8 @@ def test_openai_provider_evaluate(monkeypatch) -> None:
     settings = Settings(
         provider_mode="openai",
         openai_api_key="test-key",
-        openai_default_model="gpt-4.1-mini",
-        openai_evaluator_model="gpt-4.1-mini",
+        openai_default_model="gpt-5.4-mini",
+        openai_evaluator_model="gpt-5.4-mini",
     )
     provider = OpenAIAgentProvider(settings)
     conversation = make_conversation()

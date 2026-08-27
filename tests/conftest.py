@@ -11,4 +11,5 @@ if str(SRC) not in sys.path:
 
 
 # Keep test execution deterministic and independent of the developer's local .env.
-os.environ["PROVIDER_MODE"] = "simulated"
+os.environ["PROVIDER_MODE"] = "openai"
+os.environ["OPENAI_API_KEY"] = "test-key"

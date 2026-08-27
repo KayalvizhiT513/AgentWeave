@@ -34,17 +34,16 @@ Create a local `.env` file and add your key:
 
 ```env
 APP_ENV=development
-PROVIDER_MODE=simulated
-OPENAI_API_KEY=
+PROVIDER_MODE=openai
+OPENAI_API_KEY=your_key_here
 OPENAI_BASE_URL=https://api.openai.com/v1
-OPENAI_DEFAULT_MODEL=gpt-4.1-mini
-OPENAI_EVALUATOR_MODEL=gpt-4.1-mini
+OPENAI_DEFAULT_MODEL=gpt-5.4-mini
+OPENAI_EVALUATOR_MODEL=gpt-5.4-mini
 ```
 
 Notes:
 
-- keep `PROVIDER_MODE=simulated` until the provider implementation is switched to real OpenAI calls
-- when you later set `PROVIDER_MODE=openai`, startup will fail if `OPENAI_API_KEY` is missing
+- OpenAI is the only supported runtime provider; startup fails if `OPENAI_API_KEY` is missing.
 
 Start the API:
 
@@ -54,6 +53,7 @@ uvicorn agentweave.app:app --reload
 
 Open:
 
+- `http://127.0.0.1:8000/` — live reasoning workspace
 - `http://127.0.0.1:8000/docs`
 - `http://127.0.0.1:8000/health`
 
@@ -119,14 +119,6 @@ Example request:
 - add auth, rate limits, and workspace/session scoping
 - add websocket transport if bidirectional control becomes necessary
 
-## Provider Modes
+## Provider
 
-- `PROVIDER_MODE=simulated`: runs deterministic placeholder agents for plumbing and UI development
-- `PROVIDER_MODE=openai`: uses `OPENAI_API_KEY` from `.env` and calls the OpenAI Responses API
-
-To enable real model-backed conversations:
-
-```env
-PROVIDER_MODE=openai
-OPENAI_API_KEY=your_key_here
-```
+AgentWeave uses `OPENAI_API_KEY` from `.env` and calls the OpenAI Responses API.

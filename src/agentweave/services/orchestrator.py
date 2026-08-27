@@ -238,6 +238,14 @@ class ConversationOrchestrator:
                 )
                 conversation.exchanges.append(exchange)
                 conversation.shared_context.history.append(exchange.content)
+                await self.store.update(conversation)
+                await self._publish(
+                    EventType.AGENT_RESPONDED,
+                    conversation,
+                    {"exchange": exchange, "agent": agent},
+                )
+                if conversation.runtime.agent_turn_delay_seconds:
+                    await asyncio.sleep(conversation.runtime.agent_turn_delay_seconds)
 
             await self._summarize_if_needed(conversation)
             await self._evaluate_if_needed(conversation)

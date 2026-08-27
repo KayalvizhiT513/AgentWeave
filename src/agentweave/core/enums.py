@@ -42,6 +42,7 @@ class EvaluationRecommendation(str, Enum):
 class EventType(str, Enum):
     CONVERSATION_CREATED = "conversation.created"
     CONVERSATION_STARTED = "conversation.started"
+    AGENT_RESPONDED = "conversation.agent_responded"
     ROUND_COMPLETED = "conversation.round_completed"
     EVALUATION_CREATED = "conversation.evaluation_created"
     AGENT_REPLACED = "conversation.agent_replaced"
