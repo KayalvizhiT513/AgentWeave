@@ -179,7 +179,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
             "Make one concrete contribution that directly engages with what others have said. "
-            "Use at most 4 sentences. Prefer crisp argumentative speech over exposition. "
+            "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
             "The 'content' field is the only user-visible text. The numeric scores are hidden metadata for the orchestrator. "
             "Return valid structured JSON matching the required schema."
@@ -273,6 +273,9 @@ class OpenAIAgentProvider(BaseAgentProvider):
         for prefix in forbidden_prefixes:
             if text.startswith(prefix):
                 text = text[len(prefix):].lstrip(" -:")
+        words = text.split()
+        if len(words) > 50:
+            return " ".join(words[:50]).rstrip(".,;:") + "…"
         return text.strip()
 
 

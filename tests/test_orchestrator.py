@@ -128,6 +128,7 @@ def test_orchestrator_e2e_workflow() -> None:
         )
         orchestrator = ConversationOrchestrator(store, event_bus, provider)
         runtime = RuntimeConfig(
+            agent_turn_delay_seconds=0,
             evaluation_interval=1,
             restructuring_interval=5,
             max_rounds=4,
@@ -158,13 +159,19 @@ def test_orchestrator_e2e_workflow() -> None:
         assert completed.replacements[0].added_role == AgentRole.CONTRARIAN
         assert "Recommendation: stop." in completed.final_summary
 
-        event_types = await _drain_event_types(queue, expected=8)
+        event_types = await _drain_event_types(queue, expected=14)
         assert event_types == [
             EventType.CONVERSATION_STARTED.value,
+            EventType.AGENT_RESPONDED.value,
+            EventType.AGENT_RESPONDED.value,
+            EventType.AGENT_RESPONDED.value,
             EventType.SUMMARY_UPDATED.value,
             EventType.EVALUATION_CREATED.value,
             EventType.AGENT_REPLACED.value,
             EventType.ROUND_COMPLETED.value,
+            EventType.AGENT_RESPONDED.value,
+            EventType.AGENT_RESPONDED.value,
+            EventType.AGENT_RESPONDED.value,
             EventType.SUMMARY_UPDATED.value,
             EventType.EVALUATION_CREATED.value,
             EventType.CONVERSATION_COMPLETED.value,

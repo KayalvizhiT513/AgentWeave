@@ -20,6 +20,7 @@ def utc_now() -> datetime:
 
 
 class RuntimeConfig(BaseModel):
+    agent_turn_delay_seconds: float = Field(default=0.45, ge=0.0, le=5.0)
     evaluation_interval: int = Field(
         default=DEFAULT_RUNTIME.evaluation_interval,
         ge=1,

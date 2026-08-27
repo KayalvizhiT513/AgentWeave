@@ -1,8 +1,15 @@
 /* A single aligned dashboard plane on wide screens. */
+.shell { padding-bottom: 0; }
+
 @media (min-width: 1051px) {
-  .workspace { scroll-margin-top: 20px; }
+  html { scroll-snap-type: y proximity; }
   .dashboard-grid {
-    --workspace-height: min(640px, calc(100svh - 32px));
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    scroll-margin-top: 16px;
+  }
+  .dashboard-grid {
+    --workspace-height: calc(100svh - 16px);
     align-items: stretch;
   }
   .agents-panel,
