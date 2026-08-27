@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgentWeave — Live reasoning workspace</title>
+    <link rel="stylesheet" href="/assets/dashboard.css" />
+    <link rel="stylesheet" href="/assets/balance.css" />
+  </head>
+  <body>
+    <div class="page-glow glow-one"></div><div class="page-glow glow-two"></div>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="/"><span class="brand-mark">✦</span><span>Agent<span>Weave</span></span></a>
+        <div class="connection"><i></i><span id="connection-label">Connecting</span></div>
+      </header>
+
+      <section class="hero">
+        <div>
+          <p class="eyebrow">LIVE REASONING WORKSPACE</p>
+          <h1>Watch ideas become<br /><em>decisions.</em></h1>
+          <p class="hero-copy">A clear window into the agents shaping your answer—who contributed, what changed, and why the team adapted.</p>
+        </div>
+        <form id="new-session-form" class="compose-card">
+          <label for="topic">Start a new session</label>
+          <input id="topic" required minlength="3" placeholder="What should the team work through?" />
+          <input id="constraints" placeholder="Constraints, separated by commas (optional)" />
+          <button type="submit"><span>+</span> Create workspace</button>
+        </form>
+      </section>
+
+      <section id="empty-state" class="empty-state">
+        <div class="empty-orbit"><span>✦</span><span>✧</span><span>•</span></div>
+        <h2>Your agent room is ready.</h2>
+        <p>Create a session above to see its team, live reasoning, evaluator signals, and any roster changes.</p>
+      </section>
+
+      <section id="workspace" class="workspace hidden">
+        <div class="session-heading">
+          <div><p class="eyebrow">CURRENT SESSION</p><h2 id="session-topic">—</h2></div>
+          <div class="session-actions"><span id="status-pill" class="status-pill">Draft</span><button id="run-button" class="run-button">Run session <span>→</span></button><button id="stop-button" class="stop-button hidden">Stop</button></div>
+        </div>
+
+        <div class="metrics" id="metrics"></div>
+
+        <div class="dashboard-grid">
+          <aside class="agents-panel panel">
+            <div class="panel-heading"><div><p class="eyebrow">THE ROOM</p><h3>Active perspectives</h3></div><span id="agent-count" class="count">0</span></div>
+            <div id="agent-list" class="agent-list"></div>
+          </aside>
+
+          <section class="dialogue-panel panel">
+            <div class="panel-heading"><div><p class="eyebrow">LIVE THREAD</p><h3>Reasoning trail</h3></div><span id="round-label" class="round-label">Round 0</span></div>
+            <div id="timeline" class="timeline"></div>
+          </section>
+
+          <aside class="insights-panel">
+            <section class="panel evaluation-card">
+              <div class="panel-heading"><div><p class="eyebrow">EVALUATOR</p><h3>Conversation health</h3></div><span class="spark">✦</span></div>
+              <div id="evaluation-content" class="evaluation-content"><p class="muted">The evaluator will check the team after its first interval.</p></div>
+            </section>
+            <section class="panel context-card"><p class="eyebrow">MISSION</p><p id="context-goal" class="context-goal">—</p><div id="constraint-list" class="constraint-list"></div></section>
+            <section class="panel change-card"><div class="panel-heading"><div><p class="eyebrow">TEAM CHANGES</p><h3>Adaptation log</h3></div></div><div id="change-list" class="change-list"><p class="muted">No changes to the roster yet.</p></div></section>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <template id="metric-template"><article class="metric"><p></p><strong></strong><span></span></article></template>
+    <script src="/assets/dashboard.js"></script>
+    <script src="/assets/scroll-to-workspace.js"></script>
+  </body>
+</html>

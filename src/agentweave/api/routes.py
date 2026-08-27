@@ -157,7 +157,7 @@ async def get_futureagi_row(
     conversation = await orchestrator.get_conversation(conversation_id)
     if not conversation:
         raise HTTPException(status_code=404, detail="Conversation not found")
-    row = build_futureagi_dataset_row(conversation, orchestrator.provider.settings.provider_mode if hasattr(orchestrator.provider, "settings") else "simulated")
+    row = build_futureagi_dataset_row(conversation, orchestrator.provider.settings.provider_mode)
     return FutureAGIDatasetRowResponse.model_validate(row)
 
 

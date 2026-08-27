@@ -1,6 +1,5 @@
 from functools import lru_cache
 from pathlib import Path
-from typing import Literal
 
 from pydantic import BaseModel, Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -30,19 +29,21 @@ class Settings(BaseSettings):
     )
 
     app_env: str = "development"
-    provider_mode: Literal["simulated", "openai"] = "simulated"
+    provider_mode: str = "openai"
     openai_api_key: SecretStr | None = None
     openai_base_url: str = "https://api.openai.com/v1"
-    openai_default_model: str = "gpt-4.1-mini"
-    openai_evaluator_model: str = "gpt-4.1-mini"
+    openai_default_model: str = "gpt-5.4-mini"
+    openai_evaluator_model: str = "gpt-5.4-mini"
     fi_api_key: SecretStr | None = None
     fi_secret_key: SecretStr | None = None
     fi_base_url: str = "https://api.futureagi.com"
 
     def validate_provider_configuration(self) -> None:
-        if self.provider_mode == "openai" and self.openai_api_key is None:
+        if self.provider_mode != "openai":
+            raise ValueError("Only PROVIDER_MODE=openai is supported.")
+        if self.openai_api_key is None:
             raise ValueError(
-                "OPENAI_API_KEY is required when PROVIDER_MODE=openai. "
+                "OPENAI_API_KEY is required. "
                 "Add it to the local .env file or your shell environment."
             )
 

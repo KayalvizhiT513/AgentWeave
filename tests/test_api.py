@@ -1,12 +1,23 @@
 from fastapi.testclient import TestClient
 
 from agentweave.app import app
+from agentweave.services.provider import AgentResponse, OpenAIAgentProvider
 
 
 client = TestClient(app)
 
 
-def test_create_and_step_conversation() -> None:
+async def _test_response(_self, conversation, agent) -> AgentResponse:
+    return AgentResponse(
+        content=f"{agent.role.value} test contribution for round {conversation.current_round}.",
+        contribution_score=0.7,
+        novelty_score=0.6,
+        repetition_score=0.2,
+    )
+
+
+def test_create_and_step_conversation(monkeypatch) -> None:
+    monkeypatch.setattr(OpenAIAgentProvider, "respond", _test_response)
     response = client.post(
         "/api/v1/conversations",
         json={
