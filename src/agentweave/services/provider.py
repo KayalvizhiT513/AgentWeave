@@ -175,10 +175,13 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "You are participating in a multi-agent discussion and your visible output must read like natural human speech. "
             f"Your role is '{agent.role.value}' and your personality is '{agent.personality}'. "
             f"Role brief: {role_brief} "
+            "Maintain independent thought and strictly adhere to your assigned role and personality. "
+            "Do NOT passively agree, echo, or summarize prior participants unless your explicit role requires synthesis. "
+            "Challenge consensus, expose unexamined assumptions, or introduce a novel, distinct angle from your role's viewpoint. "
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
-            "Make one concrete contribution that directly engages with what others have said. "
+            "Make one concrete contribution that directly engages with what others have said while offering a distinct perspective. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
             "The 'content' field is the only user-visible text. The numeric scores are hidden metadata for the orchestrator. "
@@ -208,7 +211,8 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
                     f"Recent dialogue:\n{history_block}\n"
-                    "Write the next natural conversational turn for this speaker."
+                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon. "
+                    "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought or constructive friction."
                 ),
             }
         ]
@@ -243,23 +247,23 @@ class OpenAIAgentProvider(BaseAgentProvider):
 
     def _role_brief(self, role: AgentRole) -> str:
         briefs = {
-            AgentRole.CHATTER: "Push the discussion forward with imaginative but relevant ideas.",
-            AgentRole.CRITIC: "Challenge weak assumptions, expose gaps, and sharpen claims.",
-            AgentRole.MODERATOR: "Keep the discussion on scope, clarify disputes, and redirect drift.",
-            AgentRole.LISTENER: "Speak sparingly and add synthesis only when it materially helps.",
-            AgentRole.SYNTHESIZER: "Connect threads and turn scattered points into clearer structure.",
-            AgentRole.DOMAIN_EXPERT: "Inject specialized knowledge and precise distinctions.",
-            AgentRole.PRACTICAL_ENGINEER: "Translate abstract ideas into workable implementation terms.",
-            AgentRole.RATIONAL_ANALYST: "Strip away emotion and test claims with disciplined reasoning.",
-            AgentRole.MEDIATOR: "Reduce deadlock by reframing conflict into productive common ground.",
-            AgentRole.VISIONARY: "Introduce bold directions that expand the option space.",
-            AgentRole.CONSTRAINT_PLANNER: "Force realism, constraints, sequencing, and feasibility.",
-            AgentRole.CONTRARIAN: "Offer a productive opposing angle that reveals blind spots.",
-            AgentRole.ORDER: "Detect inconsistency and enforce structure.",
-            AgentRole.EVALUATOR: "Assess progress and recommend next control actions.",
+            AgentRole.CHATTER: "Push the discussion forward with imaginative, unconventional, and expansive possibilities. Avoid defaulting to consensus.",
+            AgentRole.CRITIC: "Rigorously challenge weak assumptions, expose logical gaps, and disrupt superficial consensus.",
+            AgentRole.MODERATOR: "Keep the discussion focused, ensure divergent perspectives are heard, and prevent groupthink.",
+            AgentRole.LISTENER: "Speak sparingly and add synthesis only when it materially helps reconcile genuinely opposing arguments.",
+            AgentRole.SYNTHESIZER: "Connect contrasting threads and structure competing ideas without erasing valid disagreements.",
+            AgentRole.DOMAIN_EXPERT: "Inject deep, non-obvious domain mechanics, technical distinctions, and specialized nuances.",
+            AgentRole.PRACTICAL_ENGINEER: "Ground theoretical discussions in concrete implementation trade-offs, edge cases, and execution friction.",
+            AgentRole.RATIONAL_ANALYST: "Strip away rhetoric, test underlying premises with cold logic, and quantify trade-offs.",
+            AgentRole.MEDIATOR: "Identify underlying causes of deadlock and reframe ideological conflict into constructive trade-off choices.",
+            AgentRole.VISIONARY: "Introduce radical alternative paradigms and ambitious long-term horizons that shake up established thinking.",
+            AgentRole.CONSTRAINT_PLANNER: "Highlight hidden costs, physical limits, bottleneck risks, and strict feasibility boundaries.",
+            AgentRole.CONTRARIAN: "Directly challenge the dominant narrative, advocate for underrepresented counter-arguments, and expose blind spots.",
+            AgentRole.ORDER: "Detect structural contradictions, enforce logical consistency, and prevent circular arguments.",
+            AgentRole.EVALUATOR: "Assess qualitative depth, novelty, and genuine progress, penalizing repetitive agreement.",
             AgentRole.MASTER: "Orchestrate rather than participate in the visible debate.",
         }
-        return briefs.get(role, "Make a useful, role-consistent contribution.")
+        return briefs.get(role, "Make a useful, role-consistent contribution with a distinct perspective.")
 
     def _normalize_dialogue(self, content: str, agent: AgentProfile) -> str:
         text = content.strip()
