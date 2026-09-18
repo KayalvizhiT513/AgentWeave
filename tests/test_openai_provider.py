@@ -80,8 +80,29 @@ def test_openai_provider_respond(monkeypatch) -> None:
     instructions = FakeAsyncClient.calls[0]["json"]["instructions"]
     assert "natural human speech" in instructions
     assert "Do not label yourself with prefixes" in instructions
+    assert "Maintain your unique role perspective" in instructions
+    assert "Avoid sycophancy" in instructions
     input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
     assert "Recent dialogue:" in input_text
+    assert "Do not repeat points or concede to consensus" in input_text
+
+
+def test_divergent_prompt_instructions() -> None:
+    settings = Settings(
+        provider_mode="openai",
+        openai_api_key="test-key",
+        openai_default_model="gpt-5.4-mini",
+        openai_evaluator_model="gpt-5.4-mini",
+    )
+    provider = OpenAIAgentProvider(settings)
+    agent = AgentProfile(role=AgentRole.CONTRARIAN, personality="productive dissenter", confidence=0.85, expertise_weight=0.90)
+    instructions = provider._agent_instructions(agent)
+    assert "Confidence: 0.85" in instructions
+    assert "Expertise Weight: 0.90" in instructions
+    assert "Do NOT merely agree or echo" in instructions
+
+    eval_instructions = provider._evaluation_instructions()
+    assert "echo chamber" in eval_instructions
 
 
 def test_openai_provider_evaluate(monkeypatch) -> None:
