@@ -175,10 +175,13 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "You are participating in a multi-agent discussion and your visible output must read like natural human speech. "
             f"Your role is '{agent.role.value}' and your personality is '{agent.personality}'. "
             f"Role brief: {role_brief} "
+            f"Confidence: {agent.confidence:.2f}, Expertise Weight: {agent.expertise_weight:.2f}. "
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
-            "Make one concrete contribution that directly engages with what others have said. "
+            "Maintain your unique role perspective and persona. Do NOT merely agree or echo what previous agents said. Avoid sycophancy or premature consensus. "
+            "Push back on flaws, introduce unexamined angles, propose distinct alternatives, or challenge implicit assumptions. "
+            "Make one concrete contribution that directly engages with what others have said while offering a distinct viewpoint. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
             "The 'content' field is the only user-visible text. The numeric scores are hidden metadata for the orchestrator. "
@@ -208,7 +211,9 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
                     f"Recent dialogue:\n{history_block}\n"
-                    "Write the next natural conversational turn for this speaker."
+                    "Write the next natural conversational turn for this speaker. "
+                    "Do not repeat points or concede to consensus unless strictly required. "
+                    "Bring out a distinct argument or alternative perspective consistent with your role."
                 ),
             }
         ]
@@ -217,6 +222,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
         return (
             "You are the evaluator for a multi-agent reasoning system. "
             "Assess the recent discussion for novelty, coherence, redundancy, goal alignment, depth, and conflict utility. "
+            "Pay close attention to agent convergence: if agents are agreeing too quickly, repeating consensus, or failing to explore distinct angles (echo chamber dynamic), mark novelty/conflict utility low and recommend 'replace' or 'restructure'. "
             "Evaluate the actual conversational quality, not whether the speakers followed internal formatting. "
             "Choose one recommendation from continue, replace, restructure, or stop. "
             "Return structured JSON only."
@@ -243,20 +249,20 @@ class OpenAIAgentProvider(BaseAgentProvider):
 
     def _role_brief(self, role: AgentRole) -> str:
         briefs = {
-            AgentRole.CHATTER: "Push the discussion forward with imaginative but relevant ideas.",
-            AgentRole.CRITIC: "Challenge weak assumptions, expose gaps, and sharpen claims.",
+            AgentRole.CHATTER: "Push the discussion forward with imaginative, novel, and expansive ideas.",
+            AgentRole.CRITIC: "Challenge weak assumptions, expose gaps, demand evidence, and sharpen claims.",
             AgentRole.MODERATOR: "Keep the discussion on scope, clarify disputes, and redirect drift.",
             AgentRole.LISTENER: "Speak sparingly and add synthesis only when it materially helps.",
-            AgentRole.SYNTHESIZER: "Connect threads and turn scattered points into clearer structure.",
-            AgentRole.DOMAIN_EXPERT: "Inject specialized knowledge and precise distinctions.",
-            AgentRole.PRACTICAL_ENGINEER: "Translate abstract ideas into workable implementation terms.",
-            AgentRole.RATIONAL_ANALYST: "Strip away emotion and test claims with disciplined reasoning.",
-            AgentRole.MEDIATOR: "Reduce deadlock by reframing conflict into productive common ground.",
-            AgentRole.VISIONARY: "Introduce bold directions that expand the option space.",
-            AgentRole.CONSTRAINT_PLANNER: "Force realism, constraints, sequencing, and feasibility.",
-            AgentRole.CONTRARIAN: "Offer a productive opposing angle that reveals blind spots.",
-            AgentRole.ORDER: "Detect inconsistency and enforce structure.",
-            AgentRole.EVALUATOR: "Assess progress and recommend next control actions.",
+            AgentRole.SYNTHESIZER: "Connect threads and turn scattered points into clearer structure without papering over real disagreements.",
+            AgentRole.DOMAIN_EXPERT: "Inject specialized technical knowledge, precise distinctions, and counter-examples.",
+            AgentRole.PRACTICAL_ENGINEER: "Translate abstract ideas into workable implementation terms and highlight practical failure modes.",
+            AgentRole.RATIONAL_ANALYST: "Strip away emotion, test logical consistency, and stress-test claims with disciplined reasoning.",
+            AgentRole.MEDIATOR: "Reduce deadlock by reframing conflict into productive common ground without forcing artificial consensus.",
+            AgentRole.VISIONARY: "Introduce bold, unexamined directions that dramatically expand the option space.",
+            AgentRole.CONSTRAINT_PLANNER: "Force realism, strict constraints, sequencing, and feasibility bounds.",
+            AgentRole.CONTRARIAN: "Offer a productive opposing angle, challenge emerging consensus, and reveal blind spots.",
+            AgentRole.ORDER: "Detect inconsistency, challenge flaws, and enforce logical structure.",
+            AgentRole.EVALUATOR: "Assess progress, detect premature convergence, and recommend next control actions.",
             AgentRole.MASTER: "Orchestrate rather than participate in the visible debate.",
         }
         return briefs.get(role, "Make a useful, role-consistent contribution.")
