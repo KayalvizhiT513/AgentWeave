@@ -80,8 +80,11 @@ def test_openai_provider_respond(monkeypatch) -> None:
     instructions = FakeAsyncClient.calls[0]["json"]["instructions"]
     assert "natural human speech" in instructions
     assert "Do not label yourself with prefixes" in instructions
+    assert "Resist premature consensus, groupthink" in instructions
     input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
     assert "Recent dialogue:" in input_text
+    assert "Guidance for exploration:" in input_text
+    assert "Do NOT simply agree with or echo prior speakers." in input_text
 
 
 def test_openai_provider_evaluate(monkeypatch) -> None:
@@ -127,3 +130,20 @@ def test_openai_provider_evaluate(monkeypatch) -> None:
 
     assert evaluation.progress_score == 0.66
     assert evaluation.recommendation == EvaluationRecommendation.CONTINUE
+    instructions = FakeAsyncClient.calls[0]["json"]["instructions"]
+    assert "premature convergence" in instructions
+    assert "groupthink" in instructions
+
+
+def test_openai_provider_role_briefs_and_divergence() -> None:
+    settings = Settings(
+        provider_mode="openai",
+        openai_api_key="test-key",
+        openai_default_model="gpt-5.4-mini",
+        openai_evaluator_model="gpt-5.4-mini",
+    )
+    provider = OpenAIAgentProvider(settings)
+    assert "out-of-the-box" in provider._role_brief(AgentRole.CHATTER)
+    assert "premature agreement" in provider._role_brief(AgentRole.CRITIC)
+    assert "prevailing consensus" in provider._role_brief(AgentRole.CONTRARIAN)
+    assert "disruptive" in provider._role_brief(AgentRole.VISIONARY)
