@@ -84,7 +84,7 @@ def test_openai_provider_respond(monkeypatch) -> None:
     input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
     assert "Recent dialogue:" in input_text
     assert "Guidance for exploration:" in input_text
-    assert "Do NOT simply agree with or echo prior speakers." in input_text
+    assert "Do NOT simply agree with, echo, or build upon prior speakers" in input_text
 
 
 def test_openai_provider_evaluate(monkeypatch) -> None:
@@ -147,3 +147,27 @@ def test_openai_provider_role_briefs_and_divergence() -> None:
     assert "premature agreement" in provider._role_brief(AgentRole.CRITIC)
     assert "prevailing consensus" in provider._role_brief(AgentRole.CONTRARIAN)
     assert "disruptive" in provider._role_brief(AgentRole.VISIONARY)
+
+
+def test_openai_provider_divergence_instructions() -> None:
+    settings = Settings(
+        provider_mode="openai",
+        openai_api_key="test-key",
+        openai_default_model="gpt-5.4-mini",
+        openai_evaluator_model="gpt-5.4-mini",
+    )
+    provider = OpenAIAgentProvider(settings)
+    conversation = make_conversation()
+    agent = conversation.agents[0]
+
+    instructions = provider._agent_instructions(agent)
+    assert "Avoid agreeable filler like 'I agree' or 'Building on that'" in instructions
+    assert "Defend a distinct, opposing, or orthogonal hypothesis" in instructions
+
+    input_text = provider._agent_input(conversation, agent)[0]["content"]
+    assert "Do NOT simply agree with, echo, or build upon prior speakers" in input_text
+    assert "Actively challenge the emerging consensus" in input_text
+    assert "Focus on exploring divergent directions" in input_text
+
+    eval_instructions = provider._evaluation_instructions()
+    assert "assign lower novelty/depth scores, assign higher redundancy scores" in eval_instructions
