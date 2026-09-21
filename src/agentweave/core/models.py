@@ -39,6 +39,7 @@ class RuntimeConfig(BaseModel):
         default=DEFAULT_RUNTIME.stagnation_threshold,
         ge=1,
     )
+    divergence_bias: float = Field(default=0.7, ge=0.0, le=1.0)
 
 
 class AgentProfile(BaseModel):

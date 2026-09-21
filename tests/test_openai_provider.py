@@ -83,7 +83,7 @@ def test_openai_provider_respond(monkeypatch) -> None:
     assert "Resist premature consensus, groupthink" in instructions
     input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
     assert "Recent dialogue:" in input_text
-    assert "Guidance for exploration:" in input_text
+    assert "Guidance for exploration" in input_text
     assert "Do NOT simply agree with or echo prior speakers." in input_text
 
 
@@ -147,3 +147,19 @@ def test_openai_provider_role_briefs_and_divergence() -> None:
     assert "premature agreement" in provider._role_brief(AgentRole.CRITIC)
     assert "prevailing consensus" in provider._role_brief(AgentRole.CONTRARIAN)
     assert "disruptive" in provider._role_brief(AgentRole.VISIONARY)
+
+
+def test_openai_provider_divergence_bias_prompting() -> None:
+    settings = Settings(
+        provider_mode="openai",
+        openai_api_key="test-key",
+        openai_default_model="gpt-5.4-mini",
+        openai_evaluator_model="gpt-5.4-mini",
+    )
+    provider = OpenAIAgentProvider(settings)
+    conversation = make_conversation()
+    conversation.runtime.divergence_bias = 0.90
+    input_payload = provider._agent_input(conversation, conversation.agents[0])
+    content = input_payload[0]["content"]
+    assert "divergence bias: 0.90" in content
+    assert "Resist premature consensus" in content

@@ -360,3 +360,68 @@ def test_concurrent_step_calls_are_serialized_per_conversation() -> None:
         assert provider.evaluate_calls == 2
 
     asyncio.run(scenario())
+
+
+def test_orchestrator_high_divergence_bias_spawns_contrarian() -> None:
+    async def scenario() -> None:
+        store = ConversationStore()
+        event_bus = EventBus()
+        provider = ScriptedProvider([])
+        orchestrator = ConversationOrchestrator(store, event_bus, provider)
+        runtime = RuntimeConfig(divergence_bias=0.85)
+
+        conversation = await orchestrator.create_conversation(
+            topic="High divergence debate",
+            scene=None,
+            constraints=[],
+            runtime=runtime,
+        )
+
+        active_roles = [agent.role for agent in conversation.active_agents()]
+        assert AgentRole.CONTRARIAN in active_roles
+
+    asyncio.run(scenario())
+
+
+def test_orchestrator_failure_mode_premature_convergence() -> None:
+    class ConvergenceEvaluator(ScriptedProvider):
+        async def evaluate(self, conversation) -> EvaluationSnapshot:
+            return EvaluationSnapshot(
+                round_number=conversation.current_round,
+                progress_score=0.4,
+                novelty_score=0.3,
+                coherence_score=0.9,
+                redundancy_score=0.4,
+                goal_alignment_score=0.8,
+                depth_score=0.4,
+                conflict_utility_score=0.2,
+                recommendation=EvaluationRecommendation.RESTRUCTURE,
+                rationale="Converging too quickly without critical conflict.",
+            )
+
+    async def scenario() -> None:
+        store = ConversationStore()
+        event_bus = EventBus()
+        provider = ConvergenceEvaluator([])
+        orchestrator = ConversationOrchestrator(store, event_bus, provider)
+        runtime = RuntimeConfig(
+            evaluation_interval=1,
+            restructuring_interval=1,
+            max_rounds=2,
+        )
+
+        conversation = await orchestrator.create_conversation(
+            topic="Premature convergence test",
+            scene=None,
+            constraints=[],
+            runtime=runtime,
+        )
+
+        await orchestrator.step_conversation(conversation.id)
+        latest = await orchestrator.get_conversation(conversation.id)
+        assert latest is not None
+        assert len(latest.replacements) == 1
+        assert latest.replacements[0].failure_mode == "premature_convergence"
+        assert latest.replacements[0].added_role == AgentRole.CONTRARIAN
+
+    asyncio.run(scenario())
