@@ -78,6 +78,15 @@ The API contracts are intentionally stable and UI-friendly:
 - orchestration state is serializable without backend-only shapes
 - provider logic is abstracted from the API layer
 
+## Preventing Premature Agent Convergence
+
+When multiple LLM agents converse, they often default to echo-chamber agreement or rapid consensus around the first proposed idea. AgentWeave implements multi-layered mechanisms to force continuous exploration of diverse thoughts:
+
+1. **Anti-Consensus System Directives**: System prompts explicitly instruct agents to resist premature consensus, avoid repeating prior arguments, and identify unexamined assumptions, orthogonal angles, or counter-hypotheses.
+2. **Dynamic Divergence Bias**: Set `runtime.divergence_bias` (default `0.7`, range `0.0`–`1.0`) when creating a conversation. Setting `divergence_bias >= 0.8` injects explicit dissenting roles (such as `CONTRARIAN`) into the initial agent roster and increases exploration directives in agent turn guidance.
+3. **Evaluator Vigilance & Convergence Detection**: The evaluator layer measures novelty, depth, and conflict utility across discussion rounds. If agents converge too quickly without exploring alternative paradigms, the evaluator flags `premature_convergence` and triggers team restructuring.
+4. **Adaptive Role Replacement**: When stagnation or premature agreement occurs, the orchestrator replaces weak or conforming agents with consensus-breaking personas like `CONTRARIAN`, `VISIONARY`, or `DOMAIN_EXPERT`.
+
 ## Future AGI Export
 
 You can normalize a conversation into a dataset-ready row and upload it to an existing Future AGI dataset.

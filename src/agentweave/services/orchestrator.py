@@ -114,6 +114,7 @@ REPLACEMENT_STRATEGY: dict[str, AgentRole] = {
     "deadlocked": AgentRole.MEDIATOR,
     "no_creativity": AgentRole.VISIONARY,
     "no_realism": AgentRole.CONSTRAINT_PLANNER,
+    "premature_convergence": AgentRole.CONTRARIAN,
 }
 
 
@@ -154,7 +155,7 @@ class ConversationOrchestrator:
             constraints=constraints,
             runtime=runtime,
             shared_context=SharedContext(goal=topic, scene=scene, constraints=constraints),
-            agents=self._initial_agents(),
+            agents=self._initial_agents(runtime),
         )
         await self.store.create(conversation)
         await self._publish(EventType.CONVERSATION_CREATED, conversation, {"conversation": conversation})
@@ -263,13 +264,16 @@ class ConversationOrchestrator:
             )
             return conversation
 
-    def _initial_agents(self) -> list[AgentProfile]:
-        return [
+    def _initial_agents(self, runtime=None) -> list[AgentProfile]:
+        agents = [
             _make_agent(AgentRole.CHATTER),
             _make_agent(AgentRole.CRITIC),
             _make_agent(AgentRole.MODERATOR),
             _make_agent(AgentRole.EVALUATOR),
         ]
+        if runtime and getattr(runtime, "divergence_bias", 0.7) >= 0.8:
+            agents.insert(2, _make_agent(AgentRole.CONTRARIAN))
+        return agents
 
     async def _run_until_complete(self, conversation_id: str) -> None:
         try:
@@ -349,6 +353,8 @@ class ConversationOrchestrator:
     def _determine_failure_mode(self, conversation: Conversation, evaluation) -> str:
         if evaluation.redundancy_score > 0.62:
             return "too_repetitive"
+        if evaluation.conflict_utility_score < 0.30 and evaluation.novelty_score < 0.50:
+            return "premature_convergence"
         if evaluation.novelty_score < 0.35:
             return "no_creativity"
         if evaluation.depth_score < 0.45:

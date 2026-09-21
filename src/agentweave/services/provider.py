@@ -200,6 +200,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
             if recent_history
             else "- none yet"
         )
+        divergence_bias = conversation.runtime.divergence_bias
         return [
             {
                 "role": "user",
@@ -210,10 +211,11 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
                     f"Recent dialogue:\n{history_block}\n"
-                    "Guidance for exploration:\n"
+                    f"Guidance for exploration (divergence bias: {divergence_bias:.2f}):\n"
                     "- Do NOT simply agree with or echo prior speakers.\n"
                     "- Identify unexamined assumptions, alternative paradigms, or novel angles not yet discussed.\n"
                     "- Stay true to your specific role's unique lens and priorities.\n"
+                    "- Resist premature consensus: explore alternative hypotheses and divergent sub-problems before seeking agreement.\n"
                     "Write the next natural conversational turn for this speaker."
                 ),
             }
@@ -224,8 +226,8 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "You are the evaluator for a multi-agent reasoning system. "
             "Assess the recent discussion for novelty, coherence, redundancy, goal alignment, depth, and conflict utility. "
             "Be vigilant for premature convergence, groupthink, or agents echoing each other without introducing distinct perspectives. "
-            "If agents are converging too quickly without thoroughly exploring different thoughts or challenging assumptions, "
-            "assign lower novelty/depth scores and recommend replacement or restructuring to inject fresh perspectives. "
+            "If agents are converging too quickly without thoroughly exploring different thoughts, challenging assumptions, or proposing alternative paradigms, "
+            "assign lower novelty/depth scores and recommend replacement or restructuring to inject fresh, consensus-breaking perspectives. "
             "Choose one recommendation from continue, replace, restructure, or stop. "
             "Return structured JSON only."
         )
