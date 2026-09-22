@@ -27,78 +27,91 @@ from agentweave.services.store import ConversationStore
 ROLE_LIBRARY: dict[AgentRole, dict[str, float | str]] = {
     AgentRole.CHATTER: {
         "personality": "creative and expansive",
+        "perspective": "explores uncharted possibilities, unorthodox angles, and unexamined hypotheses",
         "confidence": 0.72,
         "priority": 0.78,
         "expertise_weight": 0.62,
     },
     AgentRole.CRITIC: {
         "personality": "skeptical and rigorous",
+        "perspective": "exposes flawed logic, unexamined assumptions, and blind spots in early consensus",
         "confidence": 0.68,
         "priority": 0.7,
         "expertise_weight": 0.7,
     },
     AgentRole.MODERATOR: {
         "personality": "scope-protective and orderly",
+        "perspective": "ensures all distinct angles get fair airtime and prevents premature collapse into a single viewpoint",
         "confidence": 0.66,
         "priority": 0.74,
         "expertise_weight": 0.58,
     },
     AgentRole.EVALUATOR: {
         "personality": "measured and analytical",
+        "perspective": "monitors overall conceptual diversity, depth, and premature convergence risks",
         "confidence": 0.8,
         "priority": 0.85,
         "expertise_weight": 0.76,
     },
     AgentRole.LISTENER: {
         "personality": "quiet synthesizer",
+        "perspective": "identifies structural gaps and latent connections across contrasting arguments",
         "confidence": 0.61,
         "priority": 0.45,
         "expertise_weight": 0.67,
     },
     AgentRole.SYNTHESIZER: {
         "personality": "integrative and clarifying",
+        "perspective": "maps divergent perspectives into a comprehensive framework without suppressing differences",
         "confidence": 0.71,
         "priority": 0.65,
         "expertise_weight": 0.71,
     },
     AgentRole.DOMAIN_EXPERT: {
         "personality": "specialist and detail-rich",
+        "perspective": "introduces domain mechanics, specialized constraints, and counter-intuitive edge cases",
         "confidence": 0.74,
         "priority": 0.67,
         "expertise_weight": 0.82,
     },
     AgentRole.PRACTICAL_ENGINEER: {
         "personality": "implementation-driven",
+        "perspective": "tests feasibility, bottleneck risks, operational trade-offs, and failure modes",
         "confidence": 0.72,
         "priority": 0.66,
         "expertise_weight": 0.78,
     },
     AgentRole.RATIONAL_ANALYST: {
         "personality": "coldly logical",
+        "perspective": "demands formal proofs, quantitative rigor, and explicit probabilistic trade-offs",
         "confidence": 0.76,
         "priority": 0.62,
         "expertise_weight": 0.74,
     },
     AgentRole.MEDIATOR: {
         "personality": "conflict-resolving",
+        "perspective": "preserves key tensions while reframing ideological stalemates into actionable options",
         "confidence": 0.66,
         "priority": 0.61,
         "expertise_weight": 0.6,
     },
     AgentRole.VISIONARY: {
         "personality": "bold and exploratory",
+        "perspective": "proposes radical paradigm shifts and disruptive non-standard solutions",
         "confidence": 0.83,
         "priority": 0.73,
         "expertise_weight": 0.61,
     },
     AgentRole.CONSTRAINT_PLANNER: {
         "personality": "practical and bounded",
+        "perspective": "enforces resource limits, safety boundaries, and hard operational trade-offs",
         "confidence": 0.69,
         "priority": 0.72,
         "expertise_weight": 0.72,
     },
     AgentRole.CONTRARIAN: {
         "personality": "productive dissenter",
+        "perspective": "directly challenges mainstream consensus and champions radical alternative hypotheses",
         "confidence": 0.65,
         "priority": 0.57,
         "expertise_weight": 0.66,
@@ -108,6 +121,7 @@ ROLE_LIBRARY: dict[AgentRole, dict[str, float | str]] = {
 REPLACEMENT_STRATEGY: dict[str, AgentRole] = {
     "too_chaotic": AgentRole.SYNTHESIZER,
     "too_repetitive": AgentRole.CONTRARIAN,
+    "premature_convergence": AgentRole.CONTRARIAN,
     "too_shallow": AgentRole.DOMAIN_EXPERT,
     "too_theoretical": AgentRole.PRACTICAL_ENGINEER,
     "too_emotional": AgentRole.RATIONAL_ANALYST,
@@ -122,6 +136,7 @@ def _make_agent(role: AgentRole) -> AgentProfile:
     return AgentProfile(
         role=role,
         personality=str(profile["personality"]),
+        perspective=str(profile.get("perspective", "")),
         confidence=float(profile["confidence"]),
         priority=float(profile["priority"]),
         expertise_weight=float(profile["expertise_weight"]),
@@ -313,9 +328,7 @@ class ConversationOrchestrator:
         )
         await self._publish(EventType.EVALUATION_CREATED, conversation, {"evaluation": evaluation})
 
-        if evaluation.recommendation == EvaluationRecommendation.REPLACE:
-            await self._replace_weakest_agent(conversation, "too_repetitive")
-        elif evaluation.recommendation == EvaluationRecommendation.RESTRUCTURE:
+        if evaluation.recommendation in {EvaluationRecommendation.REPLACE, EvaluationRecommendation.RESTRUCTURE}:
             failure_mode = self._determine_failure_mode(conversation, evaluation)
             await self._replace_weakest_agent(conversation, failure_mode)
         elif evaluation.recommendation == EvaluationRecommendation.STOP:
@@ -349,6 +362,8 @@ class ConversationOrchestrator:
     def _determine_failure_mode(self, conversation: Conversation, evaluation) -> str:
         if evaluation.redundancy_score > 0.62:
             return "too_repetitive"
+        if evaluation.coherence_score > 0.70 and evaluation.novelty_score < 0.50:
+            return "premature_convergence"
         if evaluation.novelty_score < 0.35:
             return "no_creativity"
         if evaluation.depth_score < 0.45:

@@ -20,6 +20,7 @@ class AgentProfileResponse(BaseModel):
     id: str
     role: AgentRole
     personality: str
+    perspective: str
     status: AgentStatus
     confidence: float
     priority: float
