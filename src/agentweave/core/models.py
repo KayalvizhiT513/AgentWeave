@@ -45,6 +45,7 @@ class AgentProfile(BaseModel):
     id: str = Field(default_factory=lambda: f"agent_{uuid4().hex[:8]}")
     role: AgentRole
     personality: str
+    perspective: str = ""
     status: AgentStatus = AgentStatus.ACTIVE
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)
     priority: float = Field(default=0.5, ge=0.0, le=1.0)

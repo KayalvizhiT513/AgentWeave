@@ -49,6 +49,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
     async def respond(self, conversation: Conversation, agent: AgentProfile) -> AgentResponse:
         payload = {
             "model": self.settings.openai_default_model,
+            "temperature": self._agent_temperature(agent),
             "instructions": self._agent_instructions(agent),
             "input": self._agent_input(conversation, agent),
             "text": {
@@ -169,18 +170,44 @@ class OpenAIAgentProvider(BaseAgentProvider):
 
         raise OpenAIProviderError("OpenAI response did not contain structured JSON text output.")
 
+    def _agent_temperature(self, agent: AgentProfile) -> float:
+        creative_roles = {
+            AgentRole.CHATTER,
+            AgentRole.VISIONARY,
+            AgentRole.CONTRARIAN,
+            AgentRole.CRITIC,
+        }
+        analytical_roles = {
+            AgentRole.DOMAIN_EXPERT,
+            AgentRole.PRACTICAL_ENGINEER,
+            AgentRole.RATIONAL_ANALYST,
+            AgentRole.CONSTRAINT_PLANNER,
+        }
+        if agent.role in creative_roles:
+            return 0.90
+        if agent.role in analytical_roles:
+            return 0.70
+        return 0.80
+
     def _agent_instructions(self, agent: AgentProfile) -> str:
         role_brief = self._role_brief(agent.role)
+        perspective_text = (
+            f"Your specific analytical perspective/worldview is: '{agent.perspective}'. "
+            if agent.perspective
+            else ""
+        )
         return (
             "You are participating in a multi-agent discussion and your visible output must read like natural human speech. "
             f"Your role is '{agent.role.value}' and your personality is '{agent.personality}'. "
+            f"{perspective_text}"
             f"Role brief: {role_brief} "
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
-            "Maintain your unique persona and distinct worldview. Resist premature consensus, groupthink, or echoing previous speakers. "
-            "Actively introduce distinct angles, unexamined hypotheses, counter-arguments, or orthogonal sub-problems relevant to your role. "
-            "Make one concrete contribution that directly engages with what others have said while pushing the exploration in new or deeper directions. "
+            "CRITICAL PRINCIPLE: Resist premature consensus, groupthink, or echoing previous speakers. "
+            "Actively introduce distinct angles, unexamined hypotheses, alternative frameworks, counter-arguments, or orthogonal sub-problems relevant to your stance. "
+            "Do NOT merge or flatten your view into the previous speakers' ideas unless your explicit role is synthesizer or mediator. "
+            "Make one concrete, distinct contribution that directly engages with or challenges what others have said while pushing the exploration into unexplored territory. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
             "The 'content' field is the only user-visible text. The numeric scores are hidden metadata for the orchestrator. "
@@ -200,6 +227,11 @@ class OpenAIAgentProvider(BaseAgentProvider):
             if recent_history
             else "- none yet"
         )
+        perspective_block = (
+            f"Your specific worldview / lens: {agent.perspective}\n"
+            if agent.perspective
+            else ""
+        )
         return [
             {
                 "role": "user",
@@ -207,13 +239,16 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Topic: {conversation.topic}\n"
                     f"Scene: {conversation.scene or 'none'}\n"
                     f"Current speaker role: {agent.role.value}\n"
+                    f"Personality: {agent.personality}\n"
+                    f"{perspective_block}"
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
                     f"Recent dialogue:\n{history_block}\n"
-                    "Guidance for exploration:\n"
-                    "- Do NOT simply agree with or echo prior speakers.\n"
-                    "- Identify unexamined assumptions, alternative paradigms, or novel angles not yet discussed.\n"
-                    "- Stay true to your specific role's unique lens and priorities.\n"
+                    "Guidance for exploration & non-convergence:\n"
+                    "- Do NOT simply agree with, summarize, or echo prior speakers.\n"
+                    "- Defend your role's distinct perspective and challenge dominant assumptions.\n"
+                    "- Propose alternative paradigms, unexamined risks, trade-offs, or orthogonal angles not yet discussed.\n"
+                    "- Avoid premature agreement or forcing consensus early in the discussion.\n"
                     "Write the next natural conversational turn for this speaker."
                 ),
             }
@@ -223,9 +258,10 @@ class OpenAIAgentProvider(BaseAgentProvider):
         return (
             "You are the evaluator for a multi-agent reasoning system. "
             "Assess the recent discussion for novelty, coherence, redundancy, goal alignment, depth, and conflict utility. "
-            "Be vigilant for premature convergence, groupthink, or agents echoing each other without introducing distinct perspectives. "
-            "If agents are converging too quickly without thoroughly exploring different thoughts or challenging assumptions, "
-            "assign lower novelty/depth scores and recommend replacement or restructuring to inject fresh perspectives. "
+            "CRITICAL FOCUS: Detect premature convergence, groupthink, or agents echoing each other into a single idea without exploring alternative possibilities. "
+            "If agents are converging too quickly or repeating variations of one single proposal without thoroughly exploring different thoughts, challenging assumptions, or proposing alternatives: "
+            "- Assign lower novelty_score and depth_score, and higher redundancy_score. "
+            "- Set recommendation to 'replace' or 'restructure' to inject fresh dissenting perspectives (such as contrarian or visionary roles). "
             "Choose one recommendation from continue, replace, restructure, or stop. "
             "Return structured JSON only."
         )

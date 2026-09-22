@@ -83,8 +83,9 @@ def test_openai_provider_respond(monkeypatch) -> None:
     assert "Resist premature consensus, groupthink" in instructions
     input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
     assert "Recent dialogue:" in input_text
-    assert "Guidance for exploration:" in input_text
-    assert "Do NOT simply agree with or echo prior speakers." in input_text
+    assert "Guidance for exploration" in input_text
+    assert "Do NOT simply agree with" in input_text
+    assert "temperature" in FakeAsyncClient.calls[0]["json"]
 
 
 def test_openai_provider_evaluate(monkeypatch) -> None:
@@ -147,3 +148,35 @@ def test_openai_provider_role_briefs_and_divergence() -> None:
     assert "premature agreement" in provider._role_brief(AgentRole.CRITIC)
     assert "prevailing consensus" in provider._role_brief(AgentRole.CONTRARIAN)
     assert "disruptive" in provider._role_brief(AgentRole.VISIONARY)
+
+
+def test_openai_provider_perspective_and_temperature() -> None:
+    settings = Settings(
+        provider_mode="openai",
+        openai_api_key="test-key",
+        openai_default_model="gpt-5.4-mini",
+        openai_evaluator_model="gpt-5.4-mini",
+    )
+    provider = OpenAIAgentProvider(settings)
+    creative_agent = AgentProfile(
+        role=AgentRole.VISIONARY,
+        personality="bold",
+        perspective="proposes radical paradigm shifts",
+    )
+    analytical_agent = AgentProfile(
+        role=AgentRole.PRACTICAL_ENGINEER,
+        personality="focused",
+        perspective="tests feasibility and failure modes",
+    )
+
+    assert provider._agent_temperature(creative_agent) == 0.90
+    assert provider._agent_temperature(analytical_agent) == 0.70
+
+    instructions = provider._agent_instructions(creative_agent)
+    assert "proposes radical paradigm shifts" in instructions
+    assert "Resist premature consensus" in instructions
+
+    conversation = make_conversation()
+    agent_input = provider._agent_input(conversation, creative_agent)[0]["content"]
+    assert "proposes radical paradigm shifts" in agent_input
+    assert "Guidance for exploration & non-convergence:" in agent_input
