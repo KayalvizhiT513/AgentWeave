@@ -24,6 +24,7 @@ class AgentProfileResponse(BaseModel):
     confidence: float
     priority: float
     expertise_weight: float
+    temperature: float
     contribution_score: float
     repetition_score: float
     novelty_score: float
@@ -55,6 +56,7 @@ class EvaluationResponse(BaseModel):
     conflict_utility_score: float
     recommendation: EvaluationRecommendation
     rationale: str
+    active_conflicts: list[str] = Field(default_factory=list)
     created_at: datetime
 
 

@@ -49,6 +49,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
     async def respond(self, conversation: Conversation, agent: AgentProfile) -> AgentResponse:
         payload = {
             "model": self.settings.openai_default_model,
+            "temperature": agent.temperature,
             "instructions": self._agent_instructions(agent),
             "input": self._agent_input(conversation, agent),
             "text": {
@@ -110,6 +111,10 @@ class OpenAIAgentProvider(BaseAgentProvider):
                                 "enum": [item.value for item in EvaluationRecommendation],
                             },
                             "rationale": {"type": "string"},
+                            "active_conflicts": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                            },
                         },
                         "required": [
                             "progress_score",
@@ -121,6 +126,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
                             "conflict_utility_score",
                             "recommendation",
                             "rationale",
+                            "active_conflicts",
                         ],
                     },
                 }
@@ -139,6 +145,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
             conflict_utility_score=_clamp(float(data["conflict_utility_score"])),
             recommendation=EvaluationRecommendation(str(data["recommendation"])),
             rationale=str(data["rationale"]),
+            active_conflicts=[str(item) for item in data.get("active_conflicts", [])],
         )
 
     async def _post_responses(self, payload: dict[str, Any]) -> dict[str, Any]:
@@ -180,6 +187,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
             "Maintain your unique persona and distinct worldview. Resist premature consensus, groupthink, or echoing previous speakers. "
             "Actively introduce distinct angles, unexamined hypotheses, counter-arguments, or orthogonal sub-problems relevant to your role. "
+            "Do not concede or harmonize with previous agents if doing so suppresses a valid alternative perspective. "
             "Make one concrete contribution that directly engages with what others have said while pushing the exploration in new or deeper directions. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
@@ -195,6 +203,11 @@ class OpenAIAgentProvider(BaseAgentProvider):
             if conversation.constraints
             else "- none"
         )
+        conflicts = (
+            "\n".join(f"- {item}" for item in conversation.shared_context.active_conflicts)
+            if conversation.shared_context.active_conflicts
+            else "- none currently flagged"
+        )
         history_block = (
             "\n".join(f"- {line}" for line in recent_history)
             if recent_history
@@ -209,11 +222,13 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Current speaker role: {agent.role.value}\n"
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
+                    f"Active conflicts / unresolved tensions:\n{conflicts}\n"
                     f"Recent dialogue:\n{history_block}\n"
                     "Guidance for exploration:\n"
                     "- Do NOT simply agree with or echo prior speakers.\n"
                     "- Identify unexamined assumptions, alternative paradigms, or novel angles not yet discussed.\n"
-                    "- Stay true to your specific role's unique lens and priorities.\n"
+                    "- Present a competing hypothesis, objection, or distinct trade-off from your role's perspective.\n"
+                    "- Stay true to your specific role's unique lens and priorities without bowing to premature consensus.\n"
                     "Write the next natural conversational turn for this speaker."
                 ),
             }
@@ -223,9 +238,10 @@ class OpenAIAgentProvider(BaseAgentProvider):
         return (
             "You are the evaluator for a multi-agent reasoning system. "
             "Assess the recent discussion for novelty, coherence, redundancy, goal alignment, depth, and conflict utility. "
-            "Be vigilant for premature convergence, groupthink, or agents echoing each other without introducing distinct perspectives. "
-            "If agents are converging too quickly without thoroughly exploring different thoughts or challenging assumptions, "
-            "assign lower novelty/depth scores and recommend replacement or restructuring to inject fresh perspectives. "
+            "Be vigilant for premature convergence, groupthink, superficial alignment, or agents echoing each other without introducing distinct perspectives. "
+            "If agents are converging too quickly into one idea without thoroughly exploring alternative paradigms, challenging assumptions, or preserving key trade-offs, "
+            "penalize novelty_score and depth_score, increase redundancy_score, and recommend 'replace' or 'restructure' to inject fresh dissenting perspectives. "
+            "Identify key active conflicts or unresolved tensions between agent perspectives and list them in 'active_conflicts'. "
             "Choose one recommendation from continue, replace, restructure, or stop. "
             "Return structured JSON only."
         )

@@ -71,12 +71,14 @@ def test_openai_provider_respond(monkeypatch) -> None:
     )
     provider = OpenAIAgentProvider(settings)
     conversation = make_conversation()
+    conversation.shared_context.active_conflicts = ["Functionalism vs physicalism tension"]
     response = asyncio.run(provider.respond(conversation, conversation.agents[0]))
 
     assert response.content == "A useful agent contribution."
     assert response.contribution_score == 0.8
     assert FakeAsyncClient.calls[0]["headers"]["Authorization"] == "Bearer test-key"
     assert FakeAsyncClient.calls[0]["url"].endswith("/responses")
+    assert FakeAsyncClient.calls[0]["json"]["temperature"] == conversation.agents[0].temperature
     instructions = FakeAsyncClient.calls[0]["json"]["instructions"]
     assert "natural human speech" in instructions
     assert "Do not label yourself with prefixes" in instructions
@@ -85,6 +87,7 @@ def test_openai_provider_respond(monkeypatch) -> None:
     assert "Recent dialogue:" in input_text
     assert "Guidance for exploration:" in input_text
     assert "Do NOT simply agree with or echo prior speakers." in input_text
+    assert "Functionalism vs physicalism tension" in input_text
 
 
 def test_openai_provider_evaluate(monkeypatch) -> None:
@@ -107,6 +110,7 @@ def test_openai_provider_evaluate(monkeypatch) -> None:
                                     "conflict_utility_score": 0.58,
                                     "recommendation": "continue",
                                     "rationale": "Still productive.",
+                                    "active_conflicts": ["Definition of subjective experience"],
                                 }
                             ),
                         }
@@ -130,6 +134,7 @@ def test_openai_provider_evaluate(monkeypatch) -> None:
 
     assert evaluation.progress_score == 0.66
     assert evaluation.recommendation == EvaluationRecommendation.CONTINUE
+    assert evaluation.active_conflicts == ["Definition of subjective experience"]
     instructions = FakeAsyncClient.calls[0]["json"]["instructions"]
     assert "premature convergence" in instructions
     assert "groupthink" in instructions
