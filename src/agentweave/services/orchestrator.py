@@ -30,78 +30,91 @@ ROLE_LIBRARY: dict[AgentRole, dict[str, float | str]] = {
         "confidence": 0.72,
         "priority": 0.78,
         "expertise_weight": 0.62,
+        "temperature": 0.85,
     },
     AgentRole.CRITIC: {
-        "personality": "skeptical and rigorous",
+        "personality": "skeptical, rigorous, and unyielding",
         "confidence": 0.68,
         "priority": 0.7,
         "expertise_weight": 0.7,
+        "temperature": 0.80,
     },
     AgentRole.MODERATOR: {
         "personality": "scope-protective and orderly",
         "confidence": 0.66,
         "priority": 0.74,
         "expertise_weight": 0.58,
+        "temperature": 0.50,
     },
     AgentRole.EVALUATOR: {
         "personality": "measured and analytical",
         "confidence": 0.8,
         "priority": 0.85,
         "expertise_weight": 0.76,
+        "temperature": 0.30,
     },
     AgentRole.LISTENER: {
         "personality": "quiet synthesizer",
         "confidence": 0.61,
         "priority": 0.45,
         "expertise_weight": 0.67,
+        "temperature": 0.60,
     },
     AgentRole.SYNTHESIZER: {
-        "personality": "integrative and clarifying",
+        "personality": "integrative and clarifying without flattening differences",
         "confidence": 0.71,
         "priority": 0.65,
         "expertise_weight": 0.71,
+        "temperature": 0.55,
     },
     AgentRole.DOMAIN_EXPERT: {
         "personality": "specialist and detail-rich",
         "confidence": 0.74,
         "priority": 0.67,
         "expertise_weight": 0.82,
+        "temperature": 0.70,
     },
     AgentRole.PRACTICAL_ENGINEER: {
-        "personality": "implementation-driven",
+        "personality": "implementation-driven and trade-off focused",
         "confidence": 0.72,
         "priority": 0.66,
         "expertise_weight": 0.78,
+        "temperature": 0.65,
     },
     AgentRole.RATIONAL_ANALYST: {
-        "personality": "coldly logical",
+        "personality": "coldly logical and rigorous",
         "confidence": 0.76,
         "priority": 0.62,
         "expertise_weight": 0.74,
+        "temperature": 0.60,
     },
     AgentRole.MEDIATOR: {
-        "personality": "conflict-resolving",
+        "personality": "conflict-preserving re-framer",
         "confidence": 0.66,
         "priority": 0.61,
         "expertise_weight": 0.6,
+        "temperature": 0.65,
     },
     AgentRole.VISIONARY: {
-        "personality": "bold and exploratory",
+        "personality": "bold, disruptive, and paradigm-shifting",
         "confidence": 0.83,
         "priority": 0.73,
         "expertise_weight": 0.61,
+        "temperature": 0.95,
     },
     AgentRole.CONSTRAINT_PLANNER: {
-        "personality": "practical and bounded",
+        "personality": "practical and boundary-enforcing",
         "confidence": 0.69,
         "priority": 0.72,
         "expertise_weight": 0.72,
+        "temperature": 0.60,
     },
     AgentRole.CONTRARIAN: {
-        "personality": "productive dissenter",
+        "personality": "uncompromising productive dissenter",
         "confidence": 0.65,
         "priority": 0.57,
         "expertise_weight": 0.66,
+        "temperature": 0.90,
     },
 }
 
@@ -125,6 +138,7 @@ def _make_agent(role: AgentRole) -> AgentProfile:
         confidence=float(profile["confidence"]),
         priority=float(profile["priority"]),
         expertise_weight=float(profile["expertise_weight"]),
+        temperature=float(profile.get("temperature", 0.7)),
     )
 
 
@@ -267,7 +281,7 @@ class ConversationOrchestrator:
         return [
             _make_agent(AgentRole.CHATTER),
             _make_agent(AgentRole.CRITIC),
-            _make_agent(AgentRole.MODERATOR),
+            _make_agent(AgentRole.VISIONARY),
             _make_agent(AgentRole.EVALUATOR),
         ]
 
@@ -306,6 +320,8 @@ class ConversationOrchestrator:
             return
         evaluation = await self.provider.evaluate(conversation)
         conversation.evaluations.append(evaluation)
+        if evaluation.active_conflicts:
+            conversation.shared_context.active_conflicts = evaluation.active_conflicts
         conversation.stall_count = (
             conversation.stall_count + 1
             if evaluation.recommendation in {EvaluationRecommendation.REPLACE, EvaluationRecommendation.RESTRUCTURE}
@@ -347,10 +363,12 @@ class ConversationOrchestrator:
         await self._publish(EventType.AGENT_REPLACED, conversation, {"replacement": event})
 
     def _determine_failure_mode(self, conversation: Conversation, evaluation) -> str:
-        if evaluation.redundancy_score > 0.62:
+        if evaluation.redundancy_score > 0.58:
             return "too_repetitive"
-        if evaluation.novelty_score < 0.35:
+        if evaluation.novelty_score < 0.42:
             return "no_creativity"
+        if evaluation.conflict_utility_score < 0.40:
+            return "too_repetitive"
         if evaluation.depth_score < 0.45:
             return "too_shallow"
         if conversation.current_round >= conversation.runtime.restructuring_interval:

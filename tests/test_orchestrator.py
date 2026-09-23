@@ -360,3 +360,58 @@ def test_concurrent_step_calls_are_serialized_per_conversation() -> None:
         assert provider.evaluate_calls == 2
 
     asyncio.run(scenario())
+
+
+def test_active_conflicts_and_failure_mode_trigger() -> None:
+    async def scenario() -> None:
+        class DivergentProvider(BaseAgentProvider):
+            async def respond(self, conversation, agent) -> AgentResponse:
+                return AgentResponse(
+                    content="Opinionated statement.",
+                    contribution_score=0.5,
+                    novelty_score=0.3,
+                    repetition_score=0.6,
+                )
+
+            async def evaluate(self, conversation) -> EvaluationSnapshot:
+                return EvaluationSnapshot(
+                    round_number=conversation.current_round,
+                    progress_score=0.4,
+                    novelty_score=0.3,
+                    coherence_score=0.7,
+                    redundancy_score=0.6,
+                    goal_alignment_score=0.6,
+                    depth_score=0.4,
+                    conflict_utility_score=0.3,
+                    recommendation=EvaluationRecommendation.RESTRUCTURE,
+                    rationale="Premature convergence detected.",
+                    active_conflicts=["Tension between centralized vs decentralized approach"],
+                )
+
+        store = ConversationStore()
+        event_bus = EventBus()
+        provider = DivergentProvider()
+        orchestrator = ConversationOrchestrator(store, event_bus, provider)
+        runtime = RuntimeConfig(
+            evaluation_interval=1,
+            restructuring_interval=5,
+            max_rounds=2,
+            stagnation_threshold=3,
+        )
+
+        conversation = await orchestrator.create_conversation(
+            topic="System architecture design",
+            scene="Architectural review",
+            constraints=[],
+            runtime=runtime,
+        )
+
+        updated = await orchestrator.step_conversation(conversation.id)
+
+        assert updated.shared_context.active_conflicts == [
+            "Tension between centralized vs decentralized approach"
+        ]
+        assert len(updated.replacements) == 1
+        assert updated.replacements[0].added_role == AgentRole.CONTRARIAN
+
+    asyncio.run(scenario())

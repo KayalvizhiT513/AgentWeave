@@ -49,6 +49,7 @@ class AgentProfile(BaseModel):
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)
     priority: float = Field(default=0.5, ge=0.0, le=1.0)
     expertise_weight: float = Field(default=0.5, ge=0.0, le=1.0)
+    temperature: float = Field(default=0.7, ge=0.0, le=2.0)
     contribution_score: float = Field(default=0.5, ge=0.0, le=1.0)
     repetition_score: float = Field(default=0.0, ge=0.0, le=1.0)
     novelty_score: float = Field(default=0.5, ge=0.0, le=1.0)
@@ -80,6 +81,7 @@ class EvaluationSnapshot(BaseModel):
     conflict_utility_score: float = Field(ge=0.0, le=1.0)
     recommendation: EvaluationRecommendation
     rationale: str
+    active_conflicts: list[str] = Field(default_factory=list)
     created_at: datetime = Field(default_factory=utc_now)
 
 
