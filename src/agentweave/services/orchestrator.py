@@ -214,9 +214,16 @@ class ConversationOrchestrator:
                 conversation.status = ConversationStatus.RUNNING
 
             conversation.current_round += 1
-            for agent in conversation.active_agents():
-                if agent.role == AgentRole.EVALUATOR:
-                    continue
+            active_speakers = [
+                agent
+                for agent in conversation.active_agents()
+                if agent.role != AgentRole.EVALUATOR
+            ]
+            if active_speakers:
+                offset = (conversation.current_round - 1) % len(active_speakers)
+                active_speakers = active_speakers[offset:] + active_speakers[:offset]
+
+            for agent in active_speakers:
                 response = await self.provider.respond(conversation, agent)
                 agent.contribution_score = response.contribution_score
                 agent.novelty_score = response.novelty_score
@@ -265,9 +272,9 @@ class ConversationOrchestrator:
 
     def _initial_agents(self) -> list[AgentProfile]:
         return [
-            _make_agent(AgentRole.CHATTER),
+            _make_agent(AgentRole.VISIONARY),
             _make_agent(AgentRole.CRITIC),
-            _make_agent(AgentRole.MODERATOR),
+            _make_agent(AgentRole.CONTRARIAN),
             _make_agent(AgentRole.EVALUATOR),
         ]
 

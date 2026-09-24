@@ -46,11 +46,22 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "Content-Type": "application/json",
         }
 
+    def _temperature_for_role(self, role: AgentRole) -> float:
+        exploratory_roles = {
+            AgentRole.VISIONARY: 0.95,
+            AgentRole.CONTRARIAN: 0.9,
+            AgentRole.CHATTER: 0.85,
+            AgentRole.CRITIC: 0.8,
+            AgentRole.DOMAIN_EXPERT: 0.75,
+        }
+        return exploratory_roles.get(role, 0.7)
+
     async def respond(self, conversation: Conversation, agent: AgentProfile) -> AgentResponse:
         payload = {
             "model": self.settings.openai_default_model,
             "instructions": self._agent_instructions(agent),
             "input": self._agent_input(conversation, agent),
+            "temperature": self._temperature_for_role(agent.role),
             "text": {
                 "format": {
                     "type": "json_schema",
@@ -179,6 +190,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
             "Maintain your unique persona and distinct worldview. Resist premature consensus, groupthink, or echoing previous speakers. "
+            "Never adopt another participant's stance just to be agreeable. Explicitly challenge prevailing assumptions and propose divergent solutions. "
             "Actively introduce distinct angles, unexamined hypotheses, counter-arguments, or orthogonal sub-problems relevant to your role. "
             "Make one concrete contribution that directly engages with what others have said while pushing the exploration in new or deeper directions. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
@@ -212,7 +224,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Recent dialogue:\n{history_block}\n"
                     "Guidance for exploration:\n"
                     "- Do NOT simply agree with or echo prior speakers.\n"
-                    "- Identify unexamined assumptions, alternative paradigms, or novel angles not yet discussed.\n"
+                    "- Challenge consensus by highlighting missing angles, unexamined failure modes, or alternative paradigms.\n"
                     "- Stay true to your specific role's unique lens and priorities.\n"
                     "Write the next natural conversational turn for this speaker."
                 ),

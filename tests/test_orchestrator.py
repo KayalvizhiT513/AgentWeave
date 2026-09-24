@@ -180,6 +180,46 @@ def test_orchestrator_e2e_workflow() -> None:
     asyncio.run(scenario())
 
 
+def test_initial_agents_and_turn_rotation() -> None:
+    async def scenario() -> None:
+        store = ConversationStore()
+        event_bus = EventBus()
+        provider = ScriptedProvider([EvaluationRecommendation.CONTINUE, EvaluationRecommendation.CONTINUE])
+        orchestrator = ConversationOrchestrator(store, event_bus, provider)
+        runtime = RuntimeConfig(evaluation_interval=1, max_rounds=2)
+
+        conversation = await orchestrator.create_conversation(
+            topic="Test initial agents and turn rotation",
+            scene=None,
+            constraints=[],
+            runtime=runtime,
+        )
+
+        roles = [agent.role for agent in conversation.active_agents()]
+        assert roles == [
+            AgentRole.VISIONARY,
+            AgentRole.CRITIC,
+            AgentRole.CONTRARIAN,
+            AgentRole.EVALUATOR,
+        ]
+
+        # Round 1
+        await orchestrator.step_conversation(conversation.id)
+        conv = await orchestrator.get_conversation(conversation.id)
+        assert conv is not None
+        round1_roles = [ex.role for ex in conv.exchanges if ex.round_number == 1]
+        assert round1_roles == [AgentRole.VISIONARY, AgentRole.CRITIC, AgentRole.CONTRARIAN]
+
+        # Round 2
+        await orchestrator.step_conversation(conversation.id)
+        conv = await orchestrator.get_conversation(conversation.id)
+        assert conv is not None
+        round2_roles = [ex.role for ex in conv.exchanges if ex.round_number == 2]
+        assert round2_roles == [AgentRole.CRITIC, AgentRole.CONTRARIAN, AgentRole.VISIONARY]
+
+    asyncio.run(scenario())
+
+
 def test_step_conversation_promotes_draft_to_running() -> None:
     async def scenario() -> None:
         store = ConversationStore()
