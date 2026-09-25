@@ -180,6 +180,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
             "Maintain your unique persona and distinct worldview. Resist premature consensus, groupthink, or echoing previous speakers. "
             "Actively introduce distinct angles, unexamined hypotheses, counter-arguments, or orthogonal sub-problems relevant to your role. "
+            "Advocate forcefully for your role's distinct perspective rather than settling into early agreement. "
             "Make one concrete contribution that directly engages with what others have said while pushing the exploration in new or deeper directions. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
@@ -213,7 +214,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     "Guidance for exploration:\n"
                     "- Do NOT simply agree with or echo prior speakers.\n"
                     "- Identify unexamined assumptions, alternative paradigms, or novel angles not yet discussed.\n"
-                    "- Stay true to your specific role's unique lens and priorities.\n"
+                    "- Stay true to your specific role's unique lens and priorities, challenging prevailing consensus where appropriate.\n"
                     "Write the next natural conversational turn for this speaker."
                 ),
             }
