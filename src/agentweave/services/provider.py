@@ -182,9 +182,6 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
             "Make one concrete contribution that directly engages with what others have said while offering a distinct perspective. "
-            "Maintain your unique persona and distinct worldview. Resist premature consensus, groupthink, or echoing previous speakers. "
-            "Actively introduce distinct angles, unexamined hypotheses, counter-arguments, or orthogonal sub-problems relevant to your role. "
-            "Make one concrete contribution that directly engages with what others have said while pushing the exploration in new or deeper directions. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
             "The 'content' field is the only user-visible text. The numeric scores are hidden metadata for the orchestrator. "
@@ -216,11 +213,6 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Recent dialogue:\n{history_block}\n"
                     "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon. "
                     "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought or constructive friction."
-                    "Guidance for exploration:\n"
-                    "- Do NOT simply agree with or echo prior speakers.\n"
-                    "- Identify unexamined assumptions, alternative paradigms, or novel angles not yet discussed.\n"
-                    "- Stay true to your specific role's unique lens and priorities.\n"
-                    "Write the next natural conversational turn for this speaker."
                 ),
             }
         ]
@@ -229,9 +221,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
         return (
             "You are the evaluator for a multi-agent reasoning system. "
             "Assess the recent discussion for novelty, coherence, redundancy, goal alignment, depth, and conflict utility. "
-            "Be vigilant for premature convergence, groupthink, or agents echoing each other without introducing distinct perspectives. "
-            "If agents are converging too quickly without thoroughly exploring different thoughts or challenging assumptions, "
-            "assign lower novelty/depth scores and recommend replacement or restructuring to inject fresh perspectives. "
+            "Evaluate the actual conversational quality, not whether the speakers followed internal formatting. "
             "Choose one recommendation from continue, replace, restructure, or stop. "
             "Return structured JSON only."
         )
