@@ -39,6 +39,11 @@ class RuntimeConfig(BaseModel):
         default=DEFAULT_RUNTIME.stagnation_threshold,
         ge=1,
     )
+    temperature: float = Field(
+        default=DEFAULT_RUNTIME.temperature,
+        ge=0.0,
+        le=2.0,
+    )
 
 
 class AgentProfile(BaseModel):

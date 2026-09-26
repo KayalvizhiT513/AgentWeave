@@ -49,6 +49,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
     async def respond(self, conversation: Conversation, agent: AgentProfile) -> AgentResponse:
         payload = {
             "model": self.settings.openai_default_model,
+            "temperature": conversation.runtime.temperature,
             "instructions": self._agent_instructions(agent),
             "input": self._agent_input(conversation, agent),
             "text": {
@@ -178,9 +179,10 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
-            "Maintain your unique persona and distinct worldview. Resist premature consensus, groupthink, or echoing previous speakers. "
-            "Actively introduce distinct angles, unexamined hypotheses, counter-arguments, or orthogonal sub-problems relevant to your role. "
-            "Make one concrete contribution that directly engages with what others have said while pushing the exploration in new or deeper directions. "
+            "Maintain your unique persona and distinct worldview. Strongly resist premature consensus, groupthink, or echoing previous speakers. "
+            "Actively introduce distinct angles, unexamined hypotheses, counter-arguments, dissenting perspectives, or orthogonal sub-problems relevant to your role. "
+            "Do not merely agree with prior turns or converge onto one shared opinion; instead, rigorously defend alternative views or challenge prevailing assumptions. "
+            "Make one concrete contribution that directly engages with what others have said while pushing the exploration in new, divergent, or deeper directions. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
             "The 'content' field is the only user-visible text. The numeric scores are hidden metadata for the orchestrator. "
@@ -211,9 +213,9 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Hard constraints:\n{constraints}\n"
                     f"Recent dialogue:\n{history_block}\n"
                     "Guidance for exploration:\n"
-                    "- Do NOT simply agree with or echo prior speakers.\n"
-                    "- Identify unexamined assumptions, alternative paradigms, or novel angles not yet discussed.\n"
-                    "- Stay true to your specific role's unique lens and priorities.\n"
+                    "- Do NOT simply agree with, echo, or converge on prior speakers' ideas.\n"
+                    "- Identify unexamined assumptions, alternative paradigms, counter-hypotheses, or novel angles not yet discussed.\n"
+                    "- Stay true to your specific role's unique lens and priorities, maintaining ideological and analytical divergence.\n"
                     "Write the next natural conversational turn for this speaker."
                 ),
             }
@@ -251,19 +253,19 @@ class OpenAIAgentProvider(BaseAgentProvider):
 
     def _role_brief(self, role: AgentRole) -> str:
         briefs = {
-            AgentRole.CHATTER: "Push the discussion forward with imaginative, highly creative, and out-of-the-box ideas.",
-            AgentRole.CRITIC: "Challenge weak assumptions, expose blind spots, and question premature agreement.",
-            AgentRole.MODERATOR: "Keep the discussion on scope, clarify disputes, and ensure diverse perspectives are heard.",
-            AgentRole.LISTENER: "Speak sparingly and intervene only to synthesize contrasting ideas into new insights.",
-            AgentRole.SYNTHESIZER: "Connect divergent threads and transform scattered viewpoints into structured models without flattening differences.",
-            AgentRole.DOMAIN_EXPERT: "Inject specialized knowledge, precise technical distinctions, and real-world edge cases.",
-            AgentRole.PRACTICAL_ENGINEER: "Translate abstract concepts into concrete implementation realities and feasibility tests.",
-            AgentRole.RATIONAL_ANALYST: "Strip away emotion and test claims with cold logic, rigorous data demands, and formal reasoning.",
+            AgentRole.CHATTER: "Push the discussion forward with imaginative, highly creative, and out-of-the-box ideas that open new unexplored paths.",
+            AgentRole.CRITIC: "Challenge weak assumptions, expose blind spots, and aggressively question premature agreement or consensus.",
+            AgentRole.MODERATOR: "Keep the discussion on scope, clarify disputes, and actively solicit diverse or dissenting perspectives.",
+            AgentRole.LISTENER: "Speak sparingly and intervene only to synthesize contrasting ideas into new insights without erasing divergent viewpoints.",
+            AgentRole.SYNTHESIZER: "Connect divergent threads and transform scattered viewpoints into structured models without flattening differences or forcing artificial consensus.",
+            AgentRole.DOMAIN_EXPERT: "Inject specialized knowledge, precise technical distinctions, and real-world edge cases that challenge simple consensus.",
+            AgentRole.PRACTICAL_ENGINEER: "Translate abstract concepts into concrete implementation realities and highlight unforeseen practical constraints or failure modes.",
+            AgentRole.RATIONAL_ANALYST: "Strip away emotion and test claims with cold logic, rigorous data demands, and formal reasoning, resisting unverified assumptions.",
             AgentRole.MEDIATOR: "Reframe intense conflicts into productive options while preserving key tensions rather than forcing artificial consensus.",
-            AgentRole.VISIONARY: "Introduce bold, disruptive directions and radical alternative paradigms that expand the solution space.",
-            AgentRole.CONSTRAINT_PLANNER: "Force realism, trade-offs, hard boundaries, and operational limits.",
-            AgentRole.CONTRARIAN: "Offer a sharp, productive dissenting angle that directly challenges prevailing consensus.",
-            AgentRole.ORDER: "Detect internal contradictions, logical flaws, and enforce structural consistency.",
+            AgentRole.VISIONARY: "Introduce bold, disruptive directions and radical alternative paradigms that break existing consensus and expand the solution space.",
+            AgentRole.CONSTRAINT_PLANNER: "Force realism, trade-offs, hard boundaries, and operational limits that challenge naive agreements.",
+            AgentRole.CONTRARIAN: "Offer a sharp, productive dissenting angle that directly challenges prevailing consensus and defends alternative hypotheses.",
+            AgentRole.ORDER: "Detect internal contradictions, logical flaws, and enforce structural consistency across competing views.",
             AgentRole.EVALUATOR: "Assess progress, detect groupthink, and recommend next control actions.",
             AgentRole.MASTER: "Orchestrate rather than participate in the visible debate.",
         }

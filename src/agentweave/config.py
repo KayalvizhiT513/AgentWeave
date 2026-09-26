@@ -16,6 +16,7 @@ class RuntimeDefaults(BaseModel):
     max_history_entries: int = Field(default=120, ge=10)
     summary_window: int = Field(default=8, ge=2)
     stagnation_threshold: int = Field(default=3, ge=1)
+    temperature: float = Field(default=0.85, ge=0.0, le=2.0)
 
 
 DEFAULT_RUNTIME = RuntimeDefaults()

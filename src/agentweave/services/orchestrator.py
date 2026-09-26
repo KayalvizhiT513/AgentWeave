@@ -267,6 +267,7 @@ class ConversationOrchestrator:
         return [
             _make_agent(AgentRole.CHATTER),
             _make_agent(AgentRole.CRITIC),
+            _make_agent(AgentRole.CONTRARIAN),
             _make_agent(AgentRole.MODERATOR),
             _make_agent(AgentRole.EVALUATOR),
         ]
@@ -332,6 +333,13 @@ class ConversationOrchestrator:
         weakest = max(candidates, key=lambda agent: agent.replacement_eligibility)
         weakest.status = AgentStatus.REPLACED
         new_role = REPLACEMENT_STRATEGY[failure_mode]
+        active_roles = {a.role for a in conversation.active_agents()}
+        if new_role in active_roles:
+            fallback_roles = [AgentRole.CONTRARIAN, AgentRole.VISIONARY, AgentRole.CRITIC]
+            for fb in fallback_roles:
+                if fb not in active_roles:
+                    new_role = fb
+                    break
         replacement = _make_agent(new_role)
         conversation.agents.append(replacement)
         event = ReplacementEvent(

@@ -152,16 +152,17 @@ def test_orchestrator_e2e_workflow() -> None:
 
         assert completed.status == ConversationStatus.COMPLETED
         assert completed.current_round == 2
-        assert len(completed.exchanges) == 6
+        assert len(completed.exchanges) == 8
         assert len(completed.evaluations) == 2
         assert len(completed.summaries) >= 1
         assert len(completed.replacements) == 1
-        assert completed.replacements[0].added_role == AgentRole.CONTRARIAN
+        assert completed.replacements[0].added_role == AgentRole.VISIONARY
         assert "Recommendation: stop." in completed.final_summary
 
-        event_types = await _drain_event_types(queue, expected=14)
+        event_types = await _drain_event_types(queue, expected=17)
         assert event_types == [
             EventType.CONVERSATION_STARTED.value,
+            EventType.AGENT_RESPONDED.value,
             EventType.AGENT_RESPONDED.value,
             EventType.AGENT_RESPONDED.value,
             EventType.AGENT_RESPONDED.value,
@@ -172,9 +173,11 @@ def test_orchestrator_e2e_workflow() -> None:
             EventType.AGENT_RESPONDED.value,
             EventType.AGENT_RESPONDED.value,
             EventType.AGENT_RESPONDED.value,
+            EventType.AGENT_RESPONDED.value,
             EventType.SUMMARY_UPDATED.value,
             EventType.EVALUATION_CREATED.value,
             EventType.CONVERSATION_COMPLETED.value,
+            EventType.ROUND_COMPLETED.value,
         ]
 
     asyncio.run(scenario())
@@ -206,8 +209,8 @@ def test_step_conversation_promotes_draft_to_running() -> None:
 
         assert updated.status == ConversationStatus.RUNNING
         assert updated.current_round == 1
-        assert len(updated.exchanges) == 3
-        assert provider.respond_calls == 3
+        assert len(updated.exchanges) == 4
+        assert provider.respond_calls == 4
         assert provider.evaluate_calls == 1
 
     asyncio.run(scenario())
@@ -355,8 +358,8 @@ def test_concurrent_step_calls_are_serialized_per_conversation() -> None:
 
         assert updated is not None
         assert updated.current_round == 2
-        assert [exchange.round_number for exchange in updated.exchanges] == [1, 1, 1, 2, 2, 2]
-        assert provider.respond_calls == 6
+        assert [exchange.round_number for exchange in updated.exchanges] == [1, 1, 1, 1, 2, 2, 2, 2]
+        assert provider.respond_calls == 8
         assert provider.evaluate_calls == 2
 
     asyncio.run(scenario())
