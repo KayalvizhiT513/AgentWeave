@@ -85,6 +85,57 @@ def test_openai_provider_respond(monkeypatch) -> None:
     input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
     assert "Recent dialogue:" in input_text
     assert "Analyze the recent dialogue through your unique role perspective" in input_text
+    assert "ANTI-GROUPTHINK MANDATE" in instructions
+    assert "Unresolved conflicts / Open alternatives:" in input_text
+
+
+def test_openai_provider_divergence_warning(monkeypatch) -> None:
+    from agentweave.core.models import EvaluationSnapshot
+
+    FakeAsyncClient.payloads = [
+        {
+            "output_text": json.dumps(
+                {
+                    "content": "A divergent contribution.",
+                    "contribution_score": 0.9,
+                    "novelty_score": 0.85,
+                    "repetition_score": 0.05,
+                }
+            )
+        }
+    ]
+    FakeAsyncClient.calls = []
+    monkeypatch.setattr("agentweave.services.provider.httpx.AsyncClient", FakeAsyncClient)
+
+    settings = Settings(
+        provider_mode="openai",
+        openai_api_key="test-key",
+        openai_default_model="gpt-5.4-mini",
+        openai_evaluator_model="gpt-5.4-mini",
+    )
+    provider = OpenAIAgentProvider(settings)
+    conversation = make_conversation()
+    conversation.shared_context.active_conflicts = ["Conflict over consciousness def."]
+    conversation.evaluations = [
+        EvaluationSnapshot(
+            round_number=1,
+            progress_score=0.4,
+            novelty_score=0.3,  # Low novelty!
+            coherence_score=0.6,
+            redundancy_score=0.5,
+            goal_alignment_score=0.7,
+            depth_score=0.4,
+            conflict_utility_score=0.3,
+            recommendation=EvaluationRecommendation.CONTINUE,
+            rationale="Converging too fast.",
+        )
+    ]
+
+    asyncio.run(provider.respond(conversation, conversation.agents[0]))
+
+    input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
+    assert "Unresolved conflicts / Open alternatives:\n- Conflict over consciousness def." in input_text
+    assert "DIVERGENCE ALERT: Recent discussion is converging prematurely" in input_text
 
 
 def test_openai_provider_evaluate(monkeypatch) -> None:

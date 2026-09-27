@@ -313,6 +313,14 @@ class ConversationOrchestrator:
         )
         await self._publish(EventType.EVALUATION_CREATED, conversation, {"evaluation": evaluation})
 
+        if evaluation.novelty_score < 0.5 or evaluation.redundancy_score > 0.4:
+            conflict_msg = (
+                f"Round {conversation.current_round}: Low novelty ({evaluation.novelty_score:.2f}) "
+                f"or high redundancy ({evaluation.redundancy_score:.2f}). Seek alternative angles."
+            )
+            conversation.shared_context.active_conflicts.append(conflict_msg)
+            conversation.shared_context.active_conflicts = conversation.shared_context.active_conflicts[-5:]
+
         if evaluation.recommendation == EvaluationRecommendation.REPLACE:
             await self._replace_weakest_agent(conversation, "too_repetitive")
         elif evaluation.recommendation == EvaluationRecommendation.RESTRUCTURE:
@@ -344,6 +352,14 @@ class ConversationOrchestrator:
             reason=f"Replaced due to {failure_mode.replace('_', ' ')} during evaluation.",
         )
         conversation.replacements.append(event)
+
+        replacement_conflict = (
+            f"Round {conversation.current_round}: Replaced {weakest.role.value} with {new_role.value} due to {failure_mode.replace('_', ' ')}. "
+            f"Explore alternative perspectives from the {new_role.value} domain."
+        )
+        conversation.shared_context.active_conflicts.append(replacement_conflict)
+        conversation.shared_context.active_conflicts = conversation.shared_context.active_conflicts[-5:]
+
         await self._publish(EventType.AGENT_REPLACED, conversation, {"replacement": event})
 
     def _determine_failure_mode(self, conversation: Conversation, evaluation) -> str:

@@ -176,12 +176,12 @@ class OpenAIAgentProvider(BaseAgentProvider):
             f"Your role is '{agent.role.value}' and your personality is '{agent.personality}'. "
             f"Role brief: {role_brief} "
             "Maintain independent thought and strictly adhere to your assigned role and personality. "
-            "Do NOT passively agree, echo, or summarize prior participants unless your explicit role requires synthesis. "
+            "ANTI-GROUPTHINK MANDATE: Do NOT passively agree, echo, or summarize prior participants unless your explicit role requires synthesis. "
             "Challenge consensus, expose unexamined assumptions, or introduce a novel, distinct angle from your role's viewpoint. "
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
-            "Make one concrete contribution that directly engages with what others have said while offering a distinct perspective. "
+            "Make one concrete contribution that directly engages with what others have said while offering a distinct, non-convergent perspective. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
             "The 'content' field is the only user-visible text. The numeric scores are hidden metadata for the orchestrator. "
@@ -196,11 +196,30 @@ class OpenAIAgentProvider(BaseAgentProvider):
             if conversation.constraints
             else "- none"
         )
+        active_conflicts = (
+            "\n".join(f"- {conflict}" for conflict in conversation.shared_context.active_conflicts)
+            if conversation.shared_context.active_conflicts
+            else "- none currently tracked"
+        )
         history_block = (
             "\n".join(f"- {line}" for line in recent_history)
             if recent_history
             else "- none yet"
         )
+
+        divergence_warning = ""
+        if conversation.evaluations:
+            latest_eval = conversation.evaluations[-1]
+            if latest_eval.novelty_score < 0.5 or latest_eval.redundancy_score > 0.4:
+                divergence_warning = (
+                    "DIVERGENCE ALERT: Recent discussion is converging prematurely or repeating prior ideas. "
+                    "You MUST explore an unexamined axis, challenge a core premise, or present a contrasting alternative.\n"
+                )
+        if not divergence_warning and conversation.stall_count > 0:
+            divergence_warning = (
+                "DIVERGENCE ALERT: Discussion is stagnating. Break away from the current consensus angle.\n"
+            )
+
         return [
             {
                 "role": "user",
@@ -210,7 +229,9 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Current speaker role: {agent.role.value}\n"
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
+                    f"Unresolved conflicts / Open alternatives:\n{active_conflicts}\n"
                     f"Recent dialogue:\n{history_block}\n"
+                    f"{divergence_warning}"
                     "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon. "
                     "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought or constructive friction."
                 ),

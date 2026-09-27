@@ -360,3 +360,30 @@ def test_concurrent_step_calls_are_serialized_per_conversation() -> None:
         assert provider.evaluate_calls == 2
 
     asyncio.run(scenario())
+
+
+def test_orchestrator_active_conflicts_tracking() -> None:
+    async def scenario() -> None:
+        store = ConversationStore()
+        event_bus = EventBus()
+        provider = ScriptedProvider([EvaluationRecommendation.REPLACE])
+        orchestrator = ConversationOrchestrator(store, event_bus, provider)
+        runtime = RuntimeConfig(
+            evaluation_interval=1,
+            max_rounds=2,
+        )
+
+        conversation = await orchestrator.create_conversation(
+            topic="Explore quantum computing algorithms",
+            scene=None,
+            constraints=[],
+            runtime=runtime,
+        )
+
+        updated = await orchestrator.step_conversation(conversation.id)
+
+        assert updated is not None
+        assert len(updated.shared_context.active_conflicts) > 0
+        assert any("Seek alternative angles" in c or "Replaced" in c for c in updated.shared_context.active_conflicts)
+
+    asyncio.run(scenario())
