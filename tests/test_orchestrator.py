@@ -209,6 +209,8 @@ def test_step_conversation_promotes_draft_to_running() -> None:
         assert len(updated.exchanges) == 3
         assert provider.respond_calls == 3
         assert provider.evaluate_calls == 1
+        assert len(updated.shared_context.active_conflicts) == 1
+        assert "Consensus risk detected" in updated.shared_context.active_conflicts[0]
 
     asyncio.run(scenario())
 

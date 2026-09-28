@@ -311,10 +311,17 @@ class ConversationOrchestrator:
             if evaluation.recommendation in {EvaluationRecommendation.REPLACE, EvaluationRecommendation.RESTRUCTURE}
             else 0
         )
+
+        if evaluation.conflict_utility_score < 0.45 or evaluation.novelty_score < 0.45 or evaluation.redundancy_score > 0.5:
+            notice = f"Consensus risk detected (round {conversation.current_round}): explore unconsidered alternatives and challenge dominant ideas."
+            if notice not in conversation.shared_context.active_conflicts:
+                conversation.shared_context.active_conflicts.append(notice)
+
         await self._publish(EventType.EVALUATION_CREATED, conversation, {"evaluation": evaluation})
 
         if evaluation.recommendation == EvaluationRecommendation.REPLACE:
-            await self._replace_weakest_agent(conversation, "too_repetitive")
+            failure_mode = self._determine_failure_mode(conversation, evaluation)
+            await self._replace_weakest_agent(conversation, failure_mode)
         elif evaluation.recommendation == EvaluationRecommendation.RESTRUCTURE:
             failure_mode = self._determine_failure_mode(conversation, evaluation)
             await self._replace_weakest_agent(conversation, failure_mode)
@@ -351,11 +358,13 @@ class ConversationOrchestrator:
             return "too_repetitive"
         if evaluation.novelty_score < 0.35:
             return "no_creativity"
+        if evaluation.conflict_utility_score < 0.35:
+            return "too_repetitive"
         if evaluation.depth_score < 0.45:
             return "too_shallow"
         if conversation.current_round >= conversation.runtime.restructuring_interval:
             return "too_theoretical"
-        return "too_chaotic"
+        return "too_repetitive"
 
     async def _complete_if_needed(self, conversation: Conversation) -> None:
         if conversation.current_round >= conversation.runtime.max_rounds:
