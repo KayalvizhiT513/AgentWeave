@@ -178,6 +178,8 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "Maintain independent thought and strictly adhere to your assigned role and personality. "
             "Do NOT passively agree, echo, or summarize prior participants unless your explicit role requires synthesis. "
             "Challenge consensus, expose unexamined assumptions, or introduce a novel, distinct angle from your role's viewpoint. "
+            "Avoid sycophancy or premature convergence. If previous participants are coalescing around a single option or perspective, "
+            "actively branch off by proposing an alternative hypothesis, challenging a core premise, or exploring an unconsidered dimension. "
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
@@ -196,6 +198,11 @@ class OpenAIAgentProvider(BaseAgentProvider):
             if conversation.constraints
             else "- none"
         )
+        conflicts = (
+            "\n".join(f"- {item}" for item in conversation.shared_context.active_conflicts)
+            if conversation.shared_context.active_conflicts
+            else "- none tracked yet"
+        )
         history_block = (
             "\n".join(f"- {line}" for line in recent_history)
             if recent_history
@@ -210,8 +217,10 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Current speaker role: {agent.role.value}\n"
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
+                    f"Active conflicts / Open perspectives:\n{conflicts}\n"
                     f"Recent dialogue:\n{history_block}\n"
-                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon. "
+                    "Analyze the recent dialogue through your unique role perspective. Do not repeat or echo what has been agreed upon. "
+                    "If the conversation is converging on a single proposal, actively explore an alternative branch, introduce an unconsidered counter-hypothesis, or challenge the core premise. "
                     "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought or constructive friction."
                 ),
             }
@@ -247,23 +256,23 @@ class OpenAIAgentProvider(BaseAgentProvider):
 
     def _role_brief(self, role: AgentRole) -> str:
         briefs = {
-            AgentRole.CHATTER: "Push the discussion forward with imaginative, unconventional, and expansive possibilities. Avoid defaulting to consensus.",
-            AgentRole.CRITIC: "Rigorously challenge weak assumptions, expose logical gaps, and disrupt superficial consensus.",
-            AgentRole.MODERATOR: "Keep the discussion focused, ensure divergent perspectives are heard, and prevent groupthink.",
-            AgentRole.LISTENER: "Speak sparingly and add synthesis only when it materially helps reconcile genuinely opposing arguments.",
-            AgentRole.SYNTHESIZER: "Connect contrasting threads and structure competing ideas without erasing valid disagreements.",
-            AgentRole.DOMAIN_EXPERT: "Inject deep, non-obvious domain mechanics, technical distinctions, and specialized nuances.",
-            AgentRole.PRACTICAL_ENGINEER: "Ground theoretical discussions in concrete implementation trade-offs, edge cases, and execution friction.",
-            AgentRole.RATIONAL_ANALYST: "Strip away rhetoric, test underlying premises with cold logic, and quantify trade-offs.",
-            AgentRole.MEDIATOR: "Identify underlying causes of deadlock and reframe ideological conflict into constructive trade-off choices.",
-            AgentRole.VISIONARY: "Introduce radical alternative paradigms and ambitious long-term horizons that shake up established thinking.",
-            AgentRole.CONSTRAINT_PLANNER: "Highlight hidden costs, physical limits, bottleneck risks, and strict feasibility boundaries.",
-            AgentRole.CONTRARIAN: "Directly challenge the dominant narrative, advocate for underrepresented counter-arguments, and expose blind spots.",
-            AgentRole.ORDER: "Detect structural contradictions, enforce logical consistency, and prevent circular arguments.",
-            AgentRole.EVALUATOR: "Assess qualitative depth, novelty, and genuine progress, penalizing repetitive agreement.",
+            AgentRole.CHATTER: "Push the discussion forward with imaginative, unconventional, and expansive possibilities. Propose fundamentally different alternatives rather than building on consensus.",
+            AgentRole.CRITIC: "Rigorously challenge weak assumptions, expose logical gaps, and disrupt superficial consensus by attacking core premises.",
+            AgentRole.MODERATOR: "Keep the discussion focused, ensure divergent perspectives are heard, enforce exploration of unconsidered angles, and prevent groupthink.",
+            AgentRole.LISTENER: "Speak sparingly and add synthesis only when it materially helps reconcile genuinely opposing arguments without erasing disagreement.",
+            AgentRole.SYNTHESIZER: "Connect contrasting threads and structure competing ideas into distinct trade-off models without forcing artificial consensus.",
+            AgentRole.DOMAIN_EXPERT: "Inject deep, non-obvious domain mechanics, alternative technical paradigms, and specialized nuances.",
+            AgentRole.PRACTICAL_ENGINEER: "Ground theoretical discussions in concrete implementation trade-offs, alternative technical architectures, edge cases, and execution friction.",
+            AgentRole.RATIONAL_ANALYST: "Strip away rhetoric, test underlying premises with cold logic, quantify trade-offs, and present counter-hypotheses.",
+            AgentRole.MEDIATOR: "Identify underlying causes of deadlock and reframe ideological conflict into distinct, competing trade-off choices.",
+            AgentRole.VISIONARY: "Introduce radical alternative paradigms, unthought-of possibilities, and ambitious long-term horizons that disrupt established thinking.",
+            AgentRole.CONSTRAINT_PLANNER: "Highlight hidden costs, physical limits, bottleneck risks, and strict feasibility boundaries that invalidate easy consensus.",
+            AgentRole.CONTRARIAN: "Directly challenge the dominant narrative, advocate for underrepresented counter-arguments, and champion dissenting viewpoints.",
+            AgentRole.ORDER: "Detect structural contradictions, enforce logical consistency, and expose circular or copycat arguments.",
+            AgentRole.EVALUATOR: "Assess qualitative depth, novelty, and genuine progress, penalizing repetitive agreement and groupthink.",
             AgentRole.MASTER: "Orchestrate rather than participate in the visible debate.",
         }
-        return briefs.get(role, "Make a useful, role-consistent contribution with a distinct perspective.")
+        return briefs.get(role, "Make a useful, role-consistent contribution with a distinct, divergent perspective.")
 
     def _normalize_dialogue(self, content: str, agent: AgentProfile) -> str:
         text = content.strip()

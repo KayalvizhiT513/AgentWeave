@@ -87,6 +87,45 @@ def test_openai_provider_respond(monkeypatch) -> None:
     assert "Analyze the recent dialogue through your unique role perspective" in input_text
 
 
+def test_openai_provider_anti_convergence_prompts(monkeypatch) -> None:
+    FakeAsyncClient.payloads = [
+        {
+            "output_text": json.dumps(
+                {
+                    "content": "Exploring an alternative hypothesis.",
+                    "contribution_score": 0.85,
+                    "novelty_score": 0.9,
+                    "repetition_score": 0.05,
+                }
+            )
+        }
+    ]
+    FakeAsyncClient.calls = []
+    monkeypatch.setattr("agentweave.services.provider.httpx.AsyncClient", FakeAsyncClient)
+
+    settings = Settings(
+        provider_mode="openai",
+        openai_api_key="test-key",
+        openai_default_model="gpt-5.4-mini",
+        openai_evaluator_model="gpt-5.4-mini",
+    )
+    provider = OpenAIAgentProvider(settings)
+    conversation = make_conversation()
+    conversation.shared_context.active_conflicts = [
+        "Consensus risk detected: explore unconsidered alternatives."
+    ]
+
+    response = asyncio.run(provider.respond(conversation, conversation.agents[0]))
+
+    assert response.content == "Exploring an alternative hypothesis."
+    instructions = FakeAsyncClient.calls[0]["json"]["instructions"]
+    assert "Avoid sycophancy or premature convergence" in instructions
+    input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
+    assert "Active conflicts / Open perspectives:" in input_text
+    assert "Consensus risk detected: explore unconsidered alternatives." in input_text
+    assert "If the conversation is converging on a single proposal, actively explore an alternative branch" in input_text
+
+
 def test_openai_provider_evaluate(monkeypatch) -> None:
     FakeAsyncClient.payloads = [
         {
