@@ -267,6 +267,7 @@ class ConversationOrchestrator:
         return [
             _make_agent(AgentRole.CHATTER),
             _make_agent(AgentRole.CRITIC),
+            _make_agent(AgentRole.CONTRARIAN),
             _make_agent(AgentRole.MODERATOR),
             _make_agent(AgentRole.EVALUATOR),
         ]
@@ -313,9 +314,7 @@ class ConversationOrchestrator:
         )
         await self._publish(EventType.EVALUATION_CREATED, conversation, {"evaluation": evaluation})
 
-        if evaluation.recommendation == EvaluationRecommendation.REPLACE:
-            await self._replace_weakest_agent(conversation, "too_repetitive")
-        elif evaluation.recommendation == EvaluationRecommendation.RESTRUCTURE:
+        if evaluation.recommendation in {EvaluationRecommendation.REPLACE, EvaluationRecommendation.RESTRUCTURE}:
             failure_mode = self._determine_failure_mode(conversation, evaluation)
             await self._replace_weakest_agent(conversation, failure_mode)
         elif evaluation.recommendation == EvaluationRecommendation.STOP:
@@ -355,7 +354,7 @@ class ConversationOrchestrator:
             return "too_shallow"
         if conversation.current_round >= conversation.runtime.restructuring_interval:
             return "too_theoretical"
-        return "too_chaotic"
+        return "too_repetitive"
 
     async def _complete_if_needed(self, conversation: Conversation) -> None:
         if conversation.current_round >= conversation.runtime.max_rounds:
