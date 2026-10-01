@@ -238,6 +238,14 @@ class ConversationOrchestrator:
                 )
                 conversation.exchanges.append(exchange)
                 conversation.shared_context.history.append(exchange.content)
+                if response.novelty_score >= 0.6:
+                    perspective_entry = f"[{agent.role.value}]: {response.content}"
+                    if perspective_entry not in conversation.shared_context.competing_perspectives:
+                        conversation.shared_context.competing_perspectives.append(perspective_entry)
+                        if len(conversation.shared_context.competing_perspectives) > 10:
+                            conversation.shared_context.competing_perspectives = (
+                                conversation.shared_context.competing_perspectives[-10:]
+                            )
                 await self.store.update(conversation)
                 await self._publish(
                     EventType.AGENT_RESPONDED,
