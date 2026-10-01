@@ -108,6 +108,7 @@ class SharedContext(BaseModel):
     constraints: list[str] = Field(default_factory=list)
     decisions: list[str] = Field(default_factory=list)
     active_conflicts: list[str] = Field(default_factory=list)
+    competing_perspectives: list[str] = Field(default_factory=list)
     history: list[str] = Field(default_factory=list)
 
 

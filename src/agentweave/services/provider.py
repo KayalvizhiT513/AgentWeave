@@ -176,12 +176,12 @@ class OpenAIAgentProvider(BaseAgentProvider):
             f"Your role is '{agent.role.value}' and your personality is '{agent.personality}'. "
             f"Role brief: {role_brief} "
             "Maintain independent thought and strictly adhere to your assigned role and personality. "
-            "Do NOT passively agree, echo, or summarize prior participants unless your explicit role requires synthesis. "
-            "Challenge consensus, expose unexamined assumptions, or introduce a novel, distinct angle from your role's viewpoint. "
+            "CRITICAL: Avoid premature convergence or groupthink. Do NOT passively agree, echo, validate, or summarize prior participants unless your explicit role requires synthesis. "
+            "Actively explore alternative hypotheses, challenge hidden premises, expose trade-offs, and introduce novel orthogonal angles or counter-perspectives from your role's viewpoint. "
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
-            "Make one concrete contribution that directly engages with what others have said while offering a distinct perspective. "
+            "Make one concrete contribution that directly engages with what others have said while offering a distinct, divergent perspective. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
             "The 'content' field is the only user-visible text. The numeric scores are hidden metadata for the orchestrator. "
@@ -191,10 +191,16 @@ class OpenAIAgentProvider(BaseAgentProvider):
     def _agent_input(self, conversation: Conversation, agent: AgentProfile) -> list[dict[str, str]]:
         recent_history = conversation.shared_context.history[-8:]
         active_roles = ", ".join(member.role.value for member in conversation.active_agents())
+        competing_perspectives = getattr(conversation.shared_context, "competing_perspectives", [])
         constraints = (
             "\n".join(f"- {item}" for item in conversation.constraints)
             if conversation.constraints
             else "- none"
+        )
+        perspectives_block = (
+            "\n".join(f"- {item}" for item in competing_perspectives)
+            if competing_perspectives
+            else "- none recorded yet"
         )
         history_block = (
             "\n".join(f"- {line}" for line in recent_history)
@@ -210,9 +216,11 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Current speaker role: {agent.role.value}\n"
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
+                    f"Unexplored / Competing perspectives:\n{perspectives_block}\n"
                     f"Recent dialogue:\n{history_block}\n"
-                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon. "
-                    "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought or constructive friction."
+                    "Analyze the recent dialogue through your unique role perspective. Avoid echoing consensus or refining already agreed ideas. "
+                    "Introduce a distinct, unexamined angle, question an underlying premise, or build upon one of the unexplored competing perspectives. "
+                    "Write the next natural conversational turn for this speaker, bringing genuine divergence or constructive friction."
                 ),
             }
         ]
@@ -221,6 +229,9 @@ class OpenAIAgentProvider(BaseAgentProvider):
         return (
             "You are the evaluator for a multi-agent reasoning system. "
             "Assess the recent discussion for novelty, coherence, redundancy, goal alignment, depth, and conflict utility. "
+            "Examine whether agents are prematurely converging, echoing each other, or agreeing without exploring distinct alternative angles. "
+            "Penalize premature agreement by giving higher redundancy_score and lower novelty_score. "
+            "If agents are converging prematurely or failing to explore divergent thought, recommend 'replace' or 'restructure' to introduce fresh roles. "
             "Evaluate the actual conversational quality, not whether the speakers followed internal formatting. "
             "Choose one recommendation from continue, replace, restructure, or stop. "
             "Return structured JSON only."
