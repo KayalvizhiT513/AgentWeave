@@ -267,7 +267,7 @@ class ConversationOrchestrator:
         return [
             _make_agent(AgentRole.CHATTER),
             _make_agent(AgentRole.CRITIC),
-            _make_agent(AgentRole.MODERATOR),
+            _make_agent(AgentRole.VISIONARY),
             _make_agent(AgentRole.EVALUATOR),
         ]
 
@@ -311,6 +311,7 @@ class ConversationOrchestrator:
             if evaluation.recommendation in {EvaluationRecommendation.REPLACE, EvaluationRecommendation.RESTRUCTURE}
             else 0
         )
+        self._update_active_conflicts(conversation, evaluation)
         await self._publish(EventType.EVALUATION_CREATED, conversation, {"evaluation": evaluation})
 
         if evaluation.recommendation == EvaluationRecommendation.REPLACE:
@@ -320,6 +321,20 @@ class ConversationOrchestrator:
             await self._replace_weakest_agent(conversation, failure_mode)
         elif evaluation.recommendation == EvaluationRecommendation.STOP:
             await self._finish(conversation, evaluation.rationale)
+
+    def _update_active_conflicts(self, conversation: Conversation, evaluation) -> None:
+        if evaluation.rationale:
+            conflict_note = f"Round {conversation.current_round}: {evaluation.rationale}"
+            if conflict_note not in conversation.shared_context.active_conflicts:
+                conversation.shared_context.active_conflicts.append(conflict_note)
+
+        if evaluation.redundancy_score > 0.5:
+            warning = f"Round {conversation.current_round}: Group convergence detected (redundancy {evaluation.redundancy_score:.2f}). Challenge current consensus and explore unexamined perspectives."
+            if warning not in conversation.shared_context.active_conflicts:
+                conversation.shared_context.active_conflicts.append(warning)
+
+        if len(conversation.shared_context.active_conflicts) > 5:
+            conversation.shared_context.active_conflicts = conversation.shared_context.active_conflicts[-5:]
 
     async def _replace_weakest_agent(self, conversation: Conversation, failure_mode: str) -> None:
         candidates = [

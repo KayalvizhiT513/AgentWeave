@@ -360,3 +360,49 @@ def test_concurrent_step_calls_are_serialized_per_conversation() -> None:
         assert provider.evaluate_calls == 2
 
     asyncio.run(scenario())
+
+
+def test_orchestrator_initial_agents_and_active_conflicts() -> None:
+    async def scenario() -> None:
+        store = ConversationStore()
+        event_bus = EventBus()
+
+        class HighRedundancyProvider(ScriptedProvider):
+            async def evaluate(self, conversation) -> EvaluationSnapshot:
+                return EvaluationSnapshot(
+                    round_number=conversation.current_round,
+                    progress_score=0.4,
+                    novelty_score=0.3,
+                    coherence_score=0.8,
+                    redundancy_score=0.65,
+                    goal_alignment_score=0.7,
+                    depth_score=0.4,
+                    conflict_utility_score=0.3,
+                    recommendation=EvaluationRecommendation.CONTINUE,
+                    rationale="Conversation is becoming redundant.",
+                )
+
+        provider = HighRedundancyProvider([EvaluationRecommendation.CONTINUE])
+        orchestrator = ConversationOrchestrator(store, event_bus, provider)
+        runtime = RuntimeConfig(evaluation_interval=1)
+
+        conversation = await orchestrator.create_conversation(
+            topic="Diverse initial agents test",
+            scene=None,
+            constraints=[],
+            runtime=runtime,
+        )
+
+        roles = [agent.role for agent in conversation.agents]
+        assert AgentRole.CHATTER in roles
+        assert AgentRole.CRITIC in roles
+        assert AgentRole.VISIONARY in roles
+        assert AgentRole.EVALUATOR in roles
+
+        stepped = await orchestrator.step_conversation(conversation.id)
+        conflicts = stepped.shared_context.active_conflicts
+        assert len(conflicts) >= 1
+        assert any("Conversation is becoming redundant." in item for item in conflicts)
+        assert any("Group convergence detected" in item for item in conflicts)
+
+    asyncio.run(scenario())
