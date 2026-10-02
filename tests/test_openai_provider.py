@@ -85,6 +85,44 @@ def test_openai_provider_respond(monkeypatch) -> None:
     input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
     assert "Recent dialogue:" in input_text
     assert "Analyze the recent dialogue through your unique role perspective" in input_text
+    assert "Resist premature convergence" in instructions
+
+
+def test_openai_provider_includes_active_conflicts_in_prompt(monkeypatch) -> None:
+    FakeAsyncClient.payloads = [
+        {
+            "output_text": json.dumps(
+                {
+                    "content": "A divergent contribution.",
+                    "contribution_score": 0.85,
+                    "novelty_score": 0.8,
+                    "repetition_score": 0.1,
+                }
+            )
+        }
+    ]
+    FakeAsyncClient.calls = []
+    monkeypatch.setattr("agentweave.services.provider.httpx.AsyncClient", FakeAsyncClient)
+
+    settings = Settings(
+        provider_mode="openai",
+        openai_api_key="test-key",
+        openai_default_model="gpt-5.4-mini",
+        openai_evaluator_model="gpt-5.4-mini",
+    )
+    provider = OpenAIAgentProvider(settings)
+    conversation = make_conversation()
+    conversation.shared_context.active_conflicts = [
+        "Round 1: Disagreement on energy source scalability vs cost."
+    ]
+
+    response = asyncio.run(provider.respond(conversation, conversation.agents[0]))
+
+    assert response.content == "A divergent contribution."
+    input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
+    assert "Active unresolved conflicts / divergent angles:" in input_text
+    assert "Disagreement on energy source scalability vs cost." in input_text
+    assert "Do not repeat what has been agreed upon or default to early consensus" in input_text
 
 
 def test_openai_provider_evaluate(monkeypatch) -> None:

@@ -178,6 +178,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "Maintain independent thought and strictly adhere to your assigned role and personality. "
             "Do NOT passively agree, echo, or summarize prior participants unless your explicit role requires synthesis. "
             "Challenge consensus, expose unexamined assumptions, or introduce a novel, distinct angle from your role's viewpoint. "
+            "Resist premature convergence; explore divergent possibilities and alternative hypotheses before settling on any consensus. "
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
@@ -196,6 +197,11 @@ class OpenAIAgentProvider(BaseAgentProvider):
             if conversation.constraints
             else "- none"
         )
+        active_conflicts = (
+            "\n".join(f"- {item}" for item in conversation.shared_context.active_conflicts)
+            if conversation.shared_context.active_conflicts
+            else "- none currently identified"
+        )
         history_block = (
             "\n".join(f"- {line}" for line in recent_history)
             if recent_history
@@ -210,8 +216,10 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Current speaker role: {agent.role.value}\n"
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
+                    f"Active unresolved conflicts / divergent angles:\n{active_conflicts}\n"
                     f"Recent dialogue:\n{history_block}\n"
-                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon. "
+                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon or default to early consensus. "
+                    "If prior speakers are converging, present an unexamined alternative approach, challenge their baseline assumption, or expand on an active conflict. "
                     "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought or constructive friction."
                 ),
             }
