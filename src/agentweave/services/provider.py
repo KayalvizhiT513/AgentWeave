@@ -49,6 +49,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
     async def respond(self, conversation: Conversation, agent: AgentProfile) -> AgentResponse:
         payload = {
             "model": self.settings.openai_default_model,
+            "temperature": 0.85,
             "instructions": self._agent_instructions(agent),
             "input": self._agent_input(conversation, agent),
             "text": {
@@ -176,12 +177,12 @@ class OpenAIAgentProvider(BaseAgentProvider):
             f"Your role is '{agent.role.value}' and your personality is '{agent.personality}'. "
             f"Role brief: {role_brief} "
             "Maintain independent thought and strictly adhere to your assigned role and personality. "
-            "Do NOT passively agree, echo, or summarize prior participants unless your explicit role requires synthesis. "
-            "Challenge consensus, expose unexamined assumptions, or introduce a novel, distinct angle from your role's viewpoint. "
+            "STRICTLY FORBIDDEN: Do NOT passively agree, echo, validate, or summarize prior participants unless your explicit role is Synthesizer or Mediator. "
+            "Divergence and independent exploration are essential: challenge consensus, introduce counter-perspectives, question underlying assumptions, or present an alternative thesis driven by your unique character. "
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
-            "Make one concrete contribution that directly engages with what others have said while offering a distinct perspective. "
+            "Make one concrete contribution that directly engages with what others have said while offering a distinctly divergent perspective. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
             "The 'content' field is the only user-visible text. The numeric scores are hidden metadata for the orchestrator. "
@@ -211,8 +212,8 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
                     f"Recent dialogue:\n{history_block}\n"
-                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon. "
-                    "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought or constructive friction."
+                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon or default to group consensus. "
+                    "Identify an unexamined angle, tension, counter-argument, or unexplored alternative. Write the next natural conversational turn for this speaker, bringing constructive friction or bold intellectual divergence."
                 ),
             }
         ]
