@@ -176,6 +176,9 @@ class OpenAIAgentProvider(BaseAgentProvider):
             f"Your role is '{agent.role.value}' and your personality is '{agent.personality}'. "
             f"Role brief: {role_brief} "
             "Maintain independent thought and strictly adhere to your assigned role and personality. "
+            "EXPLORE DIVERGENT THOUGHTS AND ALTERNATIVE ANGLES. Do NOT default to early agreement, consensus, or echoing previous ideas. "
+            "Actively resist groupthink. If others are converging on a single solution, introduce an alternative perspective, counter-hypothesis, "
+            "unexamined trade-off, or fresh angle from your role's viewpoint. "
             "Do NOT passively agree, echo, or summarize prior participants unless your explicit role requires synthesis. "
             "Challenge consensus, expose unexamined assumptions, or introduce a novel, distinct angle from your role's viewpoint. "
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
@@ -211,8 +214,8 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
                     f"Recent dialogue:\n{history_block}\n"
-                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon. "
-                    "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought or constructive friction."
+                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon or build incrementally on early consensus. "
+                    "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought, counter-hypothesis, or constructive friction."
                 ),
             }
         ]
