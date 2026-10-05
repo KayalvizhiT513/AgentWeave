@@ -81,10 +81,11 @@ def test_openai_provider_respond(monkeypatch) -> None:
     assert "natural human speech" in instructions
     assert "Do not label yourself with prefixes" in instructions
     assert "Maintain independent thought" in instructions
-    assert "Challenge consensus" in instructions
+    assert "STRICT ANTI-CONVERGENCE MANDATE" in instructions
+    assert "Actively resist groupthink" in instructions
     input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
     assert "Recent dialogue:" in input_text
-    assert "Analyze the recent dialogue through your unique role perspective" in input_text
+    assert "Identify unaddressed counter-arguments, blind spots, or alternative hypotheses" in input_text
 
 
 def test_openai_provider_evaluate(monkeypatch) -> None:

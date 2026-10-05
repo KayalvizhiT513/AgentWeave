@@ -6,7 +6,7 @@ from agentweave.core.enums import (
     EvaluationRecommendation,
     EventType,
 )
-from agentweave.core.models import EvaluationSnapshot, RuntimeConfig
+from agentweave.core.models import Conversation, EvaluationSnapshot, RuntimeConfig, SharedContext
 from agentweave.services.event_stream import EventBus
 from agentweave.services.orchestrator import ConversationOrchestrator
 from agentweave.services.provider import AgentResponse, BaseAgentProvider
@@ -320,6 +320,47 @@ def test_concurrent_start_creates_only_one_running_task() -> None:
             pass
 
     asyncio.run(scenario())
+
+
+def test_determine_failure_mode_triggers() -> None:
+    store = ConversationStore()
+    event_bus = EventBus()
+    provider = ScriptedProvider([])
+    orchestrator = ConversationOrchestrator(store, event_bus, provider)
+
+    conversation = Conversation(
+        topic="Testing failure mode classification",
+        runtime=RuntimeConfig(restructuring_interval=5),
+        shared_context=SharedContext(goal="Testing failure mode classification"),
+    )
+
+    eval_repetitive = EvaluationSnapshot(
+        round_number=1,
+        progress_score=0.4,
+        novelty_score=0.5,
+        coherence_score=0.7,
+        redundancy_score=0.65,
+        goal_alignment_score=0.8,
+        depth_score=0.5,
+        conflict_utility_score=0.3,
+        recommendation=EvaluationRecommendation.RESTRUCTURE,
+        rationale="Overly repetitive.",
+    )
+    assert orchestrator._determine_failure_mode(conversation, eval_repetitive) == "too_repetitive"
+
+    eval_low_creativity = EvaluationSnapshot(
+        round_number=1,
+        progress_score=0.4,
+        novelty_score=0.2,
+        coherence_score=0.7,
+        redundancy_score=0.3,
+        goal_alignment_score=0.8,
+        depth_score=0.5,
+        conflict_utility_score=0.3,
+        recommendation=EvaluationRecommendation.RESTRUCTURE,
+        rationale="Lacks novelty.",
+    )
+    assert orchestrator._determine_failure_mode(conversation, eval_low_creativity) == "no_creativity"
 
 
 def test_concurrent_step_calls_are_serialized_per_conversation() -> None:
