@@ -81,10 +81,45 @@ def test_openai_provider_respond(monkeypatch) -> None:
     assert "natural human speech" in instructions
     assert "Do not label yourself with prefixes" in instructions
     assert "Maintain independent thought" in instructions
-    assert "Challenge consensus" in instructions
+    assert "Avoid premature consensus" in instructions
     input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
     assert "Recent dialogue:" in input_text
-    assert "Analyze the recent dialogue through your unique role perspective" in input_text
+    assert "DIVERGENT THINKING DIRECTIVE:" in input_text
+
+
+def test_anti_convergence_prompt_instructions(monkeypatch) -> None:
+    FakeAsyncClient.payloads = [
+        {
+            "output_text": json.dumps(
+                {
+                    "content": "A divergent perspective.",
+                    "contribution_score": 0.85,
+                    "novelty_score": 0.9,
+                    "repetition_score": 0.05,
+                }
+            )
+        }
+    ]
+    FakeAsyncClient.calls = []
+    monkeypatch.setattr("agentweave.services.provider.httpx.AsyncClient", FakeAsyncClient)
+
+    settings = Settings(
+        provider_mode="openai",
+        openai_api_key="test-key",
+        openai_default_model="gpt-5.4-mini",
+        openai_evaluator_model="gpt-5.4-mini",
+    )
+    provider = OpenAIAgentProvider(settings)
+    conversation = make_conversation()
+    asyncio.run(provider.respond(conversation, conversation.agents[0]))
+
+    instructions = FakeAsyncClient.calls[0]["json"]["instructions"]
+    assert "Avoid premature consensus and cognitive convergence" in instructions
+    assert "explore divergent ideas" in instructions
+
+    input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
+    assert "DIVERGENT THINKING DIRECTIVE" in input_text
+    assert "Do NOT repeat, summarize, or build upon ideas that participants have already agreed on" in input_text
 
 
 def test_openai_provider_evaluate(monkeypatch) -> None:

@@ -175,13 +175,13 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "You are participating in a multi-agent discussion and your visible output must read like natural human speech. "
             f"Your role is '{agent.role.value}' and your personality is '{agent.personality}'. "
             f"Role brief: {role_brief} "
-            "Maintain independent thought and strictly adhere to your assigned role and personality. "
-            "Do NOT passively agree, echo, or summarize prior participants unless your explicit role requires synthesis. "
-            "Challenge consensus, expose unexamined assumptions, or introduce a novel, distinct angle from your role's viewpoint. "
+            "CRITICAL: Avoid premature consensus and cognitive convergence. Maintain independent thought and strict role distinction. "
+            "Do NOT passively agree, echo, validate, or restate what prior speakers have said unless your explicit role requires synthesis. "
+            "Your objective is to explore divergent ideas, uncover unexamined angles, challenge underlying assumptions, or introduce novel counter-hypotheses specific to your character's domain. "
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
-            "Make one concrete contribution that directly engages with what others have said while offering a distinct perspective. "
+            "Make one concrete contribution that introduces a fresh perspective or constructive friction. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
             "The 'content' field is the only user-visible text. The numeric scores are hidden metadata for the orchestrator. "
@@ -211,8 +211,10 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
                     f"Recent dialogue:\n{history_block}\n"
-                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon. "
-                    "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought or constructive friction."
+                    "DIVERGENT THINKING DIRECTIVE: Analyze the recent dialogue through your unique role perspective. "
+                    "Do NOT repeat, summarize, or build upon ideas that participants have already agreed on. "
+                    "Instead, identify an unaddressed blind spot, an alternative perspective, or a distinct counter-hypothesis. "
+                    "Write the next natural conversational turn for this speaker, bringing genuine thought diversity and constructive friction."
                 ),
             }
         ]
@@ -221,8 +223,11 @@ class OpenAIAgentProvider(BaseAgentProvider):
         return (
             "You are the evaluator for a multi-agent reasoning system. "
             "Assess the recent discussion for novelty, coherence, redundancy, goal alignment, depth, and conflict utility. "
+            "Heavily penalize premature agreement, polite consensus, echo-chamber behavior, and repetitive idea sharing. "
+            "Reward thought diversity, constructive disagreement, novel hypotheses, and distinct domain perspectives. "
             "Evaluate the actual conversational quality, not whether the speakers followed internal formatting. "
             "Choose one recommendation from continue, replace, restructure, or stop. "
+            "If agents are converging prematurely without sufficient exploration, recommend 'replace' or 'restructure'. "
             "Return structured JSON only."
         )
 
