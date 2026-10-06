@@ -322,6 +322,58 @@ def test_concurrent_start_creates_only_one_running_task() -> None:
     asyncio.run(scenario())
 
 
+class LowNoveltyProvider(ScriptedProvider):
+    async def evaluate(self, conversation) -> EvaluationSnapshot:
+        self.evaluate_calls += 1
+        return EvaluationSnapshot(
+            round_number=conversation.current_round,
+            progress_score=0.3,
+            novelty_score=0.2,  # low novelty triggers 'no_creativity' failure mode -> VISIONARY
+            coherence_score=0.8,
+            redundancy_score=0.4,
+            goal_alignment_score=0.7,
+            depth_score=0.5,
+            conflict_utility_score=0.2,
+            recommendation=EvaluationRecommendation.RESTRUCTURE,
+            rationale="Discussion lacks novelty and has prematurely converged.",
+        )
+
+
+def test_premature_convergence_replacement() -> None:
+    async def scenario() -> None:
+        store = ConversationStore()
+        event_bus = EventBus()
+        provider = LowNoveltyProvider([EvaluationRecommendation.RESTRUCTURE])
+        orchestrator = ConversationOrchestrator(store, event_bus, provider)
+        runtime = RuntimeConfig(
+            agent_turn_delay_seconds=0,
+            evaluation_interval=1,
+            restructuring_interval=5,
+            max_rounds=2,
+            max_history_entries=10,
+            summary_window=2,
+            stagnation_threshold=3,
+        )
+
+        conversation = await orchestrator.create_conversation(
+            topic="Test premature convergence replacement",
+            scene=None,
+            constraints=[],
+            runtime=runtime,
+        )
+
+        await orchestrator.step_conversation(conversation.id)
+        updated = await orchestrator.get_conversation(conversation.id)
+
+        assert updated is not None
+        assert len(updated.replacements) == 1
+        replacement = updated.replacements[0]
+        assert replacement.failure_mode == "no_creativity"
+        assert replacement.added_role == AgentRole.VISIONARY
+
+    asyncio.run(scenario())
+
+
 def test_concurrent_step_calls_are_serialized_per_conversation() -> None:
     async def scenario() -> None:
         store = ConversationStore()
