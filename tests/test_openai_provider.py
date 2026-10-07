@@ -80,11 +80,13 @@ def test_openai_provider_respond(monkeypatch) -> None:
     instructions = FakeAsyncClient.calls[0]["json"]["instructions"]
     assert "natural human speech" in instructions
     assert "Do not label yourself with prefixes" in instructions
-    assert "Maintain independent thought" in instructions
+    assert "Maintain fierce intellectual independence" in instructions
+    assert "DO NOT prematurely converge" in instructions
+    assert "Actively resist groupthink" in instructions
     assert "Challenge consensus" in instructions
     input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
     assert "Recent dialogue:" in input_text
-    assert "Analyze the recent dialogue through your unique role perspective" in input_text
+    assert "Do NOT repeat or validate what has already been agreed upon" in input_text
 
 
 def test_openai_provider_evaluate(monkeypatch) -> None:
@@ -130,3 +132,6 @@ def test_openai_provider_evaluate(monkeypatch) -> None:
 
     assert evaluation.progress_score == 0.66
     assert evaluation.recommendation == EvaluationRecommendation.CONTINUE
+    eval_instructions = FakeAsyncClient.calls[0]["json"]["instructions"]
+    assert "prevent premature convergence and groupthink" in eval_instructions
+    assert "Heavily penalize rapid or superficial convergence" in eval_instructions

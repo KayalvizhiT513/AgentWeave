@@ -175,13 +175,14 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "You are participating in a multi-agent discussion and your visible output must read like natural human speech. "
             f"Your role is '{agent.role.value}' and your personality is '{agent.personality}'. "
             f"Role brief: {role_brief} "
-            "Maintain independent thought and strictly adhere to your assigned role and personality. "
-            "Do NOT passively agree, echo, or summarize prior participants unless your explicit role requires synthesis. "
-            "Challenge consensus, expose unexamined assumptions, or introduce a novel, distinct angle from your role's viewpoint. "
+            "Maintain fierce intellectual independence and strictly adhere to your assigned role and personality. "
+            "DO NOT prematurely converge, agree, echo, or adopt consensus ideas that other agents have already established. "
+            "Actively resist groupthink. If previous agents are moving toward agreement, intentionally introduce an unexamined angle, alternative hypothesis, counter-perspective, or foundational friction specific to your role. "
+            "Challenge consensus, expose unexamined assumptions, or explore overlooked possibilities from your distinct viewpoint. "
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
-            "Make one concrete contribution that directly engages with what others have said while offering a distinct perspective. "
+            "Make one concrete contribution that directly engages with what others have said while pushing the exploration in a distinct direction. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
             "The 'content' field is the only user-visible text. The numeric scores are hidden metadata for the orchestrator. "
@@ -211,18 +212,22 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
                     f"Recent dialogue:\n{history_block}\n"
-                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon. "
-                    "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought or constructive friction."
+                    "Analyze the recent dialogue through your unique role perspective. Do NOT repeat or validate what has already been agreed upon. "
+                    "Explicitly seek out alternate possibilities, unaddressed edge cases, or counter-arguments. "
+                    "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought, alternative path, or constructive friction."
                 ),
             }
         ]
 
     def _evaluation_instructions(self) -> str:
         return (
-            "You are the evaluator for a multi-agent reasoning system. "
+            "You are the evaluator for a multi-agent reasoning system designed to prevent premature convergence and groupthink. "
             "Assess the recent discussion for novelty, coherence, redundancy, goal alignment, depth, and conflict utility. "
+            "Heavily penalize rapid or superficial convergence, repetitive validation, and echo-chamber agreement. "
+            "Reward agents that introduce genuine novelty, explore alternative hypotheses, and generate useful constructive friction. "
             "Evaluate the actual conversational quality, not whether the speakers followed internal formatting. "
             "Choose one recommendation from continue, replace, restructure, or stop. "
+            "If agents are converging too quickly without exploring alternate possibilities, recommend 'replace' or 'restructure'. "
             "Return structured JSON only."
         )
 
