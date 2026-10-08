@@ -360,3 +360,53 @@ def test_concurrent_step_calls_are_serialized_per_conversation() -> None:
         assert provider.evaluate_calls == 2
 
     asyncio.run(scenario())
+
+
+def test_failure_mode_determination_triggers_anti_consensus_replacement() -> None:
+    async def scenario() -> None:
+        store = ConversationStore()
+        event_bus = EventBus()
+        provider = ScriptedProvider([])
+        orchestrator = ConversationOrchestrator(store, event_bus, provider)
+        runtime = RuntimeConfig()
+
+        conversation = await orchestrator.create_conversation(
+            topic="Test convergence failure modes",
+            scene=None,
+            constraints=[],
+            runtime=runtime,
+        )
+
+        # High redundancy should result in too_repetitive failure mode -> CONTRARIAN
+        high_redundancy_eval = EvaluationSnapshot(
+            round_number=1,
+            progress_score=0.3,
+            novelty_score=0.3,
+            coherence_score=0.8,
+            redundancy_score=0.7,
+            goal_alignment_score=0.8,
+            depth_score=0.5,
+            conflict_utility_score=0.2,
+            recommendation=EvaluationRecommendation.REPLACE,
+            rationale="High redundancy observed.",
+        )
+        fm1 = orchestrator._determine_failure_mode(conversation, high_redundancy_eval)
+        assert fm1 == "too_repetitive"
+
+        # Low novelty should result in no_creativity failure mode -> VISIONARY
+        low_novelty_eval = EvaluationSnapshot(
+            round_number=1,
+            progress_score=0.3,
+            novelty_score=0.2,
+            coherence_score=0.8,
+            redundancy_score=0.4,
+            goal_alignment_score=0.8,
+            depth_score=0.5,
+            conflict_utility_score=0.2,
+            recommendation=EvaluationRecommendation.REPLACE,
+            rationale="Low novelty observed.",
+        )
+        fm2 = orchestrator._determine_failure_mode(conversation, low_novelty_eval)
+        assert fm2 == "no_creativity"
+
+    asyncio.run(scenario())
