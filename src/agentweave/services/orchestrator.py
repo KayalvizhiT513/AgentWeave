@@ -314,7 +314,8 @@ class ConversationOrchestrator:
         await self._publish(EventType.EVALUATION_CREATED, conversation, {"evaluation": evaluation})
 
         if evaluation.recommendation == EvaluationRecommendation.REPLACE:
-            await self._replace_weakest_agent(conversation, "too_repetitive")
+            failure_mode = self._determine_failure_mode(conversation, evaluation)
+            await self._replace_weakest_agent(conversation, failure_mode)
         elif evaluation.recommendation == EvaluationRecommendation.RESTRUCTURE:
             failure_mode = self._determine_failure_mode(conversation, evaluation)
             await self._replace_weakest_agent(conversation, failure_mode)
@@ -347,14 +348,16 @@ class ConversationOrchestrator:
         await self._publish(EventType.AGENT_REPLACED, conversation, {"replacement": event})
 
     def _determine_failure_mode(self, conversation: Conversation, evaluation) -> str:
-        if evaluation.redundancy_score > 0.62:
+        if evaluation.redundancy_score > 0.55:
             return "too_repetitive"
-        if evaluation.novelty_score < 0.35:
+        if evaluation.novelty_score < 0.40:
             return "no_creativity"
         if evaluation.depth_score < 0.45:
             return "too_shallow"
         if conversation.current_round >= conversation.runtime.restructuring_interval:
             return "too_theoretical"
+        if evaluation.recommendation == EvaluationRecommendation.REPLACE:
+            return "too_repetitive"
         return "too_chaotic"
 
     async def _complete_if_needed(self, conversation: Conversation) -> None:
