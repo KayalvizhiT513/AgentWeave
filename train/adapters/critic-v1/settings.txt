@@ -1,0 +1,8 @@
+model=/Users/kayalvizhi/.lmstudio/models/lmstudio-community/Qwen3-4B-Instruct-2507-MLX-4bit
+data=evals/training/full/sft
+iters=1100
+batch_size=1
+num_layers=16
+learning_rate=1e-4
+max_seq_length=3072
+mask_prompt=true

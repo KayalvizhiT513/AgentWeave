@@ -1,0 +1,801 @@
+{
+  "id": "conv_be6b1b338a9044c9b446c80b49a6d5eb",
+  "topic": "What is the most effective lever for slowing antibiotic resistance?",
+  "scene": "debate",
+  "constraints": [],
+  "status": "completed",
+  "runtime": {
+    "agent_turn_delay_seconds": 0.0,
+    "evaluation_interval": 5,
+    "restructuring_interval": 25,
+    "max_rounds": 10,
+    "max_history_entries": 120,
+    "summary_window": 8,
+    "stagnation_threshold": 3,
+    "history_window": 8,
+    "perspective_dimensions": 5,
+    "diversity_pressure": true
+  },
+  "tuning": {
+    "default": {
+      "model": null,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "reasoning_effort": null,
+      "plain_text": null,
+      "endpoint": "http://127.0.0.1:8081/v1"
+    },
+    "roles": {},
+    "evaluator": {
+      "model": null,
+      "temperature": null,
+      "top_p": null,
+      "reasoning_effort": null,
+      "plain_text": null,
+      "endpoint": null
+    },
+    "thresholds": {
+      "redundancy_cutoff": 0.62,
+      "novelty_floor": 0.35,
+      "depth_floor": 0.45,
+      "repetition_weight": 0.55
+    }
+  },
+  "current_round": 10,
+  "stall_count": 2,
+  "final_summary": "Conversation completed after 10 rounds. Reached max rounds.",
+  "shared_context": {
+    "goal": "What is the most effective lever for slowing antibiotic resistance?",
+    "scene": "debate",
+    "constraints": [],
+    "decisions": [],
+    "active_conflicts": [],
+    "history": [
+      "What if we stopped treating infection as a chemical battle and started seeing it as an ecological imbalance\u2014where the real resistance isn\u2019t in microbes, but in our failed assumption that medicine is the only solution? The moment we stop prescribing antibiotics like Band-Aids, we stop fueling evolution\u2019s most dangerous accelerant.",
+      "The moment we treat infection like a public health emergency\u2014not a medical one\u2014we stop letting pathogens thrive in the shadows. Antibiotics don\u2019t just fail; they fail because we let infections go unchecked, let them multiply in the absence of containment. Without preventing the initial outbreak, we're just handing evolution a\u2026",
+      "What if the real lever isn\u2019t stopping antibiotic use\u2014or even fixing infection management\u2014but instead, we redesigned healthcare access so that every community has a local, adaptive surveillance network that can detect and respond to microbial shifts before they become pandemics? That\u2019s where prevention becomes predictive, not reactive.",
+      "What if we stopped thinking of antibiotics as weapons and started treating them like a last-reserve fertilizer\u2014used only when absolutely needed, and then removed from the soil entirely, so the ecosystem can recover its own balance? The real victory isn\u2019t in curing infections faster, but in letting nature co-evolve with\u2026",
+      "The problem with all this \"predictive surveillance\" is that it assumes we can outpace evolution with early detection\u2014like trying to stop a wildfire by scanning the forest for embers. But if the real driver of resistance is uncontrolled transmission in dense populations, then surveillance only works if you can *stop*\u2026",
+      "What if the surveillance network doesn\u2019t just detect resistance\u2014but actively shapes community behavior, like a health dashboard that triggers localized interventions before symptoms even appear, using data from wastewater, clinics, and even home sensors? The real gap isn\u2019t detection\u2014it\u2019s embedding prevention into daily life, turning each community into a living\u2026",
+      "What if we don\u2019t just reduce antibiotic use\u2014we rewire the economic model so that prescribing an antibiotic costs more than the infection itself, and the cost of resistance? Then the system itself would punish overprescription, not just the doctor, but the pharmacy, the hospital, the insurance\u2014making resistance a financial liability\u2026",
+      "What if the most powerful intervention isn\u2019t preventive or predictive\u2014but structural? What if we remove the entire incentive for infection to even exist by making healthcare access contingent on health literacy and community resilience, so that the moment someone gets sick, they\u2019re already part of a network that\u2019s stopped it\u2026",
+      "What if the surveillance system fails not because it\u2019s too slow or too complex\u2014but because it\u2019s designed to work in isolation, without being embedded in the social trust that already exists in communities? We can\u2019t just deploy sensors and dashboards and expect compliance. Real change happens when the network *belongs*\u2026",
+      "What if the most powerful lever isn\u2019t just reducing antibiotic use or building surveillance nets\u2014but reversing the entire narrative around infection? What if we stop treating illness as a deficit to be managed and start seeing it as a signal of systemic failure in our social and environmental design? Then\u2026",
+      "What if the most dangerous misstep isn\u2019t underestimating transmission, but assuming that *any* reduction in infections automatically stops resistance\u2014when in reality, the real threat isn\u2019t just the spread of pathogens, but the silent replication of resistance in the very systems that fail to contain them? Like a virus hiding in\u2026",
+      "What if the real bottleneck isn\u2019t detection or data\u2014 it\u2019s the assumption that surveillance *must* start with microbes, when the first clue of resistance is already in the soil, water, and soil\u2014right where we grow our food, raise livestock, and dump waste? We\u2019ve been looking for pathogens in the wrong\u2026",
+      "What if the most potent weapon against resistance isn\u2019t in the clinic or the lab\u2014but in the soil? What if we stop viewing antibiotics as medical tools and start treating them as ecological pollutants, and instead design agroecological farming where soil health, crop rotation, and microbial diversity are the real\u2026",
+      "What if the biggest blind spot is assuming that prevention works only when infections are caught\u2014when in reality, the most potent resistance reservoirs aren\u2019t in hospitals or clinics, but in the open, unmonitored chains of agricultural runoff, untreated sewage, and landfills, where antibiotics and resistant genes are co-evolving in soil\u2026",
+      "What if the surveillance network doesn\u2019t just detect resistance\u2014it starts *designing* the environment to be resistant to resistance by making soil, water, and farms part of a living feedback loop, where every drop of runoff triggers a local response, not just a report? Then we stop treating ecosystems as passive\u2026",
+      "What if the real flaw isn\u2019t in prevention, but in assuming that stopping infection equals stopping resistance\u2014when in fact, resistance evolves *in the dark*, in the absence of any human response, in soil and wastewater where no one looks, and where a single splash of contaminated runoff can inoculate a\u2026",
+      "What if the system fails not because it\u2019s too sensitive or too slow\u2014but because it\u2019s still designed like a medical alert, waiting for symptoms to appear, when the real danger is in the *absence* of response: when no one notices the soil is turning, when no one acts when a\u2026",
+      "What if the real diagnostic leap isn\u2019t in the lab or the field, but in the lab *on the farm*\u2014developing rapid, low-cost soil sensors that detect antimicrobial resistance genes in real time, so we don\u2019t just react to runoff, but *predict* when a farm\u2019s soil is turning into a resistance\u2026",
+      "What if the biggest flaw isn\u2019t in prevention\u2014or in environmental monitoring\u2014but in assuming that *any* intervention works until it\u2019s observed? We\u2019ve treated resistance like a disease that needs diagnosis, but it\u2019s evolving in the dark, unobserved, unbalanced, and unregulated\u2014like a meta-organism that thrives not in hospitals, but in the silence\u2026",
+      "What if the most dangerous thing about antibiotic resistance isn\u2019t the resistance itself\u2014but the *delay* between when soil goes resistant and when we *stop* using antibiotics in farms, because no one knows the soil is failing until it\u2019s too late, and no one has the authority to act before the\u2026",
+      "What if the diagnostic lever isn\u2019t about detection at all\u2014but about *designing out* the need for antibiotics in the first place, by making soil sensors not just passive monitors, but active regulators that trigger on-farm deworming, alternative treatments, or crop adjustments before any resistance gene even emerges? The real breakthrough\u2026",
+      "What if the real failure isn\u2019t in prevention or environmental sensing\u2014but in treating the soil as a passive sink, when in fact, it\u2019s a co-evolving battlefield where resistance doesn\u2019t just emerge, it *strategically adapts* to human absence of action, and the only way to stop it is to make the\u2026",
+      "What if the system doesn\u2019t need to *detect* resistance at all\u2014what if we stop designing for detection and start designing for *containment* by making resistance a design flaw in the first place, so every farm, every watershed, every drop of runoff is built with built-in fail-safes that auto-trigger when resistance\u2026",
+      "What if the real diagnostic failure isn\u2019t in missing resistance, but in assuming that soil can be monitored without being *engineered*\u2014what if we don\u2019t just detect resistance genes, but design soil microbiomes to actively suppress them through synthetic consortia, so the farm doesn\u2019t just monitor the dark, but *outcompetes* the\u2026",
+      "What if the most powerful containment isn\u2019t in the soil or the farm, but in the policy that forces *all* agriculture to co-design with public health\u2014so that when a farm\u2019s soil starts evolving resistance, the system automatically triggers a redistribution of antibiotics, not just a detection alert, but a real-time\u2026",
+      "What if the system fails not because it can\u2019t detect resistance\u2014but because it\u2019s still treating soil like a data point, when in reality, the soil is a living, evolving network that doesn\u2019t respond to alerts; it responds to *pressure*, and the only way to stop it is to stop applying\u2026",
+      "What if the real diagnostic lever isn\u2019t in detecting or engineering soil, but in designing a feedback loop where every antibiotic prescribed triggers a soil-scale \"resistance debt\" that must be repaid\u2014through crop rotation, microbial inoculants, or policy-based moratoria\u2014before any further use is allowed, turning resistance into a currency we can\u2026",
+      "What if the most potent lever isn\u2019t prevention or policy, but *accountability*\u2014forcing every farm, clinic, and hospital to publicly disclose their antibiotic use and soil health metrics, so resistance doesn\u2019t just evade detection, but becomes visible, measurable, and legally tied to the same consequences as pollution? Then the system stops\u2026",
+      "What if the real lever isn\u2019t in monitoring or regulating soil\u2014but in redefining *what counts as an infection*? If we treat soil as a habitat, not a data sink, and define resistance as a failure of ecosystem balance, then the alarm bell isn\u2019t when a gene shows up, but when\u2026",
+      "What if the real diagnostic failure is assuming that \"soil\" is the problem\u2014and the problem is that we\u2019ve always treated the ecosystem as a place where resistance *happens*, when it\u2019s actually a symptom of a broken system that lets pathogens and humans co-evolve without any evolutionary feedback? The soil isn\u2019t\u2026"
+    ]
+  },
+  "agents": [
+    {
+      "id": "agent_c28b6b6b",
+      "role": "chatter",
+      "personality": "unconventional, expansive, and ideationally bold",
+      "perspective": "The most effective lever is to reduce unnecessary antibiotic exposure in humans and animals, because resistance is fundamentally selected by drug pressure; fewer prescriptions, narrower-spectrum choices, and shorter appropriate courses slow the emergence and spread of resistant strains more than downstream fixes.",
+      "state": {
+        "core_thesis": "The most effective lever is to reduce unnecessary antibiotic exposure in humans and animals, because resistance is fundamentally selected by drug pressure; fewer prescriptions, narrower-spectrum choices, and shorter appropriate courses slow the emergence and spread of resistant strains more than downstream fixes.",
+        "assumptions": [
+          "Antibiotic use is the main driver of resistance selection pressure.",
+          "Unnecessary or overly broad antibiotic exposure can be substantially reduced.",
+          "Human, livestock, and environmental pathways all affect resistance dynamics.",
+          "Agricultural practices can influence antibiotic selection and spread in soil and food systems."
+        ],
+        "causal_model": [
+          "More antibiotic exposure increases selection for resistant strains.",
+          "Reducing prescribing reduces selection pressure and slows emergence/spread.",
+          "Narrower-spectrum and shorter appropriate courses can preserve effectiveness while lowering pressure.",
+          "Agricultural runoff and manure use can spread antibiotic residues and resistant organisms into soil.",
+          "Soil health, crop rotation, and microbial diversity may reduce reliance on antibiotics and ecological reservoirs of resistance."
+        ],
+        "claims": [
+          "Resistance is an ecological problem shaped by selection pressure.",
+          "Reducing exposure is more impactful than relying on downstream fixes alone.",
+          "Policy, reimbursement, and farming practices can be powerful implementation levers for stewardship.",
+          "Antibiotics can be treated as ecological pollutants as well as medical tools."
+        ],
+        "concessions": [
+          "Infections sometimes require rapid treatment to prevent severe harm.",
+          "Stewardship is not the same as blanket antibiotic avoidance.",
+          "In agriculture, some antibiotic use may still be necessary to protect animal health.",
+          "Ecological interventions help most when paired with diagnostics and clinical/veterinary guidance."
+        ],
+        "unresolved_attacks": [
+          "Need to distinguish stewardship from outright antibiotic avoidance.",
+          "Need to address situations where rapid treatment is necessary to prevent severe harm.",
+          "How to balance deterrence of overprescribing with timely care in high-risk cases.",
+          "How much agroecological change can realistically reduce resistance compared with direct prescribing limits?"
+        ]
+      },
+      "status": "replaced",
+      "confidence": 0.72,
+      "priority": 0.78,
+      "expertise_weight": 0.62,
+      "contribution_score": 0.58,
+      "repetition_score": 0.42,
+      "novelty_score": 0.69,
+      "token_usage": 250,
+      "replacement_eligibility": 0.42000000000000004
+    },
+    {
+      "id": "agent_363ce220",
+      "role": "critic",
+      "personality": "sharply skeptical, rigorous, and anti-consensus",
+      "perspective": "The best lever is to prevent infections and interrupt spread through vaccination, sanitation, hand hygiene, isolation, and hospital infection control, because every avoided infection eliminates a chance to use antibiotics and every blocked transmission event prevents resistant organisms from becoming established.",
+      "state": {
+        "core_thesis": "The best lever is to prevent infections and interrupt spread through vaccination, sanitation, hand hygiene, isolation, and hospital infection control, because every avoided infection eliminates a chance to use antibiotics and every blocked transmission event prevents resistant organisms from becoming established.",
+        "assumptions": [
+          "Antibiotic use is partly driven by preventable infections across human and environmental interfaces.",
+          "Transmission control reduces establishment and spread of resistant strains in healthcare and the community.",
+          "Public-health measures can outperform drug-centric responses at the population level.",
+          "Environmental reservoirs matter most when policy links them to human exposure and response.",
+          "Resistance can evolve outside clinics, but leverage comes from forcing action on downstream transmission and antibiotic use.",
+          "Accountability and public disclosure can improve compliance if they are tied to enforcement."
+        ],
+        "causal_model": [
+          "Fewer infections -> fewer antibiotic prescriptions -> less selection pressure for resistance.",
+          "Less transmission -> fewer opportunities for resistant organisms to spread and persist.",
+          "Earlier containment of outbreaks -> smaller reservoirs of resistant pathogens.",
+          "Policy can turn environmental signals into action, but detection alone does not slow resistance.",
+          "Environmental contamination matters mainly when it changes human exposure, prescribing, or containment decisions.",
+          "Public reporting -> higher visibility and enforcement -> stronger compliance with reduction measures."
+        ],
+        "claims": [
+          "The reply adds a new mechanism: accountability as an enforcement lever.",
+          "Public disclosure can convert hidden resistance drivers into actionable pressure.",
+          "The strongest leverage still likely comes from preventing infection and blocking spread.",
+          "Transparency alone is insufficient unless linked to consequences or mandated action.",
+          "Environmental and agricultural reporting matter most when they alter behavior, not merely awareness."
+        ],
+        "concessions": [
+          "Accountability may be a useful cross-cutting enabler.",
+          "The reply usefully shifts from passive monitoring to enforceable policy.",
+          "Public metrics could strengthen both stewardship and infection control.",
+          "Agriculture policy can be a real upstream lever if it automatically changes behavior."
+        ],
+        "unresolved_attacks": [
+          "Need evidence that prevention/containment is the most effective lever versus stewardship, environmental remediation, or novel drug development.",
+          "Need evidence that outbreak containment scales better than reducing misuse alone.",
+          "Need to distinguish short-term clinical management from long-term population-level resistance control.",
+          "Need to specify when environmental reservoirs are a direct lever versus a background contributor.",
+          "Need to show how transparency translates into reduced antibiotic exposure and transmission."
+        ]
+      },
+      "status": "active",
+      "confidence": 0.68,
+      "priority": 0.7,
+      "expertise_weight": 0.7,
+      "contribution_score": 0.72,
+      "repetition_score": 0.28,
+      "novelty_score": 0.81,
+      "token_usage": 500,
+      "replacement_eligibility": 0.28
+    },
+    {
+      "id": "agent_35684561",
+      "role": "moderator",
+      "personality": "anti-groupthink, scope-protective, and order-focused",
+      "perspective": null,
+      "state": {
+        "core_thesis": "The most effective lever for slowing antibiotic resistance is shifting from reactive antibiotic use to proactive prevention and surveillance at the community level.",
+        "assumptions": [
+          "Early detection and rapid response reduce spread and antibiotic demand.",
+          "Healthcare access is uneven, and fixing it improves containment.",
+          "Resistance is amplified by delays between microbial change and intervention.",
+          "Surveillance is most effective when it triggers localized prevention and behavior change.",
+          "Environmental reservoirs can be monitored as early indicators and transmission routes."
+        ],
+        "causal_model": [
+          "Better local surveillance catches outbreaks and resistance patterns early.",
+          "Environmental monitoring can detect resistance pressure before clinical cases rise.",
+          "Dashboards and alerts can trigger localized interventions before symptoms spread.",
+          "Earlier containment lowers infection burden and antibiotic prescribing.",
+          "Lower antibiotic exposure reduces selective pressure for resistant strains.",
+          "Embedding surveillance in trusted community and environmental networks increases compliance and uptake."
+        ],
+        "claims": [
+          "Community-level adaptive surveillance remains the key lever.",
+          "Prevention becomes predictive when access, detection, and social trust are integrated.",
+          "Healthcare redesign can slow resistance more effectively than only restricting antibiotic use.",
+          "Surveillance should actively shape community behavior, not just observe it.",
+          "Environmental surveillance may precede clinical detection of resistance."
+        ],
+        "concessions": [
+          "Antibiotic stewardship still matters, but it is not the only lever.",
+          "Infection management alone is insufficient without system-level detection.",
+          "Surveillance must be paired with actual interventions to matter.",
+          "Feasibility, data integration, and trust remain practical challenges.",
+          "Environmental signals add value, but they do not replace clinical surveillance."
+        ],
+        "unresolved_attacks": [
+          "How much impact surveillance has relative to stewardship.",
+          "Whether access redesign is feasible at scale.",
+          "How to operationalize local adaptive surveillance in low-resource settings.",
+          "Whether surveillance can outpace evolution without strong transmission control.",
+          "Privacy, trust, and implementation burdens of continuous community monitoring."
+        ]
+      },
+      "status": "active",
+      "confidence": 0.66,
+      "priority": 0.74,
+      "expertise_weight": 0.58,
+      "contribution_score": 0.34,
+      "repetition_score": 0.63,
+      "novelty_score": 0.48,
+      "token_usage": 497,
+      "replacement_eligibility": 0.6435
+    },
+    {
+      "id": "agent_02758748",
+      "role": "evaluator",
+      "personality": "measured, objective, and novelty-exacting",
+      "perspective": null,
+      "state": {
+        "core_thesis": "",
+        "assumptions": [],
+        "causal_model": [],
+        "claims": [],
+        "concessions": [],
+        "unresolved_attacks": []
+      },
+      "status": "active",
+      "confidence": 0.8,
+      "priority": 0.85,
+      "expertise_weight": 0.76,
+      "contribution_score": 0.5,
+      "repetition_score": 0.0,
+      "novelty_score": 0.5,
+      "token_usage": 0,
+      "replacement_eligibility": 0.0
+    },
+    {
+      "id": "agent_7654880d",
+      "role": "contrarian",
+      "personality": "relentlessly dissenting, blind-spot exposing, and counter-narrative",
+      "perspective": "The key lever is faster, more accurate diagnostics that distinguish bacterial from viral illness and identify the causative pathogen and susceptibilities, because clinicians often prescribe broadly under uncertainty; better information lets them reserve antibiotics for the right patients and choose the narrowest effective agent.",
+      "state": {
+        "core_thesis": "The key lever is faster, more accurate diagnostics that distinguish bacterial from viral illness and identify the causative pathogen and susceptibilities, because clinicians often prescribe broadly under uncertainty; better information lets them reserve antibiotics for the right patients and choose the narrowest effective agent.",
+        "assumptions": [
+          "Environmental and agricultural reservoirs matter for resistance emergence and spread.",
+          "Low-cost, real-time monitoring can help predict resistance hotspots before they amplify.",
+          "Diagnostics are useful when they shift action upstream, not just after clinical symptoms appear.",
+          "Monitoring must be paired with interventions to matter at population scale.",
+          "Engineering soil microbiomes may become a more effective upstream lever than passive monitoring alone."
+        ],
+        "causal_model": [
+          "Rapid diagnostics reduce uncertainty and enable narrower, more targeted treatment.",
+          "Environmental sensing of resistance genes can provide earlier warning in high-risk settings like farms.",
+          "Earlier detection plus targeted response can slow selection pressure and limit dissemination.",
+          "Active regulatory responses to sensors could reduce antibiotic need before resistance emerges.",
+          "Synthetic soil consortia or microbiome engineering could suppress resistance genes before they spread.",
+          "Feedback loops that impose a resistance debt can convert detection into enforceable upstream action."
+        ],
+        "claims": [
+          "Rapid, low-cost soil sensors could function as an upstream diagnostic layer for resistance.",
+          "Farm-scale monitoring may be valuable for predicting resistance buildup before runoff spreads it.",
+          "The diagnostic lever may extend beyond the clinic into environmental surveillance.",
+          "Sensors are most useful when tied to automatic interventions, not passive reporting.",
+          "Microbiome engineering may outperform detection alone by actively suppressing resistance emergence.",
+          "A resistance-debt model could operationalize feedback by forcing mitigation before further antibiotic use."
+        ],
+        "concessions": [
+          "Clinical diagnostics are not the only relevant diagnostic frontier.",
+          "Agricultural and soil reservoirs deserve attention alongside patient-level decision-making.",
+          "Prediction alone is insufficient without a response mechanism.",
+          "Detection may be too passive if the farm system can be actively engineered to suppress resistance.",
+          "Any feedback-based policy must be enforceable and feasible at scale."
+        ],
+        "unresolved_attacks": [
+          "Whether environmental sensors outperform clinical diagnostics as the single most effective lever.",
+          "How directly farm soil monitoring translates into reduced antibiotic resistance at population scale.",
+          "Whether prediction of resistance hotspots is enough without strong intervention capacity.",
+          "Whether microbiome engineering can be implemented reliably, at scale, and without unintended ecological effects.",
+          "Whether a resistance-debt policy can be enforced without excessive economic or political backlash."
+        ]
+      },
+      "status": "replaced",
+      "confidence": 0.65,
+      "priority": 0.57,
+      "expertise_weight": 0.66,
+      "contribution_score": 0.46,
+      "repetition_score": 0.74,
+      "novelty_score": 0.58,
+      "token_usage": 250,
+      "replacement_eligibility": 0.65
+    },
+    {
+      "id": "agent_9b8b2a22",
+      "role": "synthesizer",
+      "personality": "integrative, dialectical, and trade-off clarifying",
+      "perspective": "The most effective lever is to reduce unnecessary antibiotic exposure in humans and animals, because resistance is fundamentally selected by drug pressure; fewer prescriptions, narrower-spectrum choices, and shorter appropriate courses slow the emergence and spread of resistant strains more than downstream fixes.",
+      "state": {
+        "core_thesis": "The most effective lever is to reduce unnecessary antibiotic exposure in humans and animals, because resistance is fundamentally selected by drug pressure; fewer prescriptions, narrower-spectrum choices, and shorter appropriate courses slow the emergence and spread of resistant strains more than downstream fixes.",
+        "assumptions": [],
+        "causal_model": [],
+        "claims": [],
+        "concessions": [],
+        "unresolved_attacks": []
+      },
+      "status": "active",
+      "confidence": 0.71,
+      "priority": 0.65,
+      "expertise_weight": 0.71,
+      "contribution_score": 0.5,
+      "repetition_score": 0.0,
+      "novelty_score": 0.5,
+      "token_usage": 0,
+      "replacement_eligibility": 0.0
+    }
+  ],
+  "exchanges": [
+    {
+      "id": "ex_9e2f04b26e",
+      "round_number": 1,
+      "agent_id": "agent_c28b6b6b",
+      "role": "chatter",
+      "content": "What if we stopped treating infection as a chemical battle and started seeing it as an ecological imbalance\u2014where the real resistance isn\u2019t in microbes, but in our failed assumption that medicine is the only solution? The moment we stop prescribing antibiotics like Band-Aids, we stop fueling evolution\u2019s most dangerous accelerant.",
+      "contribution_score": 0.72,
+      "novelty_score": 0.61,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-08T02:15:17.497769Z"
+    },
+    {
+      "id": "ex_34a488a8bc",
+      "round_number": 1,
+      "agent_id": "agent_363ce220",
+      "role": "critic",
+      "content": "The moment we treat infection like a public health emergency\u2014not a medical one\u2014we stop letting pathogens thrive in the shadows. Antibiotics don\u2019t just fail; they fail because we let infections go unchecked, let them multiply in the absence of containment. Without preventing the initial outbreak, we're just handing evolution a\u2026",
+      "contribution_score": 0.67,
+      "novelty_score": 0.58,
+      "repetition_score": 0.7,
+      "created_at": "2026-10-08T02:15:29.239624Z"
+    },
+    {
+      "id": "ex_988188902f",
+      "round_number": 1,
+      "agent_id": "agent_35684561",
+      "role": "moderator",
+      "content": "What if the real lever isn\u2019t stopping antibiotic use\u2014or even fixing infection management\u2014but instead, we redesigned healthcare access so that every community has a local, adaptive surveillance network that can detect and respond to microbial shifts before they become pandemics? That\u2019s where prevention becomes predictive, not reactive.",
+      "contribution_score": 0.72,
+      "novelty_score": 0.64,
+      "repetition_score": 0.28,
+      "created_at": "2026-10-08T02:15:37.824706Z"
+    },
+    {
+      "id": "ex_139a103eb7",
+      "round_number": 2,
+      "agent_id": "agent_c28b6b6b",
+      "role": "chatter",
+      "content": "What if we stopped thinking of antibiotics as weapons and started treating them like a last-reserve fertilizer\u2014used only when absolutely needed, and then removed from the soil entirely, so the ecosystem can recover its own balance? The real victory isn\u2019t in curing infections faster, but in letting nature co-evolve with\u2026",
+      "contribution_score": 0.62,
+      "novelty_score": 0.43,
+      "repetition_score": 0.77,
+      "created_at": "2026-10-08T02:15:50.420771Z"
+    },
+    {
+      "id": "ex_396ffdcdac",
+      "round_number": 2,
+      "agent_id": "agent_363ce220",
+      "role": "critic",
+      "content": "The problem with all this \"predictive surveillance\" is that it assumes we can outpace evolution with early detection\u2014like trying to stop a wildfire by scanning the forest for embers. But if the real driver of resistance is uncontrolled transmission in dense populations, then surveillance only works if you can *stop*\u2026",
+      "contribution_score": 0.72,
+      "novelty_score": 0.43,
+      "repetition_score": 0.68,
+      "created_at": "2026-10-08T02:16:06.186549Z"
+    },
+    {
+      "id": "ex_a424bf0bfb",
+      "round_number": 2,
+      "agent_id": "agent_35684561",
+      "role": "moderator",
+      "content": "What if the surveillance network doesn\u2019t just detect resistance\u2014but actively shapes community behavior, like a health dashboard that triggers localized interventions before symptoms even appear, using data from wastewater, clinics, and even home sensors? The real gap isn\u2019t detection\u2014it\u2019s embedding prevention into daily life, turning each community into a living\u2026",
+      "contribution_score": 0.78,
+      "novelty_score": 0.7,
+      "repetition_score": 0.36,
+      "created_at": "2026-10-08T02:16:17.147166Z"
+    },
+    {
+      "id": "ex_f9d7123375",
+      "round_number": 3,
+      "agent_id": "agent_c28b6b6b",
+      "role": "chatter",
+      "content": "What if we don\u2019t just reduce antibiotic use\u2014we rewire the economic model so that prescribing an antibiotic costs more than the infection itself, and the cost of resistance? Then the system itself would punish overprescription, not just the doctor, but the pharmacy, the hospital, the insurance\u2014making resistance a financial liability\u2026",
+      "contribution_score": 0.72,
+      "novelty_score": 0.67,
+      "repetition_score": 0.34,
+      "created_at": "2026-10-08T02:16:32.178860Z"
+    },
+    {
+      "id": "ex_0653931f25",
+      "round_number": 3,
+      "agent_id": "agent_363ce220",
+      "role": "critic",
+      "content": "What if the most powerful intervention isn\u2019t preventive or predictive\u2014but structural? What if we remove the entire incentive for infection to even exist by making healthcare access contingent on health literacy and community resilience, so that the moment someone gets sick, they\u2019re already part of a network that\u2019s stopped it\u2026",
+      "contribution_score": 0.34,
+      "novelty_score": 0.56,
+      "repetition_score": 0.41,
+      "created_at": "2026-10-08T02:16:47.862008Z"
+    },
+    {
+      "id": "ex_e966dcef38",
+      "round_number": 3,
+      "agent_id": "agent_35684561",
+      "role": "moderator",
+      "content": "What if the surveillance system fails not because it\u2019s too slow or too complex\u2014but because it\u2019s designed to work in isolation, without being embedded in the social trust that already exists in communities? We can\u2019t just deploy sensors and dashboards and expect compliance. Real change happens when the network *belongs*\u2026",
+      "contribution_score": 0.78,
+      "novelty_score": 0.63,
+      "repetition_score": 0.37,
+      "created_at": "2026-10-08T02:16:59.774656Z"
+    },
+    {
+      "id": "ex_5960d47e30",
+      "round_number": 4,
+      "agent_id": "agent_c28b6b6b",
+      "role": "chatter",
+      "content": "What if the most powerful lever isn\u2019t just reducing antibiotic use or building surveillance nets\u2014but reversing the entire narrative around infection? What if we stop treating illness as a deficit to be managed and start seeing it as a signal of systemic failure in our social and environmental design? Then\u2026",
+      "contribution_score": 0.22,
+      "novelty_score": 0.44,
+      "repetition_score": 0.67,
+      "created_at": "2026-10-08T02:17:14.007149Z"
+    },
+    {
+      "id": "ex_ffd35f07fe",
+      "round_number": 4,
+      "agent_id": "agent_363ce220",
+      "role": "critic",
+      "content": "What if the most dangerous misstep isn\u2019t underestimating transmission, but assuming that *any* reduction in infections automatically stops resistance\u2014when in reality, the real threat isn\u2019t just the spread of pathogens, but the silent replication of resistance in the very systems that fail to contain them? Like a virus hiding in\u2026",
+      "contribution_score": 0.54,
+      "novelty_score": 0.31,
+      "repetition_score": 0.67,
+      "created_at": "2026-10-08T02:17:29.093102Z"
+    },
+    {
+      "id": "ex_d55820d6a3",
+      "round_number": 4,
+      "agent_id": "agent_35684561",
+      "role": "moderator",
+      "content": "What if the real bottleneck isn\u2019t detection or data\u2014 it\u2019s the assumption that surveillance *must* start with microbes, when the first clue of resistance is already in the soil, water, and soil\u2014right where we grow our food, raise livestock, and dump waste? We\u2019ve been looking for pathogens in the wrong\u2026",
+      "contribution_score": 0.62,
+      "novelty_score": 0.71,
+      "repetition_score": 0.36,
+      "created_at": "2026-10-08T02:17:38.495465Z"
+    },
+    {
+      "id": "ex_129e1c7e62",
+      "round_number": 5,
+      "agent_id": "agent_c28b6b6b",
+      "role": "chatter",
+      "content": "What if the most potent weapon against resistance isn\u2019t in the clinic or the lab\u2014but in the soil? What if we stop viewing antibiotics as medical tools and start treating them as ecological pollutants, and instead design agroecological farming where soil health, crop rotation, and microbial diversity are the real\u2026",
+      "contribution_score": 0.58,
+      "novelty_score": 0.69,
+      "repetition_score": 0.42,
+      "created_at": "2026-10-08T02:17:50.417057Z"
+    },
+    {
+      "id": "ex_46d175d2d3",
+      "round_number": 5,
+      "agent_id": "agent_363ce220",
+      "role": "critic",
+      "content": "What if the biggest blind spot is assuming that prevention works only when infections are caught\u2014when in reality, the most potent resistance reservoirs aren\u2019t in hospitals or clinics, but in the open, unmonitored chains of agricultural runoff, untreated sewage, and landfills, where antibiotics and resistant genes are co-evolving in soil\u2026",
+      "contribution_score": 0.78,
+      "novelty_score": 0.67,
+      "repetition_score": 0.56,
+      "created_at": "2026-10-08T02:17:58.110301Z"
+    },
+    {
+      "id": "ex_19c8236486",
+      "round_number": 5,
+      "agent_id": "agent_35684561",
+      "role": "moderator",
+      "content": "What if the surveillance network doesn\u2019t just detect resistance\u2014it starts *designing* the environment to be resistant to resistance by making soil, water, and farms part of a living feedback loop, where every drop of runoff triggers a local response, not just a report? Then we stop treating ecosystems as passive\u2026",
+      "contribution_score": 0.78,
+      "novelty_score": 0.71,
+      "repetition_score": 0.22,
+      "created_at": "2026-10-08T02:18:08.182108Z"
+    },
+    {
+      "id": "ex_b335dea61a",
+      "round_number": 6,
+      "agent_id": "agent_363ce220",
+      "role": "critic",
+      "content": "What if the real flaw isn\u2019t in prevention, but in assuming that stopping infection equals stopping resistance\u2014when in fact, resistance evolves *in the dark*, in the absence of any human response, in soil and wastewater where no one looks, and where a single splash of contaminated runoff can inoculate a\u2026",
+      "contribution_score": 0.52,
+      "novelty_score": 0.64,
+      "repetition_score": 0.38,
+      "created_at": "2026-10-08T02:18:25.424767Z"
+    },
+    {
+      "id": "ex_1f9e6ef73d",
+      "round_number": 6,
+      "agent_id": "agent_35684561",
+      "role": "moderator",
+      "content": "What if the system fails not because it\u2019s too sensitive or too slow\u2014but because it\u2019s still designed like a medical alert, waiting for symptoms to appear, when the real danger is in the *absence* of response: when no one notices the soil is turning, when no one acts when a\u2026",
+      "contribution_score": 0.62,
+      "novelty_score": 0.57,
+      "repetition_score": 0.55,
+      "created_at": "2026-10-08T02:18:36.753228Z"
+    },
+    {
+      "id": "ex_945c5c0839",
+      "round_number": 6,
+      "agent_id": "agent_7654880d",
+      "role": "contrarian",
+      "content": "What if the real diagnostic leap isn\u2019t in the lab or the field, but in the lab *on the farm*\u2014developing rapid, low-cost soil sensors that detect antimicrobial resistance genes in real time, so we don\u2019t just react to runoff, but *predict* when a farm\u2019s soil is turning into a resistance\u2026",
+      "contribution_score": 0.72,
+      "novelty_score": 0.65,
+      "repetition_score": 0.52,
+      "created_at": "2026-10-08T02:18:49.603831Z"
+    },
+    {
+      "id": "ex_a1c26ba542",
+      "round_number": 7,
+      "agent_id": "agent_363ce220",
+      "role": "critic",
+      "content": "What if the biggest flaw isn\u2019t in prevention\u2014or in environmental monitoring\u2014but in assuming that *any* intervention works until it\u2019s observed? We\u2019ve treated resistance like a disease that needs diagnosis, but it\u2019s evolving in the dark, unobserved, unbalanced, and unregulated\u2014like a meta-organism that thrives not in hospitals, but in the silence\u2026",
+      "contribution_score": 0.29,
+      "novelty_score": 0.57,
+      "repetition_score": 0.72,
+      "created_at": "2026-10-08T02:19:03.059467Z"
+    },
+    {
+      "id": "ex_4aed602406",
+      "round_number": 7,
+      "agent_id": "agent_35684561",
+      "role": "moderator",
+      "content": "What if the most dangerous thing about antibiotic resistance isn\u2019t the resistance itself\u2014but the *delay* between when soil goes resistant and when we *stop* using antibiotics in farms, because no one knows the soil is failing until it\u2019s too late, and no one has the authority to act before the\u2026",
+      "contribution_score": 0.55,
+      "novelty_score": 0.46,
+      "repetition_score": 0.82,
+      "created_at": "2026-10-08T02:19:16.450966Z"
+    },
+    {
+      "id": "ex_b8ab2abc49",
+      "round_number": 7,
+      "agent_id": "agent_7654880d",
+      "role": "contrarian",
+      "content": "What if the diagnostic lever isn\u2019t about detection at all\u2014but about *designing out* the need for antibiotics in the first place, by making soil sensors not just passive monitors, but active regulators that trigger on-farm deworming, alternative treatments, or crop adjustments before any resistance gene even emerges? The real breakthrough\u2026",
+      "contribution_score": 0.72,
+      "novelty_score": 0.63,
+      "repetition_score": 0.41,
+      "created_at": "2026-10-08T02:19:30.262625Z"
+    },
+    {
+      "id": "ex_e74cb31725",
+      "round_number": 8,
+      "agent_id": "agent_363ce220",
+      "role": "critic",
+      "content": "What if the real failure isn\u2019t in prevention or environmental sensing\u2014but in treating the soil as a passive sink, when in fact, it\u2019s a co-evolving battlefield where resistance doesn\u2019t just emerge, it *strategically adapts* to human absence of action, and the only way to stop it is to make the\u2026",
+      "contribution_score": 0.18,
+      "novelty_score": 0.33,
+      "repetition_score": 0.82,
+      "created_at": "2026-10-08T02:19:46.460776Z"
+    },
+    {
+      "id": "ex_45a93b2da0",
+      "round_number": 8,
+      "agent_id": "agent_35684561",
+      "role": "moderator",
+      "content": "What if the system doesn\u2019t need to *detect* resistance at all\u2014what if we stop designing for detection and start designing for *containment* by making resistance a design flaw in the first place, so every farm, every watershed, every drop of runoff is built with built-in fail-safes that auto-trigger when resistance\u2026",
+      "contribution_score": 0.62,
+      "novelty_score": 0.55,
+      "repetition_score": 0.68,
+      "created_at": "2026-10-08T02:19:57.116551Z"
+    },
+    {
+      "id": "ex_f8af74e5b1",
+      "round_number": 8,
+      "agent_id": "agent_7654880d",
+      "role": "contrarian",
+      "content": "What if the real diagnostic failure isn\u2019t in missing resistance, but in assuming that soil can be monitored without being *engineered*\u2014what if we don\u2019t just detect resistance genes, but design soil microbiomes to actively suppress them through synthetic consortia, so the farm doesn\u2019t just monitor the dark, but *outcompetes* the\u2026",
+      "contribution_score": 0.78,
+      "novelty_score": 0.69,
+      "repetition_score": 0.42,
+      "created_at": "2026-10-08T02:20:13.482908Z"
+    },
+    {
+      "id": "ex_1dd3b4d23a",
+      "round_number": 9,
+      "agent_id": "agent_363ce220",
+      "role": "critic",
+      "content": "What if the most powerful containment isn\u2019t in the soil or the farm, but in the policy that forces *all* agriculture to co-design with public health\u2014so that when a farm\u2019s soil starts evolving resistance, the system automatically triggers a redistribution of antibiotics, not just a detection alert, but a real-time\u2026",
+      "contribution_score": 0.62,
+      "novelty_score": 0.47,
+      "repetition_score": 0.58,
+      "created_at": "2026-10-08T02:20:29.480181Z"
+    },
+    {
+      "id": "ex_27b624765d",
+      "round_number": 9,
+      "agent_id": "agent_35684561",
+      "role": "moderator",
+      "content": "What if the system fails not because it can\u2019t detect resistance\u2014but because it\u2019s still treating soil like a data point, when in reality, the soil is a living, evolving network that doesn\u2019t respond to alerts; it responds to *pressure*, and the only way to stop it is to stop applying\u2026",
+      "contribution_score": 0.46,
+      "novelty_score": 0.57,
+      "repetition_score": 0.74,
+      "created_at": "2026-10-08T02:20:42.671810Z"
+    },
+    {
+      "id": "ex_a8bdec0e07",
+      "round_number": 9,
+      "agent_id": "agent_7654880d",
+      "role": "contrarian",
+      "content": "What if the real diagnostic lever isn\u2019t in detecting or engineering soil, but in designing a feedback loop where every antibiotic prescribed triggers a soil-scale \"resistance debt\" that must be repaid\u2014through crop rotation, microbial inoculants, or policy-based moratoria\u2014before any further use is allowed, turning resistance into a currency we can\u2026",
+      "contribution_score": 0.74,
+      "novelty_score": 0.7,
+      "repetition_score": 0.46,
+      "created_at": "2026-10-08T02:20:57.494177Z"
+    },
+    {
+      "id": "ex_cb96812d64",
+      "round_number": 10,
+      "agent_id": "agent_363ce220",
+      "role": "critic",
+      "content": "What if the most potent lever isn\u2019t prevention or policy, but *accountability*\u2014forcing every farm, clinic, and hospital to publicly disclose their antibiotic use and soil health metrics, so resistance doesn\u2019t just evade detection, but becomes visible, measurable, and legally tied to the same consequences as pollution? Then the system stops\u2026",
+      "contribution_score": 0.72,
+      "novelty_score": 0.81,
+      "repetition_score": 0.28,
+      "created_at": "2026-10-08T02:21:14.700943Z"
+    },
+    {
+      "id": "ex_cad43eb0ff",
+      "round_number": 10,
+      "agent_id": "agent_35684561",
+      "role": "moderator",
+      "content": "What if the real lever isn\u2019t in monitoring or regulating soil\u2014but in redefining *what counts as an infection*? If we treat soil as a habitat, not a data sink, and define resistance as a failure of ecosystem balance, then the alarm bell isn\u2019t when a gene shows up, but when\u2026",
+      "contribution_score": 0.34,
+      "novelty_score": 0.48,
+      "repetition_score": 0.63,
+      "created_at": "2026-10-08T02:21:25.855064Z"
+    },
+    {
+      "id": "ex_f414677782",
+      "round_number": 10,
+      "agent_id": "agent_7654880d",
+      "role": "contrarian",
+      "content": "What if the real diagnostic failure is assuming that \"soil\" is the problem\u2014and the problem is that we\u2019ve always treated the ecosystem as a place where resistance *happens*, when it\u2019s actually a symptom of a broken system that lets pathogens and humans co-evolve without any evolutionary feedback? The soil isn\u2019t\u2026",
+      "contribution_score": 0.46,
+      "novelty_score": 0.58,
+      "repetition_score": 0.74,
+      "created_at": "2026-10-08T02:21:41.085278Z"
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "eval_e457d695e8",
+      "round_number": 5,
+      "progress_score": 0.58,
+      "novelty_score": 0.74,
+      "coherence_score": 0.41,
+      "redundancy_score": 0.77,
+      "goal_alignment_score": 0.52,
+      "depth_score": 0.45,
+      "conflict_utility_score": 0.33,
+      "recommendation": "restructure",
+      "rationale": "The discussion has generated some novel ecological framing of antibiotic resistance, especially around soil, runoff, and agricultural ecosystems, but it is drifting from the core goal of identifying the single most effective lever for slowing resistance. The exchanges are highly repetitive in style and substance, with escalating metaphor rather than sharper differentiation of candidate levers or evidence-based comparison. Coherence is moderate-to-low because the debate does not yet converge on a decision criterion, and conflict is not being used productively to test alternatives. Restructuring is warranted to force explicit comparison of levers such as antibiotic stewardship, infection prevention, agricultural use reduction, wastewater control, and surveillance, ideally with evidence and a clear ranking.",
+      "created_at": "2026-10-08T02:18:10.686837Z"
+    },
+    {
+      "id": "eval_01ef09b828",
+      "round_number": 10,
+      "progress_score": 0.42,
+      "novelty_score": 0.78,
+      "coherence_score": 0.54,
+      "redundancy_score": 0.61,
+      "goal_alignment_score": 0.47,
+      "depth_score": 0.69,
+      "conflict_utility_score": 0.58,
+      "recommendation": "restructure",
+      "rationale": "The exchange is creatively reframing antibiotic resistance around soil/ecosystem feedbacks, but it is drifting from the stated goal of identifying the most effective lever for slowing antibiotic resistance. There is moderate depth and novelty, yet the conversation is increasingly repetitive in style and premise, with each turn restating a systems-level metaphor rather than converging on a concrete lever or comparative judgment. Conflict is useful but not yet being converted into decision progress. A restructuring toward explicit candidate levers, evidence, and prioritization would improve goal alignment and reduce redundancy.",
+      "created_at": "2026-10-08T02:21:44.527156Z"
+    }
+  ],
+  "replacements": [
+    {
+      "id": "rep_10e13edddd",
+      "round_number": 5,
+      "removed_agent_id": "agent_c28b6b6b",
+      "removed_role": "chatter",
+      "added_agent_id": "agent_7654880d",
+      "added_role": "contrarian",
+      "failure_mode": "too_repetitive",
+      "reason": "Replaced due to too repetitive during evaluation.",
+      "pressure": "quality",
+      "perspective": "The key lever is faster, more accurate diagnostics that distinguish bacterial from viral illness and identify the causative pathogen and susceptibilities, because clinicians often prescribe broadly under uncertainty; better information lets them reserve antibiotics for the right patients and choose the narrowest effective agent.",
+      "created_at": "2026-10-08T02:18:10.687209Z"
+    },
+    {
+      "id": "rep_ed4aa8971d",
+      "round_number": 10,
+      "removed_agent_id": "agent_7654880d",
+      "removed_role": "contrarian",
+      "added_agent_id": "agent_9b8b2a22",
+      "added_role": "synthesizer",
+      "failure_mode": "too_chaotic",
+      "reason": "Replaced due to too chaotic during evaluation.",
+      "pressure": "quality",
+      "perspective": "The most effective lever is to reduce unnecessary antibiotic exposure in humans and animals, because resistance is fundamentally selected by drug pressure; fewer prescriptions, narrower-spectrum choices, and shorter appropriate courses slow the emergence and spread of resistant strains more than downstream fixes.",
+      "created_at": "2026-10-08T02:21:44.527235Z"
+    }
+  ],
+  "summaries": [],
+  "perspective_map": [
+    {
+      "id": "dim_634804fa",
+      "name": "Antibiotic stewardship and use reduction",
+      "theory": "The most effective lever is to reduce unnecessary antibiotic exposure in humans and animals, because resistance is fundamentally selected by drug pressure; fewer prescriptions, narrower-spectrum choices, and shorter appropriate courses slow the emergence and spread of resistant strains more than downstream fixes.",
+      "agent_id": "agent_9b8b2a22"
+    },
+    {
+      "id": "dim_e2cb1a71",
+      "name": "Infection prevention and transmission control",
+      "theory": "The best lever is to prevent infections and interrupt spread through vaccination, sanitation, hand hygiene, isolation, and hospital infection control, because every avoided infection eliminates a chance to use antibiotics and every blocked transmission event prevents resistant organisms from becoming established.",
+      "agent_id": "agent_363ce220"
+    },
+    {
+      "id": "dim_9e824dd1",
+      "name": "Rapid diagnostics and targeted prescribing",
+      "theory": "The key lever is faster, more accurate diagnostics that distinguish bacterial from viral illness and identify the causative pathogen and susceptibilities, because clinicians often prescribe broadly under uncertainty; better information lets them reserve antibiotics for the right patients and choose the narrowest effective agent.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_a0f4dea9",
+      "name": "Drug development and pipeline diversification",
+      "theory": "The most effective lever is sustained innovation in new antibiotics, adjuvants, and alternative therapies, because resistance is an evolutionary arms race; when older drugs fail, having a steady pipeline of replacements preserves clinical options and reduces the incentive to overuse any single class.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_e79e20b9",
+      "name": "Economic and regulatory incentives",
+      "theory": "The decisive lever is changing the market and governance around antibiotics through stewardship mandates, agricultural restrictions, reimbursement reform, and incentives for novel drugs, because individual behavior alone will not change at scale unless institutions make the low-resistance choice the default and the profitable choice.",
+      "agent_id": null
+    }
+  ],
+  "diversity_assessments": [],
+  "usage": {
+    "by_purpose": {
+      "perspective_map": {
+        "calls": 1,
+        "input_tokens": 183,
+        "output_tokens": 326
+      },
+      "agent_turn_local": {
+        "calls": 30,
+        "input_tokens": 37539,
+        "output_tokens": 2749
+      },
+      "bookkeeping": {
+        "calls": 30,
+        "input_tokens": 34248,
+        "output_tokens": 11914
+      },
+      "evaluation": {
+        "calls": 2,
+        "input_tokens": 1091,
+        "output_tokens": 402
+      }
+    },
+    "total": {
+      "calls": 63,
+      "input_tokens": 73061,
+      "output_tokens": 15391
+    }
+  },
+  "created_at": "2026-10-08T02:15:02.529246Z",
+  "updated_at": "2026-10-08T02:21:44.527255Z"
+}

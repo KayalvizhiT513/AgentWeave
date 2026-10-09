@@ -1,0 +1,9 @@
+{
+  "id": "001-baseline-reference",
+  "hypothesis": "Establishes the reference numbers and run-to-run noise for the current default config. No effect predicted; the spread across reps sets how large a later difference must be to mean anything.",
+  "primary_metrics": ["judge_novelty", "judge_depth", "judge_disagreement_preserved", "sim_late"],
+  "reps": 3,
+  "runtime": {"max_rounds": 10, "agent_turn_delay_seconds": 0},
+  "baseline": "default",
+  "variants": {"default": {}}
+}

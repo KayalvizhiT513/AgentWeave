@@ -1,0 +1,13 @@
+{
+  "id": "002-thresholds",
+  "hypothesis": "A lower redundancy cutoff (0.45) replaces agents sooner and raises novelty_vs_history at the cost of tokens and judge_depth; a higher cutoff (0.75) does the opposite. Prediction: monotone in the cutoff for novelty_vs_history, flat or noisy for judge_depth.",
+  "primary_metrics": ["novelty_vs_history", "judge_novelty", "judge_depth", "replacements"],
+  "reps": 2,
+  "runtime": {"max_rounds": 10, "agent_turn_delay_seconds": 0, "evaluation_interval": 3},
+  "baseline": "cutoff_0.62",
+  "variants": {
+    "cutoff_0.45": {"tuning": {"thresholds": {"redundancy_cutoff": 0.45}}},
+    "cutoff_0.62": {},
+    "cutoff_0.75": {"tuning": {"thresholds": {"redundancy_cutoff": 0.75}}}
+  }
+}

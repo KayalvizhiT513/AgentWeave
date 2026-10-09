@@ -12,6 +12,20 @@ AgentWeave is an adaptive multi-agent reasoning backend designed around a dynami
 - server-sent event stream for live frontend updates
 - provider abstraction for future LLM integration
 
+## Agent Diversity Model
+
+Agents differ on two axes: **personality** (how they reason) and **perspective** (the causal theory they defend).
+
+- **Perspective map:** on creation, the provider maps the topic's major dimensions, each with a defensible theory. Chatter and Critic each claim a distinct theory; Moderator and Evaluator stay invariant. Unclaimed dimensions form a reservoir.
+- **Private agent state:** each agent keeps a persistent `AgentState` (core thesis, assumptions, causal model, claims, concessions, unresolved attacks), updated every turn. Dialogue is evidence, not identity.
+- **Two replacement pressures:**
+  - *Quality* (existing): evaluator failure mode picks a new personality (repetitive → Contrarian, shallow → Domain Expert, ...).
+  - *Exploration* (new): a diversity audit looks for a missing dimension, a shared assumption, or converged causal models, and swaps in an `explorer` agent defending a theory that fills the gap. At most one roster change per evaluation; quality takes precedence.
+
+Cost tracking: every model call is recorded on `conversation.usage`, by purpose (`agent_turn`, `evaluation`, `diversity`, `perspective_map`) with call counts and input/output tokens, plus a `total`. This makes the overhead of the evaluator and diversity audit measurable per conversation.
+
+Runtime knobs (per conversation, useful for baselines): `perspective_dimensions` (0 disables the map), `diversity_pressure`, `history_window`.
+
 ## Project Layout
 
 ```text
@@ -56,6 +70,25 @@ Open:
 - `http://127.0.0.1:8000/` — live reasoning workspace
 - `http://127.0.0.1:8000/docs`
 - `http://127.0.0.1:8000/health`
+
+## Tuning and Evals
+
+Tuning here means settings, not training. `TuningConfig` (`src/agentweave/tuning.py`) holds per-role sampling
+(`model`, `temperature`, `top_p`, `reasoning_effort`) and the orchestration thresholds that used to be hardcoded.
+Unset fields are not sent, so defaults behave exactly as before.
+
+Every tuning claim goes through the eval harness, which keeps a permanent record in `evals/`:
+
+```bash
+export PYTHONPATH=src
+python -m agentweave.evals plan evals/experiments/001-baseline-reference.json   # shows run count and call estimate
+python -m agentweave.evals run  evals/experiments/001-baseline-reference.json --yes
+python -m agentweave.evals report                                                 # regenerates evals/EVALS.md
+```
+
+- `evals/experiments/*.json`: pre-registered hypothesis, primary metrics and variants.
+- `evals/ledger.jsonl`: append-only, one row per run with full config, git sha, models, metrics, transcript path.
+- `evals/EVALS.md`: generated tables. `evals/JOURNAL.md`: what we concluded and changed.
 
 ## Primary API Endpoints
 

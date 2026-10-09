@@ -16,8 +16,13 @@ async def _test_response(_self, conversation, agent) -> AgentResponse:
     )
 
 
+async def _no_perspectives(_self, conversation, count):
+    return []
+
+
 def test_create_and_step_conversation(monkeypatch) -> None:
     monkeypatch.setattr(OpenAIAgentProvider, "respond", _test_response)
+    monkeypatch.setattr(OpenAIAgentProvider, "map_perspectives", _no_perspectives)
     response = client.post(
         "/api/v1/conversations",
         json={

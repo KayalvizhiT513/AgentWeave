@@ -1,0 +1,13 @@
+{
+  "id": "004-role-sampling",
+  "hypothesis": "Giving the Critic and Chatter higher reasoning effort improves judge_depth, while lower effort on all roles cuts tokens with a small depth loss. Prediction: depth rises with effort; novelty_vs_history is unaffected. Uses reasoning_effort because temperature support depends on the model: check the first run for API errors.",
+  "primary_metrics": ["judge_depth", "judge_novelty", "tokens"],
+  "reps": 2,
+  "runtime": {"max_rounds": 10, "agent_turn_delay_seconds": 0, "evaluation_interval": 3},
+  "baseline": "default",
+  "variants": {
+    "default": {},
+    "all_low_effort": {"tuning": {"default": {"reasoning_effort": "low"}}},
+    "critic_chatter_high_effort": {"tuning": {"roles": {"critic": {"reasoning_effort": "high"}, "chatter": {"reasoning_effort": "high"}}}}
+  }
+}

@@ -1,0 +1,9 @@
+{
+ "samples": 17,
+ "no_winner": 8,
+ "winner_invalid": 5,
+ "train": 4,
+ "valid": 0,
+ "pairs": 4,
+ "valid_topics": []
+}

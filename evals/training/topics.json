@@ -1,0 +1,202 @@
+[
+ {
+  "id": "car-free-centers",
+  "topic": "Should cities ban private cars from their centers?",
+  "scene": "policy debate"
+ },
+ {
+  "id": "nuclear-climate",
+  "topic": "Is nuclear power essential to meeting climate targets?",
+  "scene": "debate"
+ },
+ {
+  "id": "teen-social-media",
+  "topic": "Should social media be restricted for under-16s?",
+  "scene": "policy debate"
+ },
+ {
+  "id": "remote-juniors",
+  "topic": "Is remote work better or worse for junior engineers' careers?",
+  "scene": "debate"
+ },
+ {
+  "id": "test-optional",
+  "topic": "Should universities abolish standardized admissions tests?",
+  "scene": "policy debate"
+ },
+ {
+  "id": "icu-allocation",
+  "topic": "How should a hospital allocate scarce ICU beds during a surge?",
+  "scene": "decision"
+ },
+ {
+  "id": "open-weights",
+  "topic": "Is open-sourcing frontier AI models safer than keeping them closed?",
+  "scene": "debate"
+ },
+ {
+  "id": "basic-income",
+  "topic": "Should governments fund basic income pilots?",
+  "scene": "policy debate"
+ },
+ {
+  "id": "birth-rates",
+  "topic": "What explains the decline in birth rates across rich countries?",
+  "scene": "debate"
+ },
+ {
+  "id": "rate-limiter",
+  "topic": "Design a rate limiter for a public API with bursty traffic.",
+  "scene": "collaborative design"
+ },
+ {
+  "id": "microservices",
+  "topic": "Should a startup rewrite its monolith as microservices?",
+  "scene": "decision"
+ },
+ {
+  "id": "gene-doping",
+  "topic": "Should professional athletes be allowed to use gene therapy?",
+  "scene": "debate"
+ },
+ {
+  "id": "town-windfall",
+  "topic": "How should a small town spend a one-time $5M windfall?",
+  "scene": "decision"
+ },
+ {
+  "id": "tests-privilege",
+  "topic": "Do standardized tests measure ability or privilege?",
+  "scene": "debate"
+ },
+ {
+  "id": "lab-meat",
+  "topic": "Is it ethical to eat meat if lab-grown meat becomes cheap?",
+  "scene": "debate"
+ },
+ {
+  "id": "pay-transparency",
+  "topic": "Should companies disclose pay for every role?",
+  "scene": "policy debate"
+ },
+ {
+  "id": "news-caching",
+  "topic": "Design a caching strategy for a global news site during breaking events.",
+  "scene": "collaborative design"
+ },
+ {
+  "id": "traffic-deaths",
+  "topic": "What is the most effective way to reduce traffic deaths?",
+  "scene": "debate"
+ },
+ {
+  "id": "crypto-securities",
+  "topic": "Should cryptocurrencies be regulated like securities?",
+  "scene": "policy debate"
+ },
+ {
+  "id": "space-funding",
+  "topic": "Is space exploration worth public funding?",
+  "scene": "debate"
+ },
+ {
+  "id": "ai-evidence",
+  "topic": "How should courts treat AI-generated evidence?",
+  "scene": "policy debate"
+ },
+ {
+  "id": "projects-late",
+  "topic": "Why do most large software projects run late?",
+  "scene": "debate"
+ },
+ {
+  "id": "financial-literacy",
+  "topic": "Should schools teach financial literacy instead of trigonometry?",
+  "scene": "debate"
+ },
+ {
+  "id": "privacy-luxury",
+  "topic": "Is privacy a right or a luxury in the age of smartphones?",
+  "scene": "debate"
+ },
+ {
+  "id": "maintainer-burnout",
+  "topic": "How should an open-source maintainer handle burnout and demand?",
+  "scene": "decision"
+ },
+ {
+  "id": "global-min-tax",
+  "topic": "Should there be a global minimum corporate tax?",
+  "scene": "policy debate"
+ },
+ {
+  "id": "night-nurse-onboarding",
+  "topic": "Design the onboarding for a tool used by nurses on night shifts.",
+  "scene": "collaborative design"
+ },
+ {
+  "id": "meritocracy",
+  "topic": "Is competitive meritocracy fair?",
+  "scene": "debate"
+ },
+ {
+  "id": "beyond-gdp",
+  "topic": "What should replace GDP as a measure of national success?",
+  "scene": "debate"
+ },
+ {
+  "id": "embryo-editing",
+  "topic": "Should gene editing of embryos be allowed to prevent disease?",
+  "scene": "policy debate"
+ },
+ {
+  "id": "newsroom-ai",
+  "topic": "How should a newsroom decide when to use AI-written copy?",
+  "scene": "decision"
+ },
+ {
+  "id": "rent-control",
+  "topic": "Does rent control help or hurt tenants over time?",
+  "scene": "debate"
+ },
+ {
+  "id": "gain-of-function",
+  "topic": "Should gain-of-function research continue?",
+  "scene": "policy debate"
+ },
+ {
+  "id": "degree-worth",
+  "topic": "Is a college degree still worth it?",
+  "scene": "debate"
+ },
+ {
+  "id": "feel-safe",
+  "topic": "What makes a city feel safe?",
+  "scene": "debate"
+ },
+ {
+  "id": "av-tradeoffs",
+  "topic": "Should self-driving cars be allowed to make life-and-death trade-off decisions?",
+  "scene": "policy debate"
+ },
+ {
+  "id": "build-vs-buy",
+  "topic": "How should a company decide between building and buying software?",
+  "scene": "decision"
+ },
+ {
+  "id": "election-cycle",
+  "topic": "Is a short election cycle bad for long-term policy?",
+  "scene": "debate"
+ },
+ {
+  "id": "ai-copyright",
+  "topic": "Should art created by AI be copyrightable?",
+  "scene": "policy debate"
+ },
+ {
+  "id": "specialize-early",
+  "topic": "Is it better to specialize early or sample broadly?",
+  "scene": "debate"
+ }
+]

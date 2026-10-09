@@ -1,0 +1,20 @@
+{
+ "samples": 81,
+ "no_usable_reply": 33,
+ "skipped_by_filter": 0,
+ "train": 48,
+ "valid": 0,
+ "pairs": 7,
+ "by_selection": {
+  "compliance": 34,
+  "tie": 7,
+  "judge": 7
+ },
+ "by_role": {
+  "chatter": 9,
+  "critic": 18,
+  "moderator": 19,
+  "explorer": 2
+ },
+ "valid_topics": []
+}

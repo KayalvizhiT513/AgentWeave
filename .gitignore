@@ -3,3 +3,7 @@
 __pycache__/
 .pytest_cache/
 *.pyc
+
+# raw third-party data; a fixed sample is committed under evals/calibration/
+evals/data/
+train/adapters/*/*.safetensors

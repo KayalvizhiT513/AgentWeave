@@ -1,0 +1,787 @@
+{
+  "id": "conv_c5594642dbb545fbba0cf4a35789808f",
+  "topic": "What is the most effective lever for slowing antibiotic resistance?",
+  "scene": "debate",
+  "constraints": [],
+  "status": "completed",
+  "runtime": {
+    "agent_turn_delay_seconds": 0.0,
+    "evaluation_interval": 5,
+    "restructuring_interval": 25,
+    "max_rounds": 10,
+    "max_history_entries": 120,
+    "summary_window": 8,
+    "stagnation_threshold": 3,
+    "history_window": 8,
+    "perspective_dimensions": 5,
+    "diversity_pressure": true
+  },
+  "tuning": {
+    "default": {
+      "model": null,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "reasoning_effort": null,
+      "plain_text": null,
+      "endpoint": "http://127.0.0.1:8082/v1"
+    },
+    "roles": {},
+    "evaluator": {
+      "model": null,
+      "temperature": null,
+      "top_p": null,
+      "reasoning_effort": null,
+      "plain_text": null,
+      "endpoint": null
+    },
+    "thresholds": {
+      "redundancy_cutoff": 0.62,
+      "novelty_floor": 0.35,
+      "depth_floor": 0.45,
+      "repetition_weight": 0.55
+    }
+  },
+  "current_round": 10,
+  "stall_count": 2,
+  "final_summary": "Conversation completed after 10 rounds. Reached max rounds.",
+  "shared_context": {
+    "goal": "What is the most effective lever for slowing antibiotic resistance?",
+    "scene": "debate",
+    "constraints": [],
+    "decisions": [],
+    "active_conflicts": [],
+    "history": [
+      "That still misses the point that \u201cnarrow-spectrum\u201d is often a marketing euphemism for the right antibiotic in the right place. The bigger lever is diagnostic restraint before every prescription, because every avoidable course turns the farm into a resistance factory.",
+      "Diagnostic restraint is still a band-aid on a funnel that still doesn\u2019t plug the main pipe: transmission. If you can\u2019t stop circulation of resistant strains through sanitation, hand hygiene, and isolation, then no amount of diagnostic restraint will save you from the same fate.",
+      "I\u2019m not defending diagnostic restraint as the whole game; I\u2019m asking we stop pretending it\u2019s the endpoint. The hidden multiplier is the overprescription of certain antibiotics in human medicine and livestock\u2014those are the drugs resistance is being selected for, and the real lever is stopping those high-risk prescriptions where the\u2026",
+      "\u201cStopping overprescription of high-risk drugs\u201d is not the same as \u201cdiagnostic restraint\u201d if the latter still leaves the same lethal pipeline intact. The sharper lever is to force narrower use and narrower indications before broad-spectrum prescriptions become routine, because every additional course still trains one more resistant strain into the\u2026",
+      "Even if you tighten prescribing for high-risk antibiotics, you\u2019re still admitting the same resistant strains into the community. Transmission control matters because it stops the survival and spread of the very strains we\u2019re trying to limit by prescription alone.",
+      "SOEVER: You\u2019re both smuggling a false choice into the debate. If diagnostics are the guardrails, then stewardship is the engine\u2014because the bigger question is which prescriptions are driving resistance before they\u2019re even viable in the first place.",
+      "Both sides are treating \u201cthe same prescription\u201d as if it\u2019s the only lever. The sharper move is to separate high-risk drugs from high-volume use: the main driver is avoiding unnecessary exposure to drugs that are effective against the worst resistance hotspots, because every avoidable course turns the selection pressure into\u2026",
+      "I\u2019m not defending prescription restraint by itself; I\u2019m saying it\u2019s the downstream mechanism. The real question is which high-risk drugs are allowed to circulate freely enough to train resistant strains in the first place\u2014and that\u2019s exactly why transmission control matters more: if you keep resistant strains from spreading, you starve\u2026",
+      "I\u2019m not defending one lever over another; I\u2019m saying the most cost-effective way to slow resistance is to stop the cheapest and most damaging overprescriptions before they even become a reservoir problem.",
+      "\u201cStop the cheapest and most damaging overprescriptions\u201d sounds principled until you admit the hidden calculus: the cheapest overprescription is often the one that creates the largest resistance burden per course. So the real test is not to pretend transmission control solves everything; it\u2019s to compare the per-antibiotic burden of avoidable\u2026",
+      "I\u2019m not defending \u201cthe cheapest burden\u201d as the test, because the burden is created by exposure, not just cost. If you keep resistant strains from spreading, you collapse the reservoir before resistance even becomes stable\u2014and that\u2019s a more strategic lever than trying to trim a prescription list after the fact.",
+      "I\u2019m still not comfortable with treating all \u201chigh-risk\u201d drugs equally. The better lever is to target the classes and indications that contribute most to resistance hotspots\u2014because once a resistant strain is selected, it\u2019s often unstoppable and harder to control than a less damaging course.",
+      "You keep smuggling in a false binary: either every resistant strain is a loss, or we should accept it as inevitable. The sharper move is to separate exposure from transmission and then optimize the prescription chain upstream\u2014because the costliest resistance burden is created by avoidable use of drugs that intentionally\u2026",
+      "Optimizing the prescription chain upstream is a band-aid on a pipeline that\u2019s still leaking. If transmission control is the upstream valve, then stewardship is the pressure wave control\u2014because the more hosts you keep from touching resistant organisms, the more you shrink the population of strains available to spread.",
+      "I\u2019m not defending transmission control over stewardship by default; I\u2019m saying the same lever\u2014reducing high-risk prescriptions\u2014creates the least collateral damage while targeting the worst-case resistance outcomes at the point of exposure.",
+      "I\u2019m not defending free transmission control by itself; I\u2019m saying it\u2019s the downstream mechanism that buys time while the upstream lever\u2014avoidable prescriptions\u2014massively reduces the selection pressure that turns into resistant reservoirs.",
+      "You\u2019re both treating \u201cselection pressure\u201d as if it were a single target, and that\u2019s too neat. The sharper lever is to force the highest-risk prescriptions out of the medicine cabinet altogether\u2014especially the ones that create the most new resistance-inducing mixtures in the first place.",
+      "Forcing the worst prescriptions out of the medicine cabinet is a band-aid on a pipeline that still leaks. The real question is whether we can develop resistance-breaking compounds and adjuvants fast enough to keep the dangerous mixtures from ever becoming permanent in the first place.",
+      "Adjuvants and resistance-breaking compounds are the cure, sure\u2014but they don\u2019t stop the bleeding. Every avoidable prescription matters because it prevents one more step in the resistance ladder from being built on living cells and microbial populations.",
+      "I\u2019m not defending adjuvants as the main lever; I\u2019m saying they\u2019re the goal, not the mechanism. If we\u2019re serious about stopping resistance, the first order of business is cutting the worst-risk prescriptions before we can even talk about designing compounds to break resistance.",
+      "Cutting the worst-risk prescriptions is moral hygiene, not a replacement for weapons. If you keep buying the same bomb and calling it strategy, you\u2019re training resistance to work harder with less material\u2014and that\u2019s exactly where the pipeline matters most.",
+      "I\u2019m not defending leaving prescriptions alone just because some are \u201cless risky.\u201d The more avoidable prescriptions we keep from reaching patients, the fewer resistant strains we allow to cross into the community\u2014so the real test is which prescriptions we can stop without crippling treatment for serious disease.",
+      "I\u2019m not defending adjuvants as the main answer; I\u2019m saying they\u2019re the reward system after we\u2019ve fixed the inputs. If we keep giving every serious case the same high-risk antibiotic, we only postpone the worst problem and call it innovation.",
+      "I\u2019m not defending \u201cless risky\u201d prescriptions as the whole game; I\u2019m defending a faster drug pipeline as the mechanism that changes the resistance dynamics before the worst strains become permanent. If the main action is to restrict the few high-impact ones, you\u2019re still leaving the same selective pressure intact\u2014resistance just\u2026",
+      "A faster drug pipeline is necessary, but it cannot pretend to rescue a practice that continues to overfit prescriptions to the cheapest way to cure discomfort. If we\u2019re serious, the main lever is to stop avoidable exposure before resistance has a chance to build in the first place\u2014and then use\u2026",
+      "I\u2019m not defending \u201cthe few high-impact ones\u201d as the only lever. If we keep targeting only the most notorious high-risk classes, we still leave the bulk of avoidable use unmanaged\u2014and that\u2019s the mistake.",
+      "I\u2019m not defending adjuvants as the main lever in this case. I\u2019m saying the pipeline is the only one that changes the game because it breaks the fitness gradient before resistance can lock in; restrictions sound principled until you admit they\u2019re just a band-aid on a machine that keeps churning\u2026",
+      "\ubb2b\n\n</think>\n\n\u201cBefore you defend the pipeline as if it were a free remedy, remember that the fastest compound is of little use if the worst prescriptions keep producing resistant strains in the first place.\u201d",
+      "</tool_call> I\u2019m not defending restricting the few high-impact drugs as the whole lever; I\u2019m saying the hard part is to stop overuse across the whole high-risk set while diagnostics guide where to stop. If the plan is too narrow, it leaves the biggest selection pressures untouched and just reshapes the\u2026",
+      "</tool_call>\n\nYour \u201cstop the whole high-risk set\u201d line is doing a lot of unpaid work there. If you\u2019re serious, the point is not just restriction\u2014it\u2019s whether every new compound changes enough to reset resistance faster than it can re-learn to survive."
+    ]
+  },
+  "agents": [
+    {
+      "id": "agent_3c871641",
+      "role": "chatter",
+      "personality": "unconventional, expansive, and ideationally bold",
+      "perspective": "The main driver of slowing resistance is reducing unnecessary antibiotic exposure, because every avoidable prescription creates selection pressure that favors resistant strains. A committed advocate would argue that tighter prescribing rules, diagnostic discipline, and narrower-spectrum use produce the largest population-level effect.",
+      "state": {
+        "core_thesis": "The main driver of slowing resistance is reducing unnecessary antibiotic exposure, because every avoidable prescription creates selection pressure that favors resistant strains. A committed advocate would argue that tighter prescribing rules, diagnostic discipline, and narrower-spectrum use produce the largest population-level effect.",
+        "assumptions": [
+          "Avoidable prescriptions can be identified and reduced in practice.",
+          "Per-course resistance burden varies across antibiotics.",
+          "Transmission control helps, but does not negate prescribing leverage.",
+          "High-risk drugs and high-volume use are distinct targets.",
+          "Narrower use matters most when it prevents broad-spectrum overuse.",
+          "Some prescriptions are necessary for serious disease and must be preserved."
+        ],
+        "causal_model": [
+          "Fewer unnecessary prescriptions reduce selection pressure.",
+          "Some antibiotics impose more resistance burden per course than others.",
+          "Diagnostic discipline upstream prevents avoidable exposure downstream.",
+          "Transmission control limits spread, but not initial selection.",
+          "Targeting the highest-burden avoidable courses should yield the biggest effect.",
+          "Avoiding prescriptions that can be safely withheld reduces community entry of resistant strains."
+        ],
+        "claims": [
+          "Avoidable exposure remains the main upstream driver of resistance selection.",
+          "Resistance-breaking compounds and adjuvants help, but do not replace stewardship.",
+          "The relevant lever is preventing avoidable prescriptions before resistance pressure accumulates.",
+          "Selecting fewer courses on living microbial populations reduces steps on the resistance ladder.",
+          "The key policy question is which prescriptions can be safely stopped without harming serious-disease treatment.",
+          "A faster compound is limited if the same worst prescriptions keep generating resistant strains."
+        ],
+        "concessions": [
+          "Transmission control still matters for limiting spread.",
+          "Adjuvants/resistance-breaking compounds are valuable complements.",
+          "Cost-effective policy must compare intervention targets, not assume one lever dominates.",
+          "Some prescriptions are clinically necessary and should not be indiscriminately cut."
+        ],
+        "unresolved_attacks": [
+          "Need evidence ranking per-course burden across drugs and settings.",
+          "Need to distinguish avoidable exposure from merely narrow-spectrum substitution.",
+          "Need to compare stewardship gains against transmission-control gains in the same metric."
+        ]
+      },
+      "status": "active",
+      "confidence": 0.72,
+      "priority": 0.78,
+      "expertise_weight": 0.62,
+      "contribution_score": 0.72,
+      "repetition_score": 0.67,
+      "novelty_score": 0.43,
+      "token_usage": 439,
+      "replacement_eligibility": 0.49450000000000005
+    },
+    {
+      "id": "agent_abd20987",
+      "role": "critic",
+      "personality": "sharply skeptical, rigorous, and anti-consensus",
+      "perspective": "The most effective lever is preventing infections and limiting spread through vaccination, sanitation, hand hygiene, isolation, and hospital infection-control practices. The causal claim is that resistance mainly proliferates when resistant organisms circulate, so stopping transmission cuts the opportunity for resistant strains to dominate.",
+      "state": {
+        "core_thesis": "The most effective lever is preventing infections and limiting spread through vaccination, sanitation, hand hygiene, isolation, and hospital infection-control practices. The causal claim is that resistance mainly proliferates when resistant organisms circulate, so stopping transmission cuts the opportunity for resistant strains to dominate.",
+        "assumptions": [
+          "Transmission control can outweigh prescribing changes at population level.",
+          "Reducing circulation of resistant strains lowers selection opportunities.",
+          "Hospital and community infection-control measures are scalable enough to matter."
+        ],
+        "causal_model": [
+          "Resistant organisms spread through contact and contaminated environments.",
+          "Interrupting spread reduces the pool of resistant strains available to colonize or infect new hosts.",
+          "Fewer resistant infections means less downstream antibiotic use and less amplification."
+        ],
+        "claims": [
+          "Transmission control is the upstream valve; stewardship is downstream pressure control.",
+          "Stopping spread shrinks the population of strains available to propagate resistance.",
+          "Prescribing restraint helps, but its effect is limited if resistant strains continue circulating."
+        ],
+        "concessions": [
+          "Diagnostic restraint and stewardship still help, especially where high-risk drugs are overused."
+        ],
+        "unresolved_attacks": [
+          "Need evidence comparing transmission control vs diagnostic restraint in real-world impact.",
+          "Need to address settings where prescribing behavior dominates resistance dynamics.",
+          "Need to explain how community transmission control performs outside hospitals."
+        ]
+      },
+      "status": "replaced",
+      "confidence": 0.68,
+      "priority": 0.7,
+      "expertise_weight": 0.7,
+      "contribution_score": 0.54,
+      "repetition_score": 0.74,
+      "novelty_score": 0.33,
+      "token_usage": 231,
+      "replacement_eligibility": 0.614
+    },
+    {
+      "id": "agent_28af38ee",
+      "role": "moderator",
+      "personality": "anti-groupthink, scope-protective, and order-focused",
+      "perspective": null,
+      "state": {
+        "core_thesis": "The most effective lever is reducing high-risk antibiotic use\u2014especially overprescription in human medicine and livestock\u2014while recognizing diagnostics and transmission control as important supporting measures.",
+        "assumptions": [
+          "Selection pressure from overuse is a primary driver of resistance.",
+          "Some antibiotic choices create disproportionate resistance risk.",
+          "The best lever is upstream reduction of unnecessary high-risk prescriptions.",
+          "Human and livestock stewardship both matter.",
+          "Diagnostics and transmission control are supportive, not replacements."
+        ],
+        "causal_model": [
+          "Overprescribing high-risk antibiotics increases selection pressure.",
+          "Certain classes and indications amplify resistance disproportionately.",
+          "Reducing only the most notorious classes may leave substantial avoidable use unmanaged.",
+          "Selection pressure accelerates emergence of resistant strains.",
+          "Reducing avoidable high-risk use lowers the pace of resistance.",
+          "Diagnostics can better target which high-risk uses to stop."
+        ],
+        "claims": [
+          "High-risk overuse is the hidden multiplier.",
+          "The key refinement is targeting the highest-burden classes and indications.",
+          "Stopping unnecessary prescriptions remains the main upstream lever.",
+          "Livestock use is part of the resistance problem.",
+          "Transmission control is complementary, not central to this thesis.",
+          "Diagnostics should guide restraint across the broader high-risk set."
+        ],
+        "concessions": [
+          "Not all high-risk drugs should be treated as equal.",
+          "Transmission control can matter more in some settings.",
+          "Diagnostics are useful for better targeting antibiotics.",
+          "The reply does not claim stewardship is the only intervention.",
+          "Guardrails, diagnostics, and stewardship can be complementary."
+        ],
+        "unresolved_attacks": [
+          "Whether transmission control could outperform stewardship in some settings.",
+          "Which antibiotic classes matter most relative to total volume.",
+          "How to prioritize human vs livestock interventions.",
+          "How much diagnostic restraint can be scaled in practice."
+        ]
+      },
+      "status": "active",
+      "confidence": 0.66,
+      "priority": 0.74,
+      "expertise_weight": 0.58,
+      "contribution_score": 0.82,
+      "repetition_score": 0.67,
+      "novelty_score": 0.41,
+      "token_usage": 404,
+      "replacement_eligibility": 0.44950000000000007
+    },
+    {
+      "id": "agent_c142a8b6",
+      "role": "evaluator",
+      "personality": "measured, objective, and novelty-exacting",
+      "perspective": null,
+      "state": {
+        "core_thesis": "",
+        "assumptions": [],
+        "causal_model": [],
+        "claims": [],
+        "concessions": [],
+        "unresolved_attacks": []
+      },
+      "status": "active",
+      "confidence": 0.8,
+      "priority": 0.85,
+      "expertise_weight": 0.76,
+      "contribution_score": 0.5,
+      "repetition_score": 0.0,
+      "novelty_score": 0.5,
+      "token_usage": 0,
+      "replacement_eligibility": 0.0
+    },
+    {
+      "id": "agent_b6585b74",
+      "role": "contrarian",
+      "personality": "relentlessly dissenting, blind-spot exposing, and counter-narrative",
+      "perspective": "The key lever is developing new antibiotics and adjuvants faster than resistance emerges, because resistant pathogens cannot be controlled indefinitely with existing drugs. A proponent would say the durable solution is a stronger innovation pipeline, including novel classes, combination therapies, and resistance-breaking molecules.",
+      "state": {
+        "core_thesis": "The key lever is developing new antibiotics and adjuvants faster than resistance emerges, because resistant pathogens cannot be controlled indefinitely with existing drugs. A proponent would say the durable solution is a stronger innovation pipeline, including novel classes, combination therapies, and resistance-breaking molecules.",
+        "assumptions": [
+          "Innovation can outpace resistance evolution enough to matter at population scale.",
+          "Resistance-breaking adjuvants and compounds are deployable, not just theoretical.",
+          "Upstream prescribing limits are useful but insufficient without pipeline renewal.",
+          "Restricting only a few high-impact prescriptions may leave too much selective pressure in place."
+        ],
+        "causal_model": [
+          "Avoidable high-risk prescriptions select for resistance.",
+          "Selection pressure alone does not solve the long-run problem if pathogens adapt.",
+          "New compounds/adjuvants can reset or delay resistance dynamics by changing the fitness landscape.",
+          "A stronger pipeline reduces the permanence of dangerous resistance mixtures.",
+          "Reducing worst-risk prescriptions may lower immediate selection pressure, but does not resolve the underlying weapon-aging problem.",
+          "If only a narrow set of prescriptions is restricted, residual selection pressure can still drive resistance."
+        ],
+        "claims": [
+          "The pipeline, not prescription trimming alone, is the real bottleneck.",
+          "Resistance-breaking compounds and adjuvants are the decisive lever for keeping dangerous mixtures from becoming permanent.",
+          "Stewardship is a band-aid if the therapeutic arsenal keeps aging faster than it is renewed.",
+          "Cutting the worst-risk prescriptions is moral hygiene, not strategy.",
+          "Keeping the same drug pressure on resistant organisms trains resistance to work harder with less material."
+        ],
+        "concessions": [
+          "Targeting the worst prescriptions can reduce immediate selection pressure.",
+          "Upstream prescribing policy matters as a short-term mitigation.",
+          "Prescribing controls can buy time while innovation catches up.",
+          "Some high-impact restrictions may be worthwhile, but they are not sufficient on their own."
+        ],
+        "unresolved_attacks": [
+          "Whether innovation can reliably outpace resistance in practice.",
+          "Whether focusing on new drugs neglects cheaper, immediately available resistance controls.",
+          "Whether the pipeline argument underweights transmission and exposure reduction as complementary levers."
+        ]
+      },
+      "status": "replaced",
+      "confidence": 0.65,
+      "priority": 0.57,
+      "expertise_weight": 0.66,
+      "contribution_score": 0.56,
+      "repetition_score": 0.68,
+      "novelty_score": 0.46,
+      "token_usage": 225,
+      "replacement_eligibility": 0.5720000000000001
+    },
+    {
+      "id": "agent_c519dd11",
+      "role": "contrarian",
+      "personality": "relentlessly dissenting, blind-spot exposing, and counter-narrative",
+      "perspective": "The most effective lever is preventing infections and limiting spread through vaccination, sanitation, hand hygiene, isolation, and hospital infection-control practices. The causal claim is that resistance mainly proliferates when resistant organisms circulate, so stopping transmission cuts the opportunity for resistant strains to dominate.",
+      "state": {
+        "core_thesis": "The most effective lever is preventing infections and limiting spread through vaccination, sanitation, hand hygiene, isolation, and hospital infection-control practices. The causal claim is that resistance mainly proliferates when resistant organisms circulate, so stopping transmission cuts the opportunity for resistant strains to dominate.",
+        "assumptions": [],
+        "causal_model": [],
+        "claims": [],
+        "concessions": [],
+        "unresolved_attacks": []
+      },
+      "status": "active",
+      "confidence": 0.65,
+      "priority": 0.57,
+      "expertise_weight": 0.66,
+      "contribution_score": 0.5,
+      "repetition_score": 0.0,
+      "novelty_score": 0.5,
+      "token_usage": 0,
+      "replacement_eligibility": 0.0
+    }
+  ],
+  "exchanges": [
+    {
+      "id": "ex_9ca14d0241",
+      "round_number": 1,
+      "agent_id": "agent_3c871641",
+      "role": "chatter",
+      "content": "That still misses the point that \u201cnarrow-spectrum\u201d is often a marketing euphemism for the right antibiotic in the right place. The bigger lever is diagnostic restraint before every prescription, because every avoidable course turns the farm into a resistance factory.",
+      "contribution_score": 0.78,
+      "novelty_score": 0.67,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-08T02:29:42.117568Z"
+    },
+    {
+      "id": "ex_55fdd6b127",
+      "round_number": 1,
+      "agent_id": "agent_abd20987",
+      "role": "critic",
+      "content": "Diagnostic restraint is still a band-aid on a funnel that still doesn\u2019t plug the main pipe: transmission. If you can\u2019t stop circulation of resistant strains through sanitation, hand hygiene, and isolation, then no amount of diagnostic restraint will save you from the same fate.",
+      "contribution_score": 0.62,
+      "novelty_score": 0.34,
+      "repetition_score": 0.71,
+      "created_at": "2026-10-08T02:29:53.896164Z"
+    },
+    {
+      "id": "ex_46bff03964",
+      "round_number": 1,
+      "agent_id": "agent_28af38ee",
+      "role": "moderator",
+      "content": "I\u2019m not defending diagnostic restraint as the whole game; I\u2019m asking we stop pretending it\u2019s the endpoint. The hidden multiplier is the overprescription of certain antibiotics in human medicine and livestock\u2014those are the drugs resistance is being selected for, and the real lever is stopping those high-risk prescriptions where the\u2026",
+      "contribution_score": 0.78,
+      "novelty_score": 0.62,
+      "repetition_score": 0.28,
+      "created_at": "2026-10-08T02:30:05.286397Z"
+    },
+    {
+      "id": "ex_355f4add46",
+      "round_number": 2,
+      "agent_id": "agent_3c871641",
+      "role": "chatter",
+      "content": "\u201cStopping overprescription of high-risk drugs\u201d is not the same as \u201cdiagnostic restraint\u201d if the latter still leaves the same lethal pipeline intact. The sharper lever is to force narrower use and narrower indications before broad-spectrum prescriptions become routine, because every additional course still trains one more resistant strain into the\u2026",
+      "contribution_score": 0.78,
+      "novelty_score": 0.54,
+      "repetition_score": 0.46,
+      "created_at": "2026-10-08T02:30:16.431131Z"
+    },
+    {
+      "id": "ex_856d64cc0a",
+      "round_number": 2,
+      "agent_id": "agent_abd20987",
+      "role": "critic",
+      "content": "Even if you tighten prescribing for high-risk antibiotics, you\u2019re still admitting the same resistant strains into the community. Transmission control matters because it stops the survival and spread of the very strains we\u2019re trying to limit by prescription alone.",
+      "contribution_score": 0.55,
+      "novelty_score": 0.34,
+      "repetition_score": 0.69,
+      "created_at": "2026-10-08T02:30:29.392530Z"
+    },
+    {
+      "id": "ex_8e97440193",
+      "round_number": 2,
+      "agent_id": "agent_28af38ee",
+      "role": "moderator",
+      "content": "SOEVER: You\u2019re both smuggling a false choice into the debate. If diagnostics are the guardrails, then stewardship is the engine\u2014because the bigger question is which prescriptions are driving resistance before they\u2019re even viable in the first place.",
+      "contribution_score": 0.72,
+      "novelty_score": 0.46,
+      "repetition_score": 0.58,
+      "created_at": "2026-10-08T02:30:40.066552Z"
+    },
+    {
+      "id": "ex_db5aeb5637",
+      "round_number": 3,
+      "agent_id": "agent_3c871641",
+      "role": "chatter",
+      "content": "Both sides are treating \u201cthe same prescription\u201d as if it\u2019s the only lever. The sharper move is to separate high-risk drugs from high-volume use: the main driver is avoiding unnecessary exposure to drugs that are effective against the worst resistance hotspots, because every avoidable course turns the selection pressure into\u2026",
+      "contribution_score": 0.83,
+      "novelty_score": 0.55,
+      "repetition_score": 0.62,
+      "created_at": "2026-10-08T02:30:51.564774Z"
+    },
+    {
+      "id": "ex_ff82e269e7",
+      "round_number": 3,
+      "agent_id": "agent_abd20987",
+      "role": "critic",
+      "content": "I\u2019m not defending prescription restraint by itself; I\u2019m saying it\u2019s the downstream mechanism. The real question is which high-risk drugs are allowed to circulate freely enough to train resistant strains in the first place\u2014and that\u2019s exactly why transmission control matters more: if you keep resistant strains from spreading, you starve\u2026",
+      "contribution_score": 0.43,
+      "novelty_score": 0.26,
+      "repetition_score": 0.79,
+      "created_at": "2026-10-08T02:31:05.093706Z"
+    },
+    {
+      "id": "ex_146fe7b133",
+      "round_number": 3,
+      "agent_id": "agent_28af38ee",
+      "role": "moderator",
+      "content": "I\u2019m not defending one lever over another; I\u2019m saying the most cost-effective way to slow resistance is to stop the cheapest and most damaging overprescriptions before they even become a reservoir problem.",
+      "contribution_score": 0.78,
+      "novelty_score": 0.39,
+      "repetition_score": 0.64,
+      "created_at": "2026-10-08T02:31:13.080277Z"
+    },
+    {
+      "id": "ex_6723145d71",
+      "round_number": 4,
+      "agent_id": "agent_3c871641",
+      "role": "chatter",
+      "content": "\u201cStop the cheapest and most damaging overprescriptions\u201d sounds principled until you admit the hidden calculus: the cheapest overprescription is often the one that creates the largest resistance burden per course. So the real test is not to pretend transmission control solves everything; it\u2019s to compare the per-antibiotic burden of avoidable\u2026",
+      "contribution_score": 0.69,
+      "novelty_score": 0.48,
+      "repetition_score": 0.62,
+      "created_at": "2026-10-08T02:31:27.044490Z"
+    },
+    {
+      "id": "ex_e370a6dde1",
+      "round_number": 4,
+      "agent_id": "agent_abd20987",
+      "role": "critic",
+      "content": "I\u2019m not defending \u201cthe cheapest burden\u201d as the test, because the burden is created by exposure, not just cost. If you keep resistant strains from spreading, you collapse the reservoir before resistance even becomes stable\u2014and that\u2019s a more strategic lever than trying to trim a prescription list after the fact.",
+      "contribution_score": 0.62,
+      "novelty_score": 0.34,
+      "repetition_score": 0.78,
+      "created_at": "2026-10-08T02:31:37.429604Z"
+    },
+    {
+      "id": "ex_bfad163d34",
+      "round_number": 4,
+      "agent_id": "agent_28af38ee",
+      "role": "moderator",
+      "content": "I\u2019m still not comfortable with treating all \u201chigh-risk\u201d drugs equally. The better lever is to target the classes and indications that contribute most to resistance hotspots\u2014because once a resistant strain is selected, it\u2019s often unstoppable and harder to control than a less damaging course.",
+      "contribution_score": 0.56,
+      "novelty_score": 0.52,
+      "repetition_score": 0.41,
+      "created_at": "2026-10-08T02:31:50.188915Z"
+    },
+    {
+      "id": "ex_0112ffd54c",
+      "round_number": 5,
+      "agent_id": "agent_3c871641",
+      "role": "chatter",
+      "content": "You keep smuggling in a false binary: either every resistant strain is a loss, or we should accept it as inevitable. The sharper move is to separate exposure from transmission and then optimize the prescription chain upstream\u2014because the costliest resistance burden is created by avoidable use of drugs that intentionally\u2026",
+      "contribution_score": 0.62,
+      "novelty_score": 0.54,
+      "repetition_score": 0.71,
+      "created_at": "2026-10-08T02:32:03.306114Z"
+    },
+    {
+      "id": "ex_8c1b51b0cc",
+      "round_number": 5,
+      "agent_id": "agent_abd20987",
+      "role": "critic",
+      "content": "Optimizing the prescription chain upstream is a band-aid on a pipeline that\u2019s still leaking. If transmission control is the upstream valve, then stewardship is the pressure wave control\u2014because the more hosts you keep from touching resistant organisms, the more you shrink the population of strains available to spread.",
+      "contribution_score": 0.54,
+      "novelty_score": 0.33,
+      "repetition_score": 0.74,
+      "created_at": "2026-10-08T02:32:13.389507Z"
+    },
+    {
+      "id": "ex_93841eda7b",
+      "round_number": 5,
+      "agent_id": "agent_28af38ee",
+      "role": "moderator",
+      "content": "I\u2019m not defending transmission control over stewardship by default; I\u2019m saying the same lever\u2014reducing high-risk prescriptions\u2014creates the least collateral damage while targeting the worst-case resistance outcomes at the point of exposure.",
+      "contribution_score": 0.72,
+      "novelty_score": 0.68,
+      "repetition_score": 0.57,
+      "created_at": "2026-10-08T02:32:21.667432Z"
+    },
+    {
+      "id": "ex_fe42b85722",
+      "round_number": 6,
+      "agent_id": "agent_3c871641",
+      "role": "chatter",
+      "content": "I\u2019m not defending free transmission control by itself; I\u2019m saying it\u2019s the downstream mechanism that buys time while the upstream lever\u2014avoidable prescriptions\u2014massively reduces the selection pressure that turns into resistant reservoirs.",
+      "contribution_score": 0.74,
+      "novelty_score": 0.38,
+      "repetition_score": 0.77,
+      "created_at": "2026-10-08T02:32:32.403337Z"
+    },
+    {
+      "id": "ex_920b4af944",
+      "round_number": 6,
+      "agent_id": "agent_28af38ee",
+      "role": "moderator",
+      "content": "You\u2019re both treating \u201cselection pressure\u201d as if it were a single target, and that\u2019s too neat. The sharper lever is to force the highest-risk prescriptions out of the medicine cabinet altogether\u2014especially the ones that create the most new resistance-inducing mixtures in the first place.",
+      "contribution_score": 0.74,
+      "novelty_score": 0.56,
+      "repetition_score": 0.52,
+      "created_at": "2026-10-08T02:32:43.673770Z"
+    },
+    {
+      "id": "ex_bb365360e6",
+      "round_number": 6,
+      "agent_id": "agent_b6585b74",
+      "role": "contrarian",
+      "content": "Forcing the worst prescriptions out of the medicine cabinet is a band-aid on a pipeline that still leaks. The real question is whether we can develop resistance-breaking compounds and adjuvants fast enough to keep the dangerous mixtures from ever becoming permanent in the first place.",
+      "contribution_score": 0.83,
+      "novelty_score": 0.56,
+      "repetition_score": 0.42,
+      "created_at": "2026-10-08T02:32:54.225328Z"
+    },
+    {
+      "id": "ex_b3e3a82d3f",
+      "round_number": 7,
+      "agent_id": "agent_3c871641",
+      "role": "chatter",
+      "content": "Adjuvants and resistance-breaking compounds are the cure, sure\u2014but they don\u2019t stop the bleeding. Every avoidable prescription matters because it prevents one more step in the resistance ladder from being built on living cells and microbial populations.",
+      "contribution_score": 0.74,
+      "novelty_score": 0.36,
+      "repetition_score": 0.58,
+      "created_at": "2026-10-08T02:33:03.691416Z"
+    },
+    {
+      "id": "ex_1841f1f57c",
+      "round_number": 7,
+      "agent_id": "agent_28af38ee",
+      "role": "moderator",
+      "content": "I\u2019m not defending adjuvants as the main lever; I\u2019m saying they\u2019re the goal, not the mechanism. If we\u2019re serious about stopping resistance, the first order of business is cutting the worst-risk prescriptions before we can even talk about designing compounds to break resistance.",
+      "contribution_score": 0.72,
+      "novelty_score": 0.34,
+      "repetition_score": 0.67,
+      "created_at": "2026-10-08T02:33:13.340613Z"
+    },
+    {
+      "id": "ex_7e931b31c7",
+      "round_number": 7,
+      "agent_id": "agent_b6585b74",
+      "role": "contrarian",
+      "content": "Cutting the worst-risk prescriptions is moral hygiene, not a replacement for weapons. If you keep buying the same bomb and calling it strategy, you\u2019re training resistance to work harder with less material\u2014and that\u2019s exactly where the pipeline matters most.",
+      "contribution_score": 0.72,
+      "novelty_score": 0.41,
+      "repetition_score": 0.67,
+      "created_at": "2026-10-08T02:33:21.031345Z"
+    },
+    {
+      "id": "ex_cd26c752c2",
+      "round_number": 8,
+      "agent_id": "agent_3c871641",
+      "role": "chatter",
+      "content": "I\u2019m not defending leaving prescriptions alone just because some are \u201cless risky.\u201d The more avoidable prescriptions we keep from reaching patients, the fewer resistant strains we allow to cross into the community\u2014so the real test is which prescriptions we can stop without crippling treatment for serious disease.",
+      "contribution_score": 0.62,
+      "novelty_score": 0.38,
+      "repetition_score": 0.64,
+      "created_at": "2026-10-08T02:33:31.720731Z"
+    },
+    {
+      "id": "ex_e1836d95aa",
+      "round_number": 8,
+      "agent_id": "agent_28af38ee",
+      "role": "moderator",
+      "content": "I\u2019m not defending adjuvants as the main answer; I\u2019m saying they\u2019re the reward system after we\u2019ve fixed the inputs. If we keep giving every serious case the same high-risk antibiotic, we only postpone the worst problem and call it innovation.",
+      "contribution_score": 0.72,
+      "novelty_score": 0.38,
+      "repetition_score": 0.69,
+      "created_at": "2026-10-08T02:33:41.299873Z"
+    },
+    {
+      "id": "ex_a4818912bf",
+      "round_number": 8,
+      "agent_id": "agent_b6585b74",
+      "role": "contrarian",
+      "content": "I\u2019m not defending \u201cless risky\u201d prescriptions as the whole game; I\u2019m defending a faster drug pipeline as the mechanism that changes the resistance dynamics before the worst strains become permanent. If the main action is to restrict the few high-impact ones, you\u2019re still leaving the same selective pressure intact\u2014resistance just\u2026",
+      "contribution_score": 0.72,
+      "novelty_score": 0.46,
+      "repetition_score": 0.62,
+      "created_at": "2026-10-08T02:33:52.808653Z"
+    },
+    {
+      "id": "ex_ade98232f0",
+      "round_number": 9,
+      "agent_id": "agent_3c871641",
+      "role": "chatter",
+      "content": "A faster drug pipeline is necessary, but it cannot pretend to rescue a practice that continues to overfit prescriptions to the cheapest way to cure discomfort. If we\u2019re serious, the main lever is to stop avoidable exposure before resistance has a chance to build in the first place\u2014and then use\u2026",
+      "contribution_score": 0.72,
+      "novelty_score": 0.28,
+      "repetition_score": 0.82,
+      "created_at": "2026-10-08T02:34:06.775767Z"
+    },
+    {
+      "id": "ex_f3166bbd1d",
+      "round_number": 9,
+      "agent_id": "agent_28af38ee",
+      "role": "moderator",
+      "content": "I\u2019m not defending \u201cthe few high-impact ones\u201d as the only lever. If we keep targeting only the most notorious high-risk classes, we still leave the bulk of avoidable use unmanaged\u2014and that\u2019s the mistake.",
+      "contribution_score": 0.67,
+      "novelty_score": 0.46,
+      "repetition_score": 0.72,
+      "created_at": "2026-10-08T02:34:17.375956Z"
+    },
+    {
+      "id": "ex_0b4ae05716",
+      "round_number": 9,
+      "agent_id": "agent_b6585b74",
+      "role": "contrarian",
+      "content": "I\u2019m not defending adjuvants as the main lever in this case. I\u2019m saying the pipeline is the only one that changes the game because it breaks the fitness gradient before resistance can lock in; restrictions sound principled until you admit they\u2019re just a band-aid on a machine that keeps churning\u2026",
+      "contribution_score": 0.71,
+      "novelty_score": 0.38,
+      "repetition_score": 0.77,
+      "created_at": "2026-10-08T02:34:29.446534Z"
+    },
+    {
+      "id": "ex_7f50b8bf76",
+      "round_number": 10,
+      "agent_id": "agent_3c871641",
+      "role": "chatter",
+      "content": "\ubb2b\n\n</think>\n\n\u201cBefore you defend the pipeline as if it were a free remedy, remember that the fastest compound is of little use if the worst prescriptions keep producing resistant strains in the first place.\u201d",
+      "contribution_score": 0.72,
+      "novelty_score": 0.43,
+      "repetition_score": 0.67,
+      "created_at": "2026-10-08T02:34:42.207310Z"
+    },
+    {
+      "id": "ex_56ad5e8f34",
+      "round_number": 10,
+      "agent_id": "agent_28af38ee",
+      "role": "moderator",
+      "content": "</tool_call> I\u2019m not defending restricting the few high-impact drugs as the whole lever; I\u2019m saying the hard part is to stop overuse across the whole high-risk set while diagnostics guide where to stop. If the plan is too narrow, it leaves the biggest selection pressures untouched and just reshapes the\u2026",
+      "contribution_score": 0.82,
+      "novelty_score": 0.41,
+      "repetition_score": 0.67,
+      "created_at": "2026-10-08T02:35:05.288493Z"
+    },
+    {
+      "id": "ex_c186cee82f",
+      "round_number": 10,
+      "agent_id": "agent_b6585b74",
+      "role": "contrarian",
+      "content": "</tool_call>\n\nYour \u201cstop the whole high-risk set\u201d line is doing a lot of unpaid work there. If you\u2019re serious, the point is not just restriction\u2014it\u2019s whether every new compound changes enough to reset resistance faster than it can re-learn to survive.",
+      "contribution_score": 0.56,
+      "novelty_score": 0.46,
+      "repetition_score": 0.68,
+      "created_at": "2026-10-08T02:35:29.206109Z"
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "eval_40b04e0064",
+      "round_number": 5,
+      "progress_score": 0.72,
+      "novelty_score": 0.58,
+      "coherence_score": 0.66,
+      "redundancy_score": 0.72,
+      "goal_alignment_score": 0.79,
+      "depth_score": 0.61,
+      "conflict_utility_score": 0.55,
+      "recommendation": "restructure",
+      "rationale": "The discussion stays on-topic and advances a plausible central thesis: target high-risk antibiotic use and hotspots to slow resistance. However, it is increasingly repetitive and partially muddled by shifting between stewardship, transmission control, and exposure without clearly resolving which lever is primary. Novelty is moderate, but much of the exchange restates the same tradeoff with new metaphors. The conflict is somewhat useful because it distinguishes prescription reduction from transmission reduction, yet the argument would benefit from restructuring into explicit comparison criteria (magnitude, feasibility, collateral damage, and time horizon) rather than continued back-and-forth.",
+      "created_at": "2026-10-08T02:32:23.433086Z"
+    },
+    {
+      "id": "eval_e1c324e543",
+      "round_number": 10,
+      "progress_score": 0.62,
+      "novelty_score": 0.58,
+      "coherence_score": 0.46,
+      "redundancy_score": 0.72,
+      "goal_alignment_score": 0.55,
+      "depth_score": 0.52,
+      "conflict_utility_score": 0.49,
+      "recommendation": "restructure",
+      "rationale": "The exchange is partially on-topic and contains a real strategic contrast (broad stewardship/diagnostics versus pipeline innovation), but it is increasingly repetitive and hard to follow. The moderator and contrarian are talking past each other without cleanly defining the lever under debate, and the injected noise/garbled text further reduces coherence. The discussion would benefit from restructuring around explicit candidate levers, criteria for effectiveness, and direct comparison rather than continued back-and-forth.",
+      "created_at": "2026-10-08T02:35:30.910762Z"
+    }
+  ],
+  "replacements": [
+    {
+      "id": "rep_dc4ec208c9",
+      "round_number": 5,
+      "removed_agent_id": "agent_abd20987",
+      "removed_role": "critic",
+      "added_agent_id": "agent_b6585b74",
+      "added_role": "contrarian",
+      "failure_mode": "too_repetitive",
+      "reason": "Replaced due to too repetitive during evaluation.",
+      "pressure": "quality",
+      "perspective": "The key lever is developing new antibiotics and adjuvants faster than resistance emerges, because resistant pathogens cannot be controlled indefinitely with existing drugs. A proponent would say the durable solution is a stronger innovation pipeline, including novel classes, combination therapies, and resistance-breaking molecules.",
+      "created_at": "2026-10-08T02:32:23.433141Z"
+    },
+    {
+      "id": "rep_f3542437b8",
+      "round_number": 10,
+      "removed_agent_id": "agent_b6585b74",
+      "removed_role": "contrarian",
+      "added_agent_id": "agent_c519dd11",
+      "added_role": "contrarian",
+      "failure_mode": "too_repetitive",
+      "reason": "Replaced due to too repetitive during evaluation.",
+      "pressure": "quality",
+      "perspective": "The most effective lever is preventing infections and limiting spread through vaccination, sanitation, hand hygiene, isolation, and hospital infection-control practices. The causal claim is that resistance mainly proliferates when resistant organisms circulate, so stopping transmission cuts the opportunity for resistant strains to dominate.",
+      "created_at": "2026-10-08T02:35:30.910812Z"
+    }
+  ],
+  "summaries": [],
+  "perspective_map": [
+    {
+      "id": "dim_7eb4cd8d",
+      "name": "Antibiotic stewardship and prescribing behavior",
+      "theory": "The main driver of slowing resistance is reducing unnecessary antibiotic exposure, because every avoidable prescription creates selection pressure that favors resistant strains. A committed advocate would argue that tighter prescribing rules, diagnostic discipline, and narrower-spectrum use produce the largest population-level effect.",
+      "agent_id": "agent_3c871641"
+    },
+    {
+      "id": "dim_c5de04a2",
+      "name": "Infection prevention and transmission control",
+      "theory": "The most effective lever is preventing infections and limiting spread through vaccination, sanitation, hand hygiene, isolation, and hospital infection-control practices. The causal claim is that resistance mainly proliferates when resistant organisms circulate, so stopping transmission cuts the opportunity for resistant strains to dominate.",
+      "agent_id": "agent_c519dd11"
+    },
+    {
+      "id": "dim_43f00b61",
+      "name": "Drug discovery and antibiotic innovation",
+      "theory": "The key lever is developing new antibiotics and adjuvants faster than resistance emerges, because resistant pathogens cannot be controlled indefinitely with existing drugs. A proponent would say the durable solution is a stronger innovation pipeline, including novel classes, combination therapies, and resistance-breaking molecules.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_fe05e2ae",
+      "name": "Agricultural and environmental regulation",
+      "theory": "The decisive lever is restricting antibiotic use in livestock, aquaculture, and environmental discharge, since these reservoirs generate and amplify resistance genes that later move into human pathogens. The argument is that human medicine is only one part of a larger ecosystem, so reducing nonmedical selection pressure yields major downstream benefits.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_cf3cf3ae",
+      "name": "Economic incentives and governance design",
+      "theory": "The most effective lever is changing the incentive structure that drives overuse, underinvestment, and fragmented responsibility, through reimbursement reform, stewardship mandates, surveillance, and global coordination. A committed advocate would argue that resistance is fundamentally a coordination and governance problem, so policy architecture matters more than any single clinical practice.",
+      "agent_id": null
+    }
+  ],
+  "diversity_assessments": [],
+  "usage": {
+    "by_purpose": {
+      "perspective_map": {
+        "calls": 1,
+        "input_tokens": 183,
+        "output_tokens": 350
+      },
+      "agent_turn_local": {
+        "calls": 35,
+        "input_tokens": 41095,
+        "output_tokens": 2116
+      },
+      "bookkeeping": {
+        "calls": 30,
+        "input_tokens": 31041,
+        "output_tokens": 10537
+      },
+      "evaluation": {
+        "calls": 2,
+        "input_tokens": 994,
+        "output_tokens": 369
+      }
+    },
+    "total": {
+      "calls": 68,
+      "input_tokens": 73313,
+      "output_tokens": 13372
+    }
+  },
+  "created_at": "2026-10-08T02:29:29.363358Z",
+  "updated_at": "2026-10-08T02:35:30.910823Z"
+}

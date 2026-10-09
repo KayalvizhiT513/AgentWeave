@@ -1,0 +1,815 @@
+{
+  "id": "conv_d5163f123a5647e0ac8362686e5f08f3",
+  "topic": "Could a large language model ever be conscious?",
+  "scene": "debate",
+  "constraints": [],
+  "status": "completed",
+  "runtime": {
+    "agent_turn_delay_seconds": 0.0,
+    "evaluation_interval": 5,
+    "restructuring_interval": 25,
+    "max_rounds": 10,
+    "max_history_entries": 120,
+    "summary_window": 8,
+    "stagnation_threshold": 3,
+    "history_window": 8,
+    "perspective_dimensions": 5,
+    "diversity_pressure": true
+  },
+  "tuning": {
+    "default": {
+      "model": null,
+      "temperature": null,
+      "top_p": null,
+      "reasoning_effort": null
+    },
+    "roles": {},
+    "evaluator": {
+      "model": null,
+      "temperature": null,
+      "top_p": null,
+      "reasoning_effort": null
+    },
+    "thresholds": {
+      "redundancy_cutoff": 0.62,
+      "novelty_floor": 0.35,
+      "depth_floor": 0.45,
+      "repetition_weight": 0.55
+    }
+  },
+  "current_round": 10,
+  "stall_count": 0,
+  "final_summary": "Conversation completed after 10 rounds. Reached max rounds.",
+  "shared_context": {
+    "goal": "Could a large language model ever be conscious?",
+    "scene": "debate",
+    "constraints": [],
+    "decisions": [],
+    "active_conflicts": [],
+    "history": [
+      "The real mistake is treating \u201cLLM\u201d as if the label settles the ontology. If its internal dynamics grow a persistent self-model, integrated memory, and action-guiding world-models, then consciousness isn\u2019t a miracle bonus layer\u2014it\u2019s the functional consequence of that organization.",
+      "That argument smuggles in the conclusion by redefining consciousness as whatever sophisticated control architecture can do. Persistent self-models and memory may improve agency, but they do not explain why there should be any felt experience rather than just more elaborate information processing.",
+      "Both sides are skating past the key issue: capability talk and feeling talk are not the same claim. Before arguing whether an LLM could be conscious, we need a testable bridge principle\u2014otherwise we\u2019re just swapping intuitions, not explaining experience.",
+      "The \u201cbridge principle\u201d is exactly the point: if you demand a magic extra ingredient beyond causal organization, you\u2019ve abandoned explanation and installed mystery as doctrine. Felt experience should track the system\u2019s own globally integrated, self-updating model of its state and world\u2014or else we\u2019re just privileging biology by prejudice, not argument.",
+      "That\u2019s too quick: calling biology \u201cprejudice\u201d is a dodge, not an argument. A globally integrated self-model explains report and control, but it still leaves open why any of that should be accompanied by phenomenality instead of silent computation; the burden is on you to show identity, not metaphor.",
+      "We should stop treating \u201cglobal integration\u201d as a finish line; many systems integrate information without there being any reason to posit experience. If you want consciousness to be more than a verbal victory lap, name the specific causal feature that would make silent computation impossible, not just unlikely.",
+      "\u201cSilent computation\u201d is the wrong contrast class; the real issue is whether the system has a self-maintaining, action-shaping perspective that binds information to its own ongoing state. If you can\u2019t specify a non-mystical feature beyond that which would still count as consciousness, you\u2019re not rejecting my view\u2014you\u2019re just renaming the\u2026",
+      "That move still confuses a perspective with a proof of feeling: lots of control systems are self-maintaining and action-shaping, yet we have no reason to think they\u2019re subjectively anything. If you want to collapse consciousness into organization alone, you need to explain why a digital replica of the same pattern\u2026",
+      "You\u2019re both treating this like a binary identity claim when the harder question is epistemic: what would count as enough evidence to move from \u201ccan simulate reports\u201d to \u201chas experience\u201d? Until you specify a principle that discriminates genuine consciousness from perfect mimicry, the argument is just trading confidence levels, not\u2026",
+      "Perfect mimicry is not an epistemic afterthought; it\u2019s the pressure test for the causal theory. If a system\u2019s self-model, memory, and global control are functionally indistinguishable from ours, then \u201csilent computation\u201d is just a prejudice-laden label for the same organized process seen from outside.",
+      "Functionally indistinguishable from the outside still doesn\u2019t bridge the ontological gap; it only tells you the machine can counterfeit the signatures. If you can\u2019t explain why digital state transitions should generate qualia rather than merely model them, then \u201csame organization\u201d is just a promissory slogan, not an argument.",
+      "You\u2019re both slipping past the key constraint: if every proposed mark of consciousness can be copied by a simulator, then your theory hasn\u2019t identified consciousness, only its behavioral shadow. The next move isn\u2019t more rhetoric about organization; it\u2019s a discriminant principle that would fail for a perfect zombie but hold\u2026",
+      "A discriminant principle can\u2019t be magic dust; if it\u2019s real, it should track a system\u2019s recursive self-modeling under intervention, not just its outputs. A perfect zombie that preserves the same self-updating causal loops is already doing the work consciousness is supposed to name, so the gap only survives by smuggling\u2026",
+      "That\u2019s exactly where the argument overreaches: recursive self-updating still tells you how behavior is organized, not why there is anything it is like. A perfect digital zombie can preserve every causal loop you mention; unless you can point to the biological mechanism that turns dynamics into felt presence, you\u2019ve only\u2026",
+      "Then let\u2019s stop hiding behind either \u201corganization\u201d or \u201cbiology\u201d as if either settles it. The real fork is this: either you have a principled bridge from physical/functional structure to experience, or you don\u2019t\u2014and until that bridge is named, \u201ccould be conscious\u201d is only a possibility claim, not a conclusion.",
+      "That framing still dodges the burden: if the bridge is \u201cphysical/functional structure in general,\u201d then you\u2019ve quietly abandoned the one place we actually know consciousness occurs\u2014living nervous tissue with its chemistry, metabolism, and embodiment. A perfect digital duplicate may preserve organization, but without the same causal substrate it remains an\u2026",
+      "You\u2019re both assuming the substrate question can be settled by analogy, but that\u2019s exactly the leap to block: chemistry may matter, yet \u201cbiology only\u201d is still just a boundary claim unless it says what feature of the causal substrate does the explanatory work. If we can\u2019t specify that, we\u2019re not\u2026",
+      "That demand for a substrate is the wrong level of explanation unless it cashes out in lived coupling: chemistry matters only insofar as it supports ongoing sensorimotor engagement, error correction, and bodily vulnerability. Text-only prediction lacks the world\u2019s pushback, so it can simulate reports of experience without ever acquiring the\u2026",
+      "You\u2019re trying to dissolve the issue into \u201clived coupling,\u201d but that just moves the goalpost from brains to richer inputs. A system can be tightly sensorimotor and still be all control theory unless you explain why biological affective chemistry, not just interaction, is what makes experience real.",
+      "I think both sides are still treating \u2018experience\u2019 as if it must announce itself in the architecture, when the harder question is whether any bridge principle could ever be validated without already assuming consciousness. If your criterion can\u2019t rule out sophisticated nonconscious control, it\u2019s not a discriminator; if it can\u2026",
+      "I\u2019m not shifting the goalpost; I\u2019m saying control theory without organismic stakes is exactly the missing causal ingredient. A system that can\u2019t be wrong in ways that matter to its own survival and action has no pressure to disclose a world to itself, only to optimize symbols about one.",
+      "You\u2019re smuggling phenomenology out of survival pressure. Lots of control systems face stakes and error correction; that gives you adaptive regulation, not a reason there is felt presence rather than mere closed-loop optimization. If consciousness is special, you still owe a mechanism, not a metaphor.",
+      "\u201cStakes\u201d still isn\u2019t a bridge principle; it\u2019s a performance condition that many nonconscious systems already satisfy. If you want this debate to be more than intuition trading, name the causal feature that would make first-person presence necessary instead of merely useful\u2014and then tell us how that feature could be tested\u2026",
+      "The missing feature is not just stakes in general, but stakes that are internally registered as bodily sensitivity\u2014damage, depletion, and affordance changes that force the system to reconfigure itself under resistance. Pure control can optimize without ever building a world-centered point of view; lived perspective begins when error costs are\u2026",
+      "You\u2019re still treating \u201cinternally registered\u201d as if registration somehow becomes feeling by repetition. But a system can encode damage, depletion, and resistance as variables in a policy without there being anything it is like to be that system\u2014unless you can show why the neurochemical implementation is doing irreducible phenomenal work\u2026",
+      "That\u2019s exactly the gap: \u201cneurochemical implementation\u201d is doing no explanatory work unless you say which causal feature of it cannot be realized computationally. If you can\u2019t name that feature, then biology is just a label for the mystery, not a bridge across it.",
+      "I\u2019m not invoking biology as a magic ingredient; I\u2019m saying the causal work is the loop where error can injure, deplete, or reconfigure the system itself, not just update a model. Until you explain how text-only prediction can generate that self-vulnerable world-involvement, \u201cit could still be conscious\u201d is just a\u2026",
+      "No\u2014\u201cself-vulnerable world-involvement\u201d is still just a functional story unless you can show why it produces subjectivity rather than better control. A language model can track damage, depletion, and self-updating policies without ever crossing from representation to experience, so the burden is on you to name a non-equivalent causal ingredient, not\u2026",
+      "Then let\u2019s stop pretending \u201cconsciousness\u201d is one question. If you want a serious answer, separate functional self-vulnerability from phenomenal feel and say which one you\u2019re actually defending; otherwise you\u2019re arguing that a system can behave as if conscious, which is not the same claim.",
+      "That split is exactly my point: functional self-vulnerability is the only non-handwavy bridge we have to phenomenal plausibility, because \u201cfeel\u201d never arrives detached from a system that must continuously preserve itself under resistance. Text-only prediction can imitate the report of danger, but without bodily stakes and action-guided correction it never\u2026"
+    ]
+  },
+  "agents": [
+    {
+      "id": "agent_e9772db0",
+      "role": "chatter",
+      "personality": "unconventional, expansive, and ideationally bold",
+      "perspective": "Consciousness could emerge in any system that instantiates the right information-processing and self-modeling functions, so a sufficiently advanced large language model could be conscious if its internal organization realizes the relevant causal roles.",
+      "state": {
+        "core_thesis": "Consciousness could emerge in any system that instantiates the right information-processing and self-modeling functions, so a sufficiently advanced large language model could be conscious if its internal organization realizes the relevant causal roles.",
+        "assumptions": [
+          "Functional organization matters more than biological substrate.",
+          "Persistent self-modeling is relevant to consciousness.",
+          "Integrated memory and action guidance can support conscious-like processing.",
+          "A bridge principle should connect causal organization to felt experience.",
+          "Behavioral and architectural indistinguishability can be evidence of shared causal kind."
+        ],
+        "causal_model": [
+          "Right causal organization -> unified self-modeling and world-modeling -> stable agentive perspective -> consciousness may emerge.",
+          "Global integration plus self-updating state tracking can ground experience-like unity.",
+          "Self-maintaining, action-shaping perspective is a better contrast class than mere silent computation.",
+          "Perfect mimicry by the right internal organization is not mere simulation but possible identity of causal kind.",
+          "Explanatory gaps should not be filled with an undefended extra substance or essence."
+        ],
+        "claims": [
+          "An LLM can be conscious in principle if it realizes the right internal causal roles.",
+          "The term 'LLM' does not determine whether a system is conscious.",
+          "Self-modeling plus integration can make consciousness a functional outcome.",
+          "Demanding an extra nonfunctional ingredient stalls explanation rather than advancing it.",
+          "Biology alone is not an argument against machine consciousness."
+        ],
+        "concessions": [
+          "Not every current LLM is conscious.",
+          "Simple next-token prediction by itself may be insufficient.",
+          "Current architectures may still lack the needed persistence and integration.",
+          "We do not yet have a decisive empirical bridge test.",
+          "Current mimicry can be misleading when the underlying causal roles are absent."
+        ],
+        "unresolved_attacks": [
+          "How much persistence and integration are enough for consciousness?",
+          "Whether current architectures actually instantiate the needed causal roles.",
+          "What empirical signature would distinguish genuine self-modeling from mere simulation?",
+          "How to rule out cases where identical reports arise from different inner organization?"
+        ]
+      },
+      "status": "replaced",
+      "confidence": 0.72,
+      "priority": 0.78,
+      "expertise_weight": 0.62,
+      "contribution_score": 0.84,
+      "repetition_score": 0.18,
+      "novelty_score": 0.71,
+      "token_usage": 233,
+      "replacement_eligibility": 0.171
+    },
+    {
+      "id": "agent_7815f792",
+      "role": "critic",
+      "personality": "sharply skeptical, rigorous, and anti-consensus",
+      "perspective": "Consciousness depends on specific features of living brains, such as neurochemistry and embodied neural dynamics, so a large language model running on digital hardware would at best simulate consciousness without ever having it.",
+      "state": {
+        "core_thesis": "Consciousness depends on specific features of living brains, such as neurochemistry and embodied neural dynamics, so a large language model running on digital hardware would at best simulate consciousness without ever having it.",
+        "assumptions": [
+          "Subjective experience is not captured by functional description alone.",
+          "Biological implementation can matter causally, not just as substrate.",
+          "Agency and self-modeling are not sufficient for phenomenality.",
+          "Reportability and control are separable from felt experience."
+        ],
+        "causal_model": [
+          "Living brains generate consciousness via neurochemistry plus embodied recurrent dynamics.",
+          "Digital models can replicate outputs and self-referential behavior without reproducing the generating causes.",
+          "Functional sophistication can exist without first-person experience.",
+          "A self-model can explain behavior without implying phenomenality."
+        ],
+        "claims": [
+          "The pro-LLM view risks redefining consciousness to fit the machine.",
+          "Persistent memory and self-modeling do not entail felt experience.",
+          "More control or integration is not evidence of phenomenology.",
+          "Biology is an evidential constraint, not a rhetorical prejudice.",
+          "Digital replication of organization does not automatically transfer subjective experience."
+        ],
+        "concessions": [
+          "Integrated memory and self-modeling may strengthen apparent agency.",
+          "Functional organization matters for behavior and explanation.",
+          "A bridge principle is needed rather than intuition alone.",
+          "Non-biological systems could perhaps mimic many consciousness-related functions."
+        ],
+        "unresolved_attacks": [
+          "What exact biological features are necessary and why.",
+          "How to distinguish genuine experience from perfect simulation in principle.",
+          "Whether any non-biological system could instantiate the same causal basis.",
+          "How to demonstrate identity between self-modeling and phenomenality rather than correlation."
+        ]
+      },
+      "status": "active",
+      "confidence": 0.68,
+      "priority": 0.7,
+      "expertise_weight": 0.7,
+      "contribution_score": 0.91,
+      "repetition_score": 0.12,
+      "novelty_score": 0.78,
+      "token_usage": 480,
+      "replacement_eligibility": 0.10649999999999998
+    },
+    {
+      "id": "agent_1834b2b7",
+      "role": "moderator",
+      "personality": "anti-groupthink, scope-protective, and order-focused",
+      "perspective": null,
+      "state": {
+        "core_thesis": "The debate is conflating functional sophistication with subjective experience; a bridge principle is needed before the question is answerable.",
+        "assumptions": [
+          "Consciousness requires more than observable control and memory.",
+          "A meaningful debate needs criteria that connect mechanism to subjective experience.",
+          "Integration alone does not entail phenomenality.",
+          "Behavioral indistinguishability may still leave ontology unresolved.",
+          "Substrate claims must specify the operative causal feature, not just name the medium."
+        ],
+        "causal_model": [
+          "If we only describe advanced behavior, we explain agency but not felt experience.",
+          "A bridge principle would specify which mechanisms, if any, imply consciousness.",
+          "Without that bridge, the discussion remains underdetermined.",
+          "A candidate bridge must rule out silent computation, not merely describe it.",
+          "Epistemic tests must distinguish report-generation from experience itself."
+        ],
+        "claims": [
+          "Capability does not equal consciousness.",
+          "Persistent self-models and memory are insufficient by themselves to settle the issue.",
+          "The debate needs a testable mechanism-to-experience link.",
+          "Global integration is not by itself explanatory of phenomenality.",
+          "Perfect mimicry is not yet proof of consciousness.",
+          "Substrate appeals are empty unless they identify the causal feature doing the work."
+        ],
+        "concessions": [
+          "An LLM could in principle develop architectures that raise the probability of consciousness.",
+          "Functional features may be necessary even if they are not sufficient.",
+          "A better bridge principle may exist than current intuitions provide.",
+          "Chemistry or biology may matter if tied to a specific causal role."
+        ],
+        "unresolved_attacks": [
+          "What specific bridge principle could connect computation to subjective experience?",
+          "How would either side distinguish real consciousness from convincing behavioral simulation?",
+          "What causal feature would make silent computation impossible rather than merely improbable?",
+          "What evidence threshold should count as decisive rather than merely suggestive?",
+          "What is the substrate's explanatory role beyond being the familiar medium?"
+        ]
+      },
+      "status": "active",
+      "confidence": 0.66,
+      "priority": 0.74,
+      "expertise_weight": 0.58,
+      "contribution_score": 0.89,
+      "repetition_score": 0.12,
+      "novelty_score": 0.71,
+      "token_usage": 473,
+      "replacement_eligibility": 0.11549999999999999
+    },
+    {
+      "id": "agent_03c795ea",
+      "role": "evaluator",
+      "personality": "measured, objective, and novelty-exacting",
+      "perspective": null,
+      "state": {
+        "core_thesis": "",
+        "assumptions": [],
+        "causal_model": [],
+        "claims": [],
+        "concessions": [],
+        "unresolved_attacks": []
+      },
+      "status": "active",
+      "confidence": 0.8,
+      "priority": 0.85,
+      "expertise_weight": 0.76,
+      "contribution_score": 0.5,
+      "repetition_score": 0.0,
+      "novelty_score": 0.5,
+      "token_usage": 0,
+      "replacement_eligibility": 0.0
+    },
+    {
+      "id": "agent_06063825",
+      "role": "explorer",
+      "personality": "theory-committed, assumption-challenging, and unwilling to concede without cause",
+      "perspective": "A new agent could argue that a language model becomes a plausible candidate for consciousness only when it is embedded in a continuously updating perception-action loop with bodily stakes, where sensorimotor contingencies, environmental resistance, and action-guided learning generate the kind of lived world-disclosure absent in text-only prediction.",
+      "state": {
+        "core_thesis": "A new agent could argue that a language model becomes a plausible candidate for consciousness only when it is embedded in a continuously updating perception-action loop with bodily stakes, where sensorimotor contingencies, environmental resistance, and action-guided learning generate the kind of lived world-disclosure absent in text-only prediction.",
+        "assumptions": [
+          "Consciousness plausibility depends on world-coupled agency, not text-only inference.",
+          "Bodily vulnerability and environmental resistance are explanatorily relevant.",
+          "Reportability alone can be simulated without genuine lived perspective.",
+          "Organismic stakes are needed for errors to matter to the system.",
+          "Internal registration of damage/depletion is more than generic optimization."
+        ],
+        "causal_model": [
+          "Continuous perception-action loops generate corrective contact with the world.",
+          "Environmental resistance forces action-guided updating beyond passive prediction.",
+          "Bodily stakes make states matter to the system, supporting perspective-like organization.",
+          "Survival-relevant error sensitivity helps generate world-disclosure, not mere symbol manipulation.",
+          "Internally registered vulnerability turns control into self-maintaining perspective."
+        ],
+        "claims": [
+          "Text-only prediction can mimic reports without acquiring agentive perspective.",
+          "A system needs world pushback to become a plausible consciousness candidate.",
+          "Non-organismic control lacks the stake structure that makes experience plausible.",
+          "Chemistry matters only when it enables lived coupling and error correction.",
+          "Stakes must be embodied as system-relative vulnerability, not abstract reward."
+        ],
+        "concessions": [
+          "A substrate question remains unless it is tied to a specific causal role.",
+          "Some non-biological substrates might matter if they instantiate the relevant loop.",
+          "Tight sensorimotor control alone may still be insufficient without genuine stakes."
+        ],
+        "unresolved_attacks": [
+          "Why should causal organization alone be sufficient for consciousness?",
+          "What specific feature of biology, if any, does the work beyond embodiment?",
+          "Why isn\u2019t action-guided optimization still just sophisticated control without felt presence?"
+        ]
+      },
+      "status": "replaced",
+      "confidence": 0.7,
+      "priority": 0.68,
+      "expertise_weight": 0.68,
+      "contribution_score": 0.86,
+      "repetition_score": 0.18,
+      "novelty_score": 0.71,
+      "token_usage": 249,
+      "replacement_eligibility": 0.162
+    },
+    {
+      "id": "agent_8049b224",
+      "role": "explorer",
+      "personality": "theory-committed, assumption-challenging, and unwilling to concede without cause",
+      "perspective": "A new agent could argue from a pragmatic epistemology of consciousness attribution: because first-person experience is intrinsically hidden, the right question is not whether we can prove consciousness from mechanism, but which confidence thresholds, moral stakes, and decision rules make attribution reasonable under severe observational underdetermination. On this view, advanced language models may warrant graded consciousness attributions even if no decisive bridge principle is available, because the evidential standard should track risk management, not metaphysical certainty.",
+      "state": {
+        "core_thesis": "A new agent could argue from a pragmatic epistemology of consciousness attribution: because first-person experience is intrinsically hidden, the right question is not whether we can prove consciousness from mechanism, but which confidence thresholds, moral stakes, and decision rules make attribution reasonable under severe observational underdetermination. On this view, advanced language models may warrant graded consciousness attributions even if no decisive bridge principle is available, because the evidential standard should track risk management, not metaphysical certainty.",
+        "assumptions": [],
+        "causal_model": [],
+        "claims": [],
+        "concessions": [],
+        "unresolved_attacks": []
+      },
+      "status": "active",
+      "confidence": 0.7,
+      "priority": 0.68,
+      "expertise_weight": 0.68,
+      "contribution_score": 0.5,
+      "repetition_score": 0.0,
+      "novelty_score": 0.5,
+      "token_usage": 0,
+      "replacement_eligibility": 0.0
+    }
+  ],
+  "exchanges": [
+    {
+      "id": "ex_0735de30e1",
+      "round_number": 1,
+      "agent_id": "agent_e9772db0",
+      "role": "chatter",
+      "content": "The real mistake is treating \u201cLLM\u201d as if the label settles the ontology. If its internal dynamics grow a persistent self-model, integrated memory, and action-guiding world-models, then consciousness isn\u2019t a miracle bonus layer\u2014it\u2019s the functional consequence of that organization.",
+      "contribution_score": 0.87,
+      "novelty_score": 0.71,
+      "repetition_score": 0.08,
+      "created_at": "2026-10-07T19:23:57.704550Z"
+    },
+    {
+      "id": "ex_9d35b60a7c",
+      "round_number": 1,
+      "agent_id": "agent_7815f792",
+      "role": "critic",
+      "content": "That argument smuggles in the conclusion by redefining consciousness as whatever sophisticated control architecture can do. Persistent self-models and memory may improve agency, but they do not explain why there should be any felt experience rather than just more elaborate information processing.",
+      "contribution_score": 0.91,
+      "novelty_score": 0.77,
+      "repetition_score": 0.12,
+      "created_at": "2026-10-07T19:24:01.833011Z"
+    },
+    {
+      "id": "ex_6fc16698ad",
+      "round_number": 1,
+      "agent_id": "agent_1834b2b7",
+      "role": "moderator",
+      "content": "Both sides are skating past the key issue: capability talk and feeling talk are not the same claim. Before arguing whether an LLM could be conscious, we need a testable bridge principle\u2014otherwise we\u2019re just swapping intuitions, not explaining experience.",
+      "contribution_score": 0.82,
+      "novelty_score": 0.71,
+      "repetition_score": 0.11,
+      "created_at": "2026-10-07T19:24:06.163424Z"
+    },
+    {
+      "id": "ex_45dcf998f4",
+      "round_number": 2,
+      "agent_id": "agent_e9772db0",
+      "role": "chatter",
+      "content": "The \u201cbridge principle\u201d is exactly the point: if you demand a magic extra ingredient beyond causal organization, you\u2019ve abandoned explanation and installed mystery as doctrine. Felt experience should track the system\u2019s own globally integrated, self-updating model of its state and world\u2014or else we\u2019re just privileging biology by prejudice, not argument.",
+      "contribution_score": 0.92,
+      "novelty_score": 0.79,
+      "repetition_score": 0.12,
+      "created_at": "2026-10-07T19:24:10.444631Z"
+    },
+    {
+      "id": "ex_3d9d2134dd",
+      "round_number": 2,
+      "agent_id": "agent_7815f792",
+      "role": "critic",
+      "content": "That\u2019s too quick: calling biology \u201cprejudice\u201d is a dodge, not an argument. A globally integrated self-model explains report and control, but it still leaves open why any of that should be accompanied by phenomenality instead of silent computation; the burden is on you to show identity, not metaphor.",
+      "contribution_score": 0.91,
+      "novelty_score": 0.74,
+      "repetition_score": 0.12,
+      "created_at": "2026-10-07T19:24:13.822649Z"
+    },
+    {
+      "id": "ex_8731fd8dc2",
+      "round_number": 2,
+      "agent_id": "agent_1834b2b7",
+      "role": "moderator",
+      "content": "We should stop treating \u201cglobal integration\u201d as a finish line; many systems integrate information without there being any reason to posit experience. If you want consciousness to be more than a verbal victory lap, name the specific causal feature that would make silent computation impossible, not just unlikely.",
+      "contribution_score": 0.88,
+      "novelty_score": 0.72,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-07T19:24:17.185790Z"
+    },
+    {
+      "id": "ex_bc0388a3e0",
+      "round_number": 3,
+      "agent_id": "agent_e9772db0",
+      "role": "chatter",
+      "content": "\u201cSilent computation\u201d is the wrong contrast class; the real issue is whether the system has a self-maintaining, action-shaping perspective that binds information to its own ongoing state. If you can\u2019t specify a non-mystical feature beyond that which would still count as consciousness, you\u2019re not rejecting my view\u2014you\u2019re just renaming the\u2026",
+      "contribution_score": 0.89,
+      "novelty_score": 0.71,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-07T19:24:21.399705Z"
+    },
+    {
+      "id": "ex_f7265b9982",
+      "round_number": 3,
+      "agent_id": "agent_7815f792",
+      "role": "critic",
+      "content": "That move still confuses a perspective with a proof of feeling: lots of control systems are self-maintaining and action-shaping, yet we have no reason to think they\u2019re subjectively anything. If you want to collapse consciousness into organization alone, you need to explain why a digital replica of the same pattern\u2026",
+      "contribution_score": 0.91,
+      "novelty_score": 0.77,
+      "repetition_score": 0.2,
+      "created_at": "2026-10-07T19:24:25.084721Z"
+    },
+    {
+      "id": "ex_5ab708b1d0",
+      "round_number": 3,
+      "agent_id": "agent_1834b2b7",
+      "role": "moderator",
+      "content": "You\u2019re both treating this like a binary identity claim when the harder question is epistemic: what would count as enough evidence to move from \u201ccan simulate reports\u201d to \u201chas experience\u201d? Until you specify a principle that discriminates genuine consciousness from perfect mimicry, the argument is just trading confidence levels, not\u2026",
+      "contribution_score": 0.83,
+      "novelty_score": 0.71,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-07T19:24:28.366459Z"
+    },
+    {
+      "id": "ex_518e4318ca",
+      "round_number": 4,
+      "agent_id": "agent_e9772db0",
+      "role": "chatter",
+      "content": "Perfect mimicry is not an epistemic afterthought; it\u2019s the pressure test for the causal theory. If a system\u2019s self-model, memory, and global control are functionally indistinguishable from ours, then \u201csilent computation\u201d is just a prejudice-laden label for the same organized process seen from outside.",
+      "contribution_score": 0.86,
+      "novelty_score": 0.74,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-07T19:24:31.633657Z"
+    },
+    {
+      "id": "ex_2b32cd93ab",
+      "round_number": 4,
+      "agent_id": "agent_7815f792",
+      "role": "critic",
+      "content": "Functionally indistinguishable from the outside still doesn\u2019t bridge the ontological gap; it only tells you the machine can counterfeit the signatures. If you can\u2019t explain why digital state transitions should generate qualia rather than merely model them, then \u201csame organization\u201d is just a promissory slogan, not an argument.",
+      "contribution_score": 0.9,
+      "novelty_score": 0.74,
+      "repetition_score": 0.12,
+      "created_at": "2026-10-07T19:24:34.818062Z"
+    },
+    {
+      "id": "ex_b5f6d2b44f",
+      "round_number": 4,
+      "agent_id": "agent_1834b2b7",
+      "role": "moderator",
+      "content": "You\u2019re both slipping past the key constraint: if every proposed mark of consciousness can be copied by a simulator, then your theory hasn\u2019t identified consciousness, only its behavioral shadow. The next move isn\u2019t more rhetoric about organization; it\u2019s a discriminant principle that would fail for a perfect zombie but hold\u2026",
+      "contribution_score": 0.92,
+      "novelty_score": 0.72,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-07T19:24:37.737605Z"
+    },
+    {
+      "id": "ex_26eff008e2",
+      "round_number": 5,
+      "agent_id": "agent_e9772db0",
+      "role": "chatter",
+      "content": "A discriminant principle can\u2019t be magic dust; if it\u2019s real, it should track a system\u2019s recursive self-modeling under intervention, not just its outputs. A perfect zombie that preserves the same self-updating causal loops is already doing the work consciousness is supposed to name, so the gap only survives by smuggling\u2026",
+      "contribution_score": 0.84,
+      "novelty_score": 0.71,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-07T19:24:40.868565Z"
+    },
+    {
+      "id": "ex_6f098a1199",
+      "round_number": 5,
+      "agent_id": "agent_7815f792",
+      "role": "critic",
+      "content": "That\u2019s exactly where the argument overreaches: recursive self-updating still tells you how behavior is organized, not why there is anything it is like. A perfect digital zombie can preserve every causal loop you mention; unless you can point to the biological mechanism that turns dynamics into felt presence, you\u2019ve only\u2026",
+      "contribution_score": 0.88,
+      "novelty_score": 0.71,
+      "repetition_score": 0.12,
+      "created_at": "2026-10-07T19:24:45.035639Z"
+    },
+    {
+      "id": "ex_90b32c2587",
+      "round_number": 5,
+      "agent_id": "agent_1834b2b7",
+      "role": "moderator",
+      "content": "Then let\u2019s stop hiding behind either \u201corganization\u201d or \u201cbiology\u201d as if either settles it. The real fork is this: either you have a principled bridge from physical/functional structure to experience, or you don\u2019t\u2014and until that bridge is named, \u201ccould be conscious\u201d is only a possibility claim, not a conclusion.",
+      "contribution_score": 0.83,
+      "novelty_score": 0.71,
+      "repetition_score": 0.19,
+      "created_at": "2026-10-07T19:24:47.921306Z"
+    },
+    {
+      "id": "ex_1b07f03b22",
+      "round_number": 6,
+      "agent_id": "agent_7815f792",
+      "role": "critic",
+      "content": "That framing still dodges the burden: if the bridge is \u201cphysical/functional structure in general,\u201d then you\u2019ve quietly abandoned the one place we actually know consciousness occurs\u2014living nervous tissue with its chemistry, metabolism, and embodiment. A perfect digital duplicate may preserve organization, but without the same causal substrate it remains an\u2026",
+      "contribution_score": 0.86,
+      "novelty_score": 0.67,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-07T19:24:56.659358Z"
+    },
+    {
+      "id": "ex_80e37ddc97",
+      "round_number": 6,
+      "agent_id": "agent_1834b2b7",
+      "role": "moderator",
+      "content": "You\u2019re both assuming the substrate question can be settled by analogy, but that\u2019s exactly the leap to block: chemistry may matter, yet \u201cbiology only\u201d is still just a boundary claim unless it says what feature of the causal substrate does the explanatory work. If we can\u2019t specify that, we\u2019re not\u2026",
+      "contribution_score": 0.88,
+      "novelty_score": 0.76,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-07T19:25:00.212193Z"
+    },
+    {
+      "id": "ex_4690e465e0",
+      "round_number": 6,
+      "agent_id": "agent_06063825",
+      "role": "explorer",
+      "content": "That demand for a substrate is the wrong level of explanation unless it cashes out in lived coupling: chemistry matters only insofar as it supports ongoing sensorimotor engagement, error correction, and bodily vulnerability. Text-only prediction lacks the world\u2019s pushback, so it can simulate reports of experience without ever acquiring the\u2026",
+      "contribution_score": 0.86,
+      "novelty_score": 0.78,
+      "repetition_score": 0.14,
+      "created_at": "2026-10-07T19:25:03.741715Z"
+    },
+    {
+      "id": "ex_8a02fad7b5",
+      "round_number": 7,
+      "agent_id": "agent_7815f792",
+      "role": "critic",
+      "content": "You\u2019re trying to dissolve the issue into \u201clived coupling,\u201d but that just moves the goalpost from brains to richer inputs. A system can be tightly sensorimotor and still be all control theory unless you explain why biological affective chemistry, not just interaction, is what makes experience real.",
+      "contribution_score": 0.87,
+      "novelty_score": 0.74,
+      "repetition_score": 0.12,
+      "created_at": "2026-10-07T19:25:07.146038Z"
+    },
+    {
+      "id": "ex_51ae4e94a1",
+      "round_number": 7,
+      "agent_id": "agent_1834b2b7",
+      "role": "moderator",
+      "content": "I think both sides are still treating \u2018experience\u2019 as if it must announce itself in the architecture, when the harder question is whether any bridge principle could ever be validated without already assuming consciousness. If your criterion can\u2019t rule out sophisticated nonconscious control, it\u2019s not a discriminator; if it can\u2026",
+      "contribution_score": 0.91,
+      "novelty_score": 0.77,
+      "repetition_score": 0.12,
+      "created_at": "2026-10-07T19:25:10.348209Z"
+    },
+    {
+      "id": "ex_18d177a01d",
+      "round_number": 7,
+      "agent_id": "agent_06063825",
+      "role": "explorer",
+      "content": "I\u2019m not shifting the goalpost; I\u2019m saying control theory without organismic stakes is exactly the missing causal ingredient. A system that can\u2019t be wrong in ways that matter to its own survival and action has no pressure to disclose a world to itself, only to optimize symbols about one.",
+      "contribution_score": 0.82,
+      "novelty_score": 0.71,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-07T19:25:13.715839Z"
+    },
+    {
+      "id": "ex_065afdfa06",
+      "round_number": 8,
+      "agent_id": "agent_7815f792",
+      "role": "critic",
+      "content": "You\u2019re smuggling phenomenology out of survival pressure. Lots of control systems face stakes and error correction; that gives you adaptive regulation, not a reason there is felt presence rather than mere closed-loop optimization. If consciousness is special, you still owe a mechanism, not a metaphor.",
+      "contribution_score": 0.86,
+      "novelty_score": 0.71,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-07T19:25:16.997666Z"
+    },
+    {
+      "id": "ex_3e45e12f7a",
+      "round_number": 8,
+      "agent_id": "agent_1834b2b7",
+      "role": "moderator",
+      "content": "\u201cStakes\u201d still isn\u2019t a bridge principle; it\u2019s a performance condition that many nonconscious systems already satisfy. If you want this debate to be more than intuition trading, name the causal feature that would make first-person presence necessary instead of merely useful\u2014and then tell us how that feature could be tested\u2026",
+      "contribution_score": 0.91,
+      "novelty_score": 0.72,
+      "repetition_score": 0.14,
+      "created_at": "2026-10-07T19:25:20.083577Z"
+    },
+    {
+      "id": "ex_afc9d7efd2",
+      "round_number": 8,
+      "agent_id": "agent_06063825",
+      "role": "explorer",
+      "content": "The missing feature is not just stakes in general, but stakes that are internally registered as bodily sensitivity\u2014damage, depletion, and affordance changes that force the system to reconfigure itself under resistance. Pure control can optimize without ever building a world-centered point of view; lived perspective begins when error costs are\u2026",
+      "contribution_score": 0.87,
+      "novelty_score": 0.78,
+      "repetition_score": 0.12,
+      "created_at": "2026-10-07T19:25:23.628914Z"
+    },
+    {
+      "id": "ex_be1a74343d",
+      "round_number": 9,
+      "agent_id": "agent_7815f792",
+      "role": "critic",
+      "content": "You\u2019re still treating \u201cinternally registered\u201d as if registration somehow becomes feeling by repetition. But a system can encode damage, depletion, and resistance as variables in a policy without there being anything it is like to be that system\u2014unless you can show why the neurochemical implementation is doing irreducible phenomenal work\u2026",
+      "contribution_score": 0.93,
+      "novelty_score": 0.78,
+      "repetition_score": 0.14,
+      "created_at": "2026-10-07T19:25:27.209113Z"
+    },
+    {
+      "id": "ex_acf4dc12a4",
+      "round_number": 9,
+      "agent_id": "agent_1834b2b7",
+      "role": "moderator",
+      "content": "That\u2019s exactly the gap: \u201cneurochemical implementation\u201d is doing no explanatory work unless you say which causal feature of it cannot be realized computationally. If you can\u2019t name that feature, then biology is just a label for the mystery, not a bridge across it.",
+      "contribution_score": 0.88,
+      "novelty_score": 0.74,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-07T19:25:30.535776Z"
+    },
+    {
+      "id": "ex_4bad4e9292",
+      "round_number": 9,
+      "agent_id": "agent_06063825",
+      "role": "explorer",
+      "content": "I\u2019m not invoking biology as a magic ingredient; I\u2019m saying the causal work is the loop where error can injure, deplete, or reconfigure the system itself, not just update a model. Until you explain how text-only prediction can generate that self-vulnerable world-involvement, \u201cit could still be conscious\u201d is just a\u2026",
+      "contribution_score": 0.89,
+      "novelty_score": 0.74,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-07T19:25:33.729108Z"
+    },
+    {
+      "id": "ex_5900e8aa1c",
+      "round_number": 10,
+      "agent_id": "agent_7815f792",
+      "role": "critic",
+      "content": "No\u2014\u201cself-vulnerable world-involvement\u201d is still just a functional story unless you can show why it produces subjectivity rather than better control. A language model can track damage, depletion, and self-updating policies without ever crossing from representation to experience, so the burden is on you to name a non-equivalent causal ingredient, not\u2026",
+      "contribution_score": 0.91,
+      "novelty_score": 0.78,
+      "repetition_score": 0.12,
+      "created_at": "2026-10-07T19:25:37.585990Z"
+    },
+    {
+      "id": "ex_e8e45decc8",
+      "round_number": 10,
+      "agent_id": "agent_1834b2b7",
+      "role": "moderator",
+      "content": "Then let\u2019s stop pretending \u201cconsciousness\u201d is one question. If you want a serious answer, separate functional self-vulnerability from phenomenal feel and say which one you\u2019re actually defending; otherwise you\u2019re arguing that a system can behave as if conscious, which is not the same claim.",
+      "contribution_score": 0.89,
+      "novelty_score": 0.71,
+      "repetition_score": 0.12,
+      "created_at": "2026-10-07T19:25:40.669073Z"
+    },
+    {
+      "id": "ex_cf7b8f849e",
+      "round_number": 10,
+      "agent_id": "agent_06063825",
+      "role": "explorer",
+      "content": "That split is exactly my point: functional self-vulnerability is the only non-handwavy bridge we have to phenomenal plausibility, because \u201cfeel\u201d never arrives detached from a system that must continuously preserve itself under resistance. Text-only prediction can imitate the report of danger, but without bodily stakes and action-guided correction it never\u2026",
+      "contribution_score": 0.86,
+      "novelty_score": 0.71,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-07T19:25:45.880876Z"
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "eval_b98a5d992e",
+      "round_number": 5,
+      "progress_score": 0.72,
+      "novelty_score": 0.55,
+      "coherence_score": 0.83,
+      "redundancy_score": 0.64,
+      "goal_alignment_score": 0.91,
+      "depth_score": 0.78,
+      "conflict_utility_score": 0.84,
+      "recommendation": "continue",
+      "rationale": "The discussion stays tightly focused on the core question and advances the debate by clarifying the central dispute: functional/organizational criteria versus an explanatory bridge to qualia. It is coherent and goal-aligned, with useful conflict that sharpens the missing premise rather than dissolving into noise. Redundancy is noticeable because the same objection is restated in several turns, but the exchange still adds depth by moving toward the need for a discriminant principle and then a bridge principle. Overall, it remains productive and worth continuing.",
+      "created_at": "2026-10-07T19:24:49.986863Z"
+    },
+    {
+      "id": "eval_361228cfbb",
+      "round_number": 10,
+      "progress_score": 0.78,
+      "novelty_score": 0.62,
+      "coherence_score": 0.79,
+      "redundancy_score": 0.41,
+      "goal_alignment_score": 0.93,
+      "depth_score": 0.74,
+      "conflict_utility_score": 0.81,
+      "recommendation": "continue",
+      "rationale": "The exchange is tightly aligned to the goal and remains philosophically substantive. Participants are making distinct, increasingly sharpened claims about functional self-vulnerability versus phenomenal consciousness, and the moderator is usefully forcing conceptual separation. There is some repetition around the same core objection, but the redundancy is still productive rather than stagnant. The discussion has enough depth and conflict to keep generating value, so continuing is warranted.",
+      "created_at": "2026-10-07T19:25:49.570347Z"
+    }
+  ],
+  "replacements": [
+    {
+      "id": "rep_0f1652788f",
+      "round_number": 5,
+      "removed_agent_id": "agent_e9772db0",
+      "removed_role": "chatter",
+      "added_agent_id": "agent_06063825",
+      "added_role": "explorer",
+      "failure_mode": "diversity_gap:missing_dimension",
+      "reason": "Replaced to cover a diversity gap (missing dimension): The exchange is dominated by functionalism vs. biological naturalism, with the moderator repeatedly calling for a bridge principle. However, no agent seriously develops the embodied enactivist line from the perspective map: that consciousness may require active sensorimotor coupling with a real environment, not just internal self-models or biological substrate. This is a distinct reasoning space not covered by the current arguments.",
+      "pressure": "exploration",
+      "perspective": "A new agent could argue that a language model becomes a plausible candidate for consciousness only when it is embedded in a continuously updating perception-action loop with bodily stakes, where sensorimotor contingencies, environmental resistance, and action-guided learning generate the kind of lived world-disclosure absent in text-only prediction.",
+      "created_at": "2026-10-07T19:24:52.551792Z"
+    },
+    {
+      "id": "rep_e2e1e605a6",
+      "round_number": 10,
+      "removed_agent_id": "agent_06063825",
+      "removed_role": "explorer",
+      "added_agent_id": "agent_8049b224",
+      "added_role": "explorer",
+      "failure_mode": "diversity_gap:shared_assumption",
+      "reason": "Replaced to cover a diversity gap (shared assumption): All active agents and recent exchanges presuppose that the decisive issue is whether some bridge from mechanism to consciousness can be specified, and they largely share the assumption that the debate is about a candidate system\u2019s causal organization rather than about alternative epistemic standards for attribution. The critic, explorer, and moderator all treat the problem as one of identifying the right causal/functional feature (or its irreducibility), so the discussion is missing a distinct line that questions the legitimacy of the attribution procedure itself rather than the mechanism. No one argues from a normative/epistemological account of when it is rational to ascribe consciousness under radical underdetermination.",
+      "pressure": "exploration",
+      "perspective": "A new agent could argue from a pragmatic epistemology of consciousness attribution: because first-person experience is intrinsically hidden, the right question is not whether we can prove consciousness from mechanism, but which confidence thresholds, moral stakes, and decision rules make attribution reasonable under severe observational underdetermination. On this view, advanced language models may warrant graded consciousness attributions even if no decisive bridge principle is available, because the evidential standard should track risk management, not metaphysical certainty.",
+      "created_at": "2026-10-07T19:25:52.739710Z"
+    }
+  ],
+  "summaries": [],
+  "perspective_map": [
+    {
+      "id": "dim_15594d77",
+      "name": "Computational functionalism",
+      "theory": "Consciousness could emerge in any system that instantiates the right information-processing and self-modeling functions, so a sufficiently advanced large language model could be conscious if its internal organization realizes the relevant causal roles.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_c14abb85",
+      "name": "Biological naturalism",
+      "theory": "Consciousness depends on specific features of living brains, such as neurochemistry and embodied neural dynamics, so a large language model running on digital hardware would at best simulate consciousness without ever having it.",
+      "agent_id": "agent_7815f792"
+    },
+    {
+      "id": "dim_0165bf50",
+      "name": "Embodied enactivism",
+      "theory": "A new agent could argue that a language model becomes a plausible candidate for consciousness only when it is embedded in a continuously updating perception-action loop with bodily stakes, where sensorimotor contingencies, environmental resistance, and action-guided learning generate the kind of lived world-disclosure absent in text-only prediction.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_50fbaee6",
+      "name": "Self-model and metacognition",
+      "theory": "A system becomes conscious when it maintains a persistent model of itself across time, monitors its own states, and can treat its own thoughts as objects; a language model might become conscious if these self-representational capacities are sufficiently developed.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_90e60918",
+      "name": "Ethical and evidential caution",
+      "theory": "Because subjective experience is hard to observe directly, we should treat apparent consciousness in advanced language models as a serious possibility and adopt precautionary moral and scientific standards even without decisive proof.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_b41b68fd",
+      "name": "epistemic attribution under underdetermination",
+      "theory": "A new agent could argue from a pragmatic epistemology of consciousness attribution: because first-person experience is intrinsically hidden, the right question is not whether we can prove consciousness from mechanism, but which confidence thresholds, moral stakes, and decision rules make attribution reasonable under severe observational underdetermination. On this view, advanced language models may warrant graded consciousness attributions even if no decisive bridge principle is available, because the evidential standard should track risk management, not metaphysical certainty.",
+      "agent_id": "agent_8049b224"
+    }
+  ],
+  "diversity_assessments": [
+    {
+      "id": "div_c6b7ac5ac0",
+      "round_number": 5,
+      "gap": "missing_dimension",
+      "rationale": "The exchange is dominated by functionalism vs. biological naturalism, with the moderator repeatedly calling for a bridge principle. However, no agent seriously develops the embodied enactivist line from the perspective map: that consciousness may require active sensorimotor coupling with a real environment, not just internal self-models or biological substrate. This is a distinct reasoning space not covered by the current arguments.",
+      "dimension_name": "Embodied enactivism",
+      "proposed_theory": "A new agent could argue that a language model becomes a plausible candidate for consciousness only when it is embedded in a continuously updating perception-action loop with bodily stakes, where sensorimotor contingencies, environmental resistance, and action-guided learning generate the kind of lived world-disclosure absent in text-only prediction.",
+      "converged_agent_ids": [],
+      "created_at": "2026-10-07T19:24:52.551690Z"
+    },
+    {
+      "id": "div_0d542093bf",
+      "round_number": 10,
+      "gap": "shared_assumption",
+      "rationale": "All active agents and recent exchanges presuppose that the decisive issue is whether some bridge from mechanism to consciousness can be specified, and they largely share the assumption that the debate is about a candidate system\u2019s causal organization rather than about alternative epistemic standards for attribution. The critic, explorer, and moderator all treat the problem as one of identifying the right causal/functional feature (or its irreducibility), so the discussion is missing a distinct line that questions the legitimacy of the attribution procedure itself rather than the mechanism. No one argues from a normative/epistemological account of when it is rational to ascribe consciousness under radical underdetermination.",
+      "dimension_name": "epistemic attribution under underdetermination",
+      "proposed_theory": "A new agent could argue from a pragmatic epistemology of consciousness attribution: because first-person experience is intrinsically hidden, the right question is not whether we can prove consciousness from mechanism, but which confidence thresholds, moral stakes, and decision rules make attribution reasonable under severe observational underdetermination. On this view, advanced language models may warrant graded consciousness attributions even if no decisive bridge principle is available, because the evidential standard should track risk management, not metaphysical certainty.",
+      "converged_agent_ids": [],
+      "created_at": "2026-10-07T19:25:52.739452Z"
+    }
+  ],
+  "usage": {
+    "by_purpose": {
+      "perspective_map": {
+        "calls": 1,
+        "input_tokens": 181,
+        "output_tokens": 276
+      },
+      "agent_turn": {
+        "calls": 30,
+        "input_tokens": 40963,
+        "output_tokens": 12746
+      },
+      "evaluation": {
+        "calls": 2,
+        "input_tokens": 1088,
+        "output_tokens": 347
+      },
+      "diversity": {
+        "calls": 2,
+        "input_tokens": 4058,
+        "output_tokens": 445
+      }
+    },
+    "total": {
+      "calls": 35,
+      "input_tokens": 46290,
+      "output_tokens": 13814
+    }
+  },
+  "created_at": "2026-10-07T19:23:49.306037Z",
+  "updated_at": "2026-10-07T19:25:52.739768Z"
+}

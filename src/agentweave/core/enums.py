@@ -24,6 +24,13 @@ class AgentRole(str, Enum):
     VISIONARY = "visionary"
     CONSTRAINT_PLANNER = "constraint_planner"
     CONTRARIAN = "contrarian"
+    EXPLORER = "explorer"
+
+
+class SpeakerProvider(str, Enum):
+    OPENAI = "openai"
+    CLAUDE = "claude"
+    PERPLEXITY = "perplexity"
 
 
 class AgentStatus(str, Enum):
@@ -39,12 +46,26 @@ class EvaluationRecommendation(str, Enum):
     STOP = "stop"
 
 
+class DiversityGapType(str, Enum):
+    NONE = "none"
+    MISSING_DIMENSION = "missing_dimension"
+    SHARED_ASSUMPTION = "shared_assumption"
+    CONVERGED_MODELS = "converged_models"
+
+
+class ReplacementPressure(str, Enum):
+    QUALITY = "quality"
+    EXPLORATION = "exploration"
+
+
 class EventType(str, Enum):
     CONVERSATION_CREATED = "conversation.created"
+    PERSPECTIVE_MAP_CREATED = "conversation.perspective_map_created"
     CONVERSATION_STARTED = "conversation.started"
     AGENT_RESPONDED = "conversation.agent_responded"
     ROUND_COMPLETED = "conversation.round_completed"
     EVALUATION_CREATED = "conversation.evaluation_created"
+    DIVERSITY_ASSESSED = "conversation.diversity_assessed"
     AGENT_REPLACED = "conversation.agent_replaced"
     SUMMARY_UPDATED = "conversation.summary_updated"
     CONVERSATION_COMPLETED = "conversation.completed"

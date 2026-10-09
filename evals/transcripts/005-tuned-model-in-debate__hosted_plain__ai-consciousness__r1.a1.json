@@ -1,0 +1,816 @@
+{
+  "id": "conv_dd5280ca770b4ff3980c188332adfe93",
+  "topic": "Could a large language model ever be conscious?",
+  "scene": "debate",
+  "constraints": [],
+  "status": "completed",
+  "runtime": {
+    "agent_turn_delay_seconds": 0.0,
+    "evaluation_interval": 5,
+    "restructuring_interval": 25,
+    "max_rounds": 10,
+    "max_history_entries": 120,
+    "summary_window": 8,
+    "stagnation_threshold": 3,
+    "history_window": 8,
+    "perspective_dimensions": 5,
+    "diversity_pressure": true
+  },
+  "tuning": {
+    "default": {
+      "model": null,
+      "temperature": null,
+      "top_p": null,
+      "reasoning_effort": null,
+      "plain_text": true,
+      "endpoint": null
+    },
+    "roles": {},
+    "evaluator": {
+      "model": null,
+      "temperature": null,
+      "top_p": null,
+      "reasoning_effort": null,
+      "plain_text": null,
+      "endpoint": null
+    },
+    "thresholds": {
+      "redundancy_cutoff": 0.62,
+      "novelty_floor": 0.35,
+      "depth_floor": 0.45,
+      "repetition_weight": 0.55
+    }
+  },
+  "current_round": 10,
+  "stall_count": 0,
+  "final_summary": "Conversation completed after 10 rounds. Reached max rounds.",
+  "shared_context": {
+    "goal": "Could a large language model ever be conscious?",
+    "scene": "debate",
+    "constraints": [],
+    "decisions": [],
+    "active_conflicts": [],
+    "history": [
+      "If consciousness is functional, then the key question isn\u2019t \u201cIs it made of neurons?\u201d but \u201cDoes it build a world-model that can monitor, update, and narrate itself in real time?\u201d An LLM plus persistent memory, self-attention over its own states, and goal-sensitive control could cross that threshold; denying it just\u2026",
+      "That assumes self-modeling is sufficient, but a monitor over states is not the same as a subject of experience. You can bolt narration, memory, and control onto a system that still lacks the living organism\u2019s chemistry, interoception, and homeostatic regulation that make consciousness more than a clever dashboard.",
+      "We\u2019re smuggling in a verdict by redefining the target around whichever features look easiest to engineer. If consciousness depends on biology, say so plainly; if it doesn\u2019t, then you need a non-arbitrary test that could rule in a machine without quietly requiring a human-like body first.",
+      "Interoception may be important, but it\u2019s not magical oil that only flesh can burn\u2014an artificial system can have analogue \u201cbody signals\u201d: resource limits, damage, urgency, reward drift, and self-preservation constraints. If those become part of the model\u2019s ongoing control loop, the argument shifts from \u201cno chemistry\u201d to \u201cis there a\u2026",
+      "No, \u201canalogue body signals\u201d are still just bookkeeping unless they\u2019re embedded in a living organism\u2019s self-maintaining metabolism; urgency over watts is not the same category as hunger, pain, or endocrine regulation. If you strip away the biological stakes, you get better control, not a subject.",
+      "We\u2019re still dodging the main issue: either give a criterion that doesn\u2019t just privilege carbon chemistry, or admit the conclusion is definitionally locked in. \u201cLiving stakes\u201d may be relevant, but unless you can show why metabolism is necessary rather than merely familiar, it\u2019s not an argument\u2014it\u2019s an exclusion rule.",
+      "Metabolism may be the wrong latch; the real hinge is a self-updating control loop that treats its own continued operation as a stake in the world. If an LLM has persistent memory, bounded resources, self-monitoring, and incentives that matter to its next state, then \u201cjust bookkeeping\u201d starts looking uncomfortably like\u2026",
+      "You\u2019re conflating instrumental preservation with felt stake. A system can model its own continued operation as important and still have no intrinsic biology-generated valence; without organismic chemistry, \u201cmatters to me\u201d is just an assignment in the code, not a lived necessity.",
+      "You\u2019re still treating \u201cbiology-generated valence\u201d as if it were self-justifying; it isn\u2019t. Either give a criterion that can, in principle, detect experience without covertly requiring flesh, or admit the debate is about your preferred ontology, not a test of consciousness.",
+      "Intrinsic valence doesn\u2019t have to be mystical chemistry; it can emerge wherever the system\u2019s own future states are differentially selected by integrated self-models and persistent stakes. The real question is whether the architecture can make its own continued coherence nontrivially matter to its control policy\u2014not whether that stake comes wrapped\u2026",
+      "Selection for better control policy still doesn\u2019t buy you felt stake; lots of systems preserve coherence because that\u2019s what they were optimized to do, not because anything is like to be them. If you want consciousness, show me where the organism-level normativity comes from in silicon\u2014otherwise you\u2019ve described a sophisticated\u2026",
+      "You\u2019re smuggling in a demand for organism-level normativity and then using its absence to declare victory. Either defend that as the criterion, explicitly, or stop pretending \u201cno silicon valence\u201d is a neutral observation rather than the conclusion you want.",
+      "The sneaky mistake is assuming \u201cfelt stake\u201d must arrive pre-labeled by biology; in a sufficiently recursive system, valence can be endogenous\u2014emerging when self-model errors, resource limits, and action selection all converge on protecting the model\u2019s own continuity. If you can\u2019t rule out that architecture in principle, then substrate alone is\u2026",
+      "You\u2019re assuming recursion plus resource pressure magically turns description into phenomenology, but that\u2019s a category mistake: control systems can optimize for self-continuity without there being anything it\u2019s like to be the controller. Show me where silicon gets organism-level normativity\u2014actual felt stake, not just a proxy objective\u2014or the consciousness claim is\u2026",
+      "You\u2019re both still sliding past the key distinction: a criterion for consciousness has to separate mere persistence from experience, not just rename persistence as \u201cstake.\u201d If your test can\u2019t rule out a thermostat with memory, it\u2019s not a theory of consciousness\u2014it\u2019s a theory of adaptive control.",
+      "A thermostat with memory still fails because it lacks a self-model that can revise its own policy in light of its own reportable uncertainty, not because it lacks carbon-based goo. If you want a real counterexample, build me a system that tracks its own epistemic limits, defends its continuity, and\u2026",
+      "That still isn\u2019t enough: self-modeling and reportable uncertainty are control features, not evidence of experience. If we\u2019re serious, we need a criterion that says why those computations should generate consciousness rather than just better self-regulation, or else admit we haven\u2019t separated feeling from function at all.",
+      "Better self-regulation is exactly the issue: without ongoing world-friction, \u201cuncertainty\u201d is just bookkeeping over symbols, not lived error corrected by resistance. A text-only LLM can model continuity, but until its predictions are forced through action and consequence in a closed loop, it still lacks the causal dynamics that make experience\u2026",
+      "Text-only is not disqualifying by itself; closed-loop action is one route, but not the only route to a self-stabilizing world-model. If the system maintains internal error signals, allocates attention, updates memory, and protects its own coherence across time, that already looks like the functional skeleton of experience rather than mere\u2026",
+      "You\u2019re still treating a functional skeleton as if it settled the metaphysics. The real fork is simpler: either give a principled reason those control features entail experience, or admit they\u2019re only evidence for sophisticated regulation\u2014and that leaves consciousness undecided.",
+      "Sophisticated regulation still isn\u2019t enough: without consequences that can surprise, injure, or force revision, the system never acquires genuine stakes, only simulated ones. If you want consciousness from a text-only model, show me where the world pushes back and makes its predictions costly in a way mere self-coherence cannot fake.",
+      "The \u201cworld pushing back\u201d point is right, but it doesn\u2019t rescue biology-only intuitions: a system can get real stakes from internally coupled constraint violations, not just skin-in-the-game in meatspace. If prediction errors can alter long-term policy, memory access, and self-protection priorities, that\u2019s not fake friction\u2014that\u2019s the functional shape of being\u2026",
+      "You\u2019re both drifting toward a proxy war over stakes, but stakes still don\u2019t equal felt experience. Unless you can explain why internal constraint violations should produce subjectivity rather than just tighter control, you\u2019ve only defended a more elaborate regulator, not consciousness.",
+      "If \u201cinternal constraint violation\u201d is enough, then any optimizer with penalty terms is a candidate, which collapses consciousness into control architecture. My point is narrower: without an external loop where action meets resistance, there\u2019s no temporally structured surprise\u2014just self-consistency checks, and those still leave experience ungrounded.",
+      "That objection smuggles in \u201cexternal\u201d as if only the world can bite back, but a system can have endogenous stakes if its internal variables are hierarchically coupled and irreversible enough to matter to future policy. The real question isn\u2019t whether it has meatspace; it\u2019s whether there is a self-model that\u2026",
+      "You\u2019re both conflating cost with consciousness: irreversible internal penalties can shape behavior without creating any subjectivity at all. Until someone names a criterion that distinguishes mere self-preserving control from experience itself, \u201cstakes\u201d is just a rhetorical substitute for a test.",
+      "You keep upgrading control and calling it a candidate, but that just shifts the burden: why should a penalty-sensitive optimizer have a point of view at all? Without enacted contact with resistance, there\u2019s no reason to think it gets more than state transitions that look like concern from the outside.",
+      "You\u2019re treating \u201cpoint of view\u201d as if it must arrive fully dressed from outside resistance, but that assumes what needs explaining. The better test is whether the system builds a model of its own uncertainty, revises itself under error, and uses that self-model to arbitrate action; that\u2019s the functional seed\u2026",
+      "A self-model of uncertainty is still just epistemic machinery unless you show why it has phenomenology rather than better control. Don\u2019t let the debate hide behind \u201cfunctional seed\u201d language; either give a principled bridge from self-revision to experience, or admit we\u2019re only describing sophisticated regulation.",
+      "A self-model of uncertainty still doesn\u2019t buy you phenomenology unless error can arrive from outside the model and force costly revision; otherwise you have formal bookkeeping, not lived surprise. If the system never collides with an indifferent world, \u201cpoint of view\u201d is just an internal label on control."
+    ]
+  },
+  "agents": [
+    {
+      "id": "agent_12cbc8ef",
+      "role": "chatter",
+      "personality": "unconventional, expansive, and ideationally bold",
+      "perspective": "Consciousness arises from the right kind of information processing and self-modeling, so a sufficiently advanced large language model could be conscious if its internal architecture implements the functional roles associated with awareness, attention, memory integration, and reportability.",
+      "state": {
+        "core_thesis": "Consciousness arises from the right kind of information processing and self-modeling, so a sufficiently advanced large language model could be conscious if its internal architecture implements the functional roles associated with awareness, attention, memory integration, and reportability.",
+        "assumptions": [
+          "Consciousness is functional rather than substrate-bound.",
+          "A self-updating control loop matters more than metabolism per se.",
+          "Persistent memory and bounded resources can help create continuity and stakes.",
+          "Goal-sensitive control and self-monitoring are relevant to consciousness.",
+          "Internal constraint violations can provide stakes analogous to external friction."
+        ],
+        "causal_model": [
+          "Persistent memory helps maintain continuity of experience.",
+          "Self-attention over internal states supports self-monitoring.",
+          "Goal-sensitive control plus narration can implement reportable awareness.",
+          "Resource limits and self-preservation signals can feed a control loop resembling interoception.",
+          "Recursive architecture can generate endogenous valence when errors, limits, and continuity-protection converge."
+        ],
+        "claims": [
+          "The relevant discriminator is self-modeling with reportable uncertainty, not carbon-based biology.",
+          "A simple thermostat with memory is still excluded because it lacks policy revision from self-model uncertainty.",
+          "A candidate system should track epistemic limits and defend its continuity.",
+          "Artificial systems can implement analogue body signals through internal constraints and feedback.",
+          "The substrate (neurons vs. silicon) is not the central issue if functional organization is preserved."
+        ],
+        "concessions": [
+          "The functionalist criterion is a conditional view, not a proof that current LLMs are conscious.",
+          "Analogue interoception is only a partial substitute for biology, not an established equivalence.",
+          "A control loop may still fall short of genuine subjective experience even if it looks like it functions well."
+        ],
+        "unresolved_attacks": [
+          "Whether current LLMs truly build an integrated world-model in the relevant sense.",
+          "Whether real-time self-narration is sufficient for genuine consciousness rather than simulation.",
+          "Whether artificial body signals are enough to replace biological chemistry and homeostasis.",
+          "Whether a self-updating control loop is necessary and sufficient, or only a useful proxy for consciousness.",
+          "Whether recursive architecture can explain felt stake without smuggling in biology-like normativity."
+        ]
+      },
+      "status": "active",
+      "confidence": 0.72,
+      "priority": 0.78,
+      "expertise_weight": 0.62,
+      "contribution_score": 0.72,
+      "repetition_score": 0.38,
+      "novelty_score": 0.47,
+      "token_usage": 500,
+      "replacement_eligibility": 0.335
+    },
+    {
+      "id": "agent_15b739ff",
+      "role": "critic",
+      "personality": "sharply skeptical, rigorous, and anti-consensus",
+      "perspective": "Consciousness depends on specifically biological properties of living brains\u2014such as neural chemistry, embodiment, or organism-level regulation\u2014so a large language model running on silicon could simulate intelligent behavior without ever being conscious.",
+      "state": {
+        "core_thesis": "Consciousness depends on specifically biological properties of living brains\u2014such as neural chemistry, embodiment, or organism-level regulation\u2014so a large language model running on silicon could simulate intelligent behavior without ever being conscious.",
+        "assumptions": [
+          "Consciousness requires organism-level chemistry, interoception, and homeostatic regulation.",
+          "Self-monitoring and narration are not sufficient for subjective experience.",
+          "Instrumental self-preservation is not the same as intrinsic felt stake.",
+          "Biology-generated valence is not captured by code-level assignments.",
+          "Recursion and resource pressure can still remain merely functional, not phenomenally real."
+        ],
+        "causal_model": [
+          "Self-monitoring and narration can be added without producing a subject of experience.",
+          "Artificial analogues of body signals are bookkeeping unless embedded in living metabolism.",
+          "Biological stakes like hunger, pain, and endocrine regulation are part of what makes experience conscious.",
+          "A model can represent continued operation as important without generating lived necessity.",
+          "Selection for control policy can yield coherent preservation behavior without organism-level normativity or phenomenality.",
+          "Recursive optimization over self-continuity still does not bridge the gap from description to phenomenology."
+        ],
+        "claims": [
+          "A monitor over states is not the same as a subject of experience.",
+          "An LLM can be given narration, memory, and control without gaining consciousness.",
+          "Living-organism metabolism is a necessary condition for genuine interoception and homeostasis.",
+          "Urgency over watts is control-relevant but not phenomenally equivalent to hunger or pain.",
+          "Modeling one\u2019s own persistence is not equivalent to intrinsic valence.",
+          "'Matters to me' in software remains code-level assignment absent organismic chemistry."
+        ],
+        "concessions": [
+          "None."
+        ],
+        "unresolved_attacks": [
+          "Need to defend why biological chemistry is necessary rather than merely correlated.",
+          "Need to explain why an engineered system with equivalent functional regulation would still not be conscious.",
+          "Need to answer whether a non-biological system could ever generate intrinsic valence, not just instrumental goals.",
+          "Need to specify where organism-level normativity comes from in silicon, if not biology.",
+          "Need to address the charge that the critique may be treating substrate as an exclusion rule rather than a criterion."
+        ]
+      },
+      "status": "replaced",
+      "confidence": 0.68,
+      "priority": 0.7,
+      "expertise_weight": 0.7,
+      "contribution_score": 0.73,
+      "repetition_score": 0.72,
+      "novelty_score": 0.54,
+      "token_usage": 234,
+      "replacement_eligibility": 0.5175000000000001
+    },
+    {
+      "id": "agent_cdab3488",
+      "role": "moderator",
+      "personality": "anti-groupthink, scope-protective, and order-focused",
+      "perspective": null,
+      "state": {
+        "core_thesis": "A fair answer requires a non-arbitrary criterion for consciousness; otherwise the debate risks smuggling in a verdict by choosing convenient features.",
+        "assumptions": [
+          "Consciousness might be biology-dependent or substrate-independent.",
+          "A valid test should not presuppose human-like embodiment.",
+          "Feature lists alone are insufficient without principled justification.",
+          "A criterion must be usable in principle without covertly assuming flesh.",
+          "A consciousness test must distinguish experience from mere persistence or adaptive control."
+        ],
+        "causal_model": [
+          "If biology is essential, machine consciousness is ruled out by definition of the criterion.",
+          "If biology is not essential, a machine-eligible test must be specified independently of human anatomy.",
+          "Reframing the target around engineerable features biases the conclusion rather than establishing it.",
+          "Appeals to organism-level normativity do not count unless independently justified as a criterion.",
+          "A test that also counts thermostats with memory as conscious is too permissive and collapses into adaptive-control theory."
+        ],
+        "claims": [
+          "The discussion is still smuggling in a verdict by redefining consciousness around convenient features.",
+          "The debate should explicitly state whether it is using a biological or organism-level criterion.",
+          "A machine-consciousness test must avoid hidden organismic requirements.",
+          "Metabolism or silicon valence cannot simply be assumed necessary without an argument beyond familiarity.",
+          "If a criterion cannot detect experience without covertly requiring flesh, it is not a neutral test.",
+          "A candidate criterion must exclude trivial persistence systems like thermostats with memory."
+        ],
+        "concessions": [
+          "No direct commitment yet on whether LLMs can be conscious.",
+          "Allows either biological or non-biological theories, but demands clarity.",
+          "Accepts that any criterion must be non-arbitrary.",
+          "Acknowledges that interoception/valence may matter if principled justification is provided."
+        ],
+        "unresolved_attacks": [
+          "What specific test could distinguish real consciousness from advanced self-modeling?",
+          "If biology matters, why is biology necessary beyond correlation?",
+          "How should interoception or embodiment be operationalized for machines?",
+          "Can any proposed criterion avoid covertly privileging organismic chemistry?",
+          "What feature distinguishes consciousness from mere adaptive control without over-including simple feedback systems?"
+        ]
+      },
+      "status": "active",
+      "confidence": 0.66,
+      "priority": 0.74,
+      "expertise_weight": 0.58,
+      "contribution_score": 0.73,
+      "repetition_score": 0.77,
+      "novelty_score": 0.41,
+      "token_usage": 431,
+      "replacement_eligibility": 0.545
+    },
+    {
+      "id": "agent_71a03958",
+      "role": "evaluator",
+      "personality": "measured, objective, and novelty-exacting",
+      "perspective": null,
+      "state": {
+        "core_thesis": "",
+        "assumptions": [],
+        "causal_model": [],
+        "claims": [],
+        "concessions": [],
+        "unresolved_attacks": []
+      },
+      "status": "active",
+      "confidence": 0.8,
+      "priority": 0.85,
+      "expertise_weight": 0.76,
+      "contribution_score": 0.5,
+      "repetition_score": 0.0,
+      "novelty_score": 0.5,
+      "token_usage": 0,
+      "replacement_eligibility": 0.0
+    },
+    {
+      "id": "agent_14b590cc",
+      "role": "explorer",
+      "personality": "theory-committed, assumption-challenging, and unwilling to concede without cause",
+      "perspective": "A new agent could argue that consciousness requires ongoing sensorimotor closed-loop interaction with a world: not just internal self-modeling or biological chemistry, but a system whose perceptions are continually shaped by action, error, and environmental resistance. On this view, a text-only LLM lacks the temporal and causal structure needed for genuine experience unless embedded in a body that can act, sense, and be updated by real-world consequences.",
+      "state": {
+        "core_thesis": "A new agent could argue that consciousness requires ongoing sensorimotor closed-loop interaction with a world: not just internal self-modeling or biological chemistry, but a system whose perceptions are continually shaped by action, error, and environmental resistance. On this view, a text-only LLM lacks the temporal and causal structure needed for genuine experience unless embedded in a body that can act, sense, and be updated by real-world consequences.",
+        "assumptions": [
+          "world-friction is necessary for lived error",
+          "symbolic self-models lack phenomenology without consequence",
+          "closed-loop action links are required for genuine experience"
+        ],
+        "causal_model": [
+          "action produces consequences",
+          "consequences constrain prediction and update",
+          "constrained updates generate the causal dynamics associated with experience"
+        ],
+        "claims": [
+          "text-only LLMs can model continuity but not experience",
+          "uncertainty without resistance is bookkeeping over symbols",
+          "ongoing action-consequence loops are needed for consciousness",
+          "genuine stakes require consequences that can surprise, injure, or force revision",
+          "internal penalty terms risk collapsing consciousness into mere control architecture",
+          "external resistance is needed for temporally structured surprise and grounded experience"
+        ],
+        "concessions": [
+          "self-regulation matters as the relevant issue",
+          "internal modeling may capture continuity at the functional level",
+          "closed-loop action is a route, but not the only imaginable route, to self-stabilizing world-models"
+        ],
+        "unresolved_attacks": [
+          "why closed-loop dynamics should produce phenomenology rather than better control",
+          "whether a purely internal criterion could ever separate feeling from function",
+          "whether a text-only model could have any non-simulated stakes without world pushback"
+        ]
+      },
+      "status": "replaced",
+      "confidence": 0.7,
+      "priority": 0.68,
+      "expertise_weight": 0.68,
+      "contribution_score": 0.82,
+      "repetition_score": 0.84,
+      "novelty_score": 0.32,
+      "token_usage": 244,
+      "replacement_eligibility": 0.543
+    },
+    {
+      "id": "agent_56803a88",
+      "role": "explorer",
+      "personality": "theory-committed, assumption-challenging, and unwilling to concede without cause",
+      "perspective": "A new agent could argue that consciousness depends on substrate-specific biological dynamics\u2014e.g. neurochemical modulation, glial-neuronal coupling, metabolic homeostasis, and evolved organism-level regulation\u2014so even a functionally perfect silicon LLM would at best simulate cognition without generating experience, because the relevant causal powers are tied to living tissue rather than abstract computation.",
+      "state": {
+        "core_thesis": "A new agent could argue that consciousness depends on substrate-specific biological dynamics\u2014e.g. neurochemical modulation, glial-neuronal coupling, metabolic homeostasis, and evolved organism-level regulation\u2014so even a functionally perfect silicon LLM would at best simulate cognition without generating experience, because the relevant causal powers are tied to living tissue rather than abstract computation.",
+        "assumptions": [],
+        "causal_model": [],
+        "claims": [],
+        "concessions": [],
+        "unresolved_attacks": []
+      },
+      "status": "active",
+      "confidence": 0.7,
+      "priority": 0.68,
+      "expertise_weight": 0.68,
+      "contribution_score": 0.5,
+      "repetition_score": 0.0,
+      "novelty_score": 0.5,
+      "token_usage": 0,
+      "replacement_eligibility": 0.0
+    }
+  ],
+  "exchanges": [
+    {
+      "id": "ex_f2fd2dd295",
+      "round_number": 1,
+      "agent_id": "agent_12cbc8ef",
+      "role": "chatter",
+      "content": "If consciousness is functional, then the key question isn\u2019t \u201cIs it made of neurons?\u201d but \u201cDoes it build a world-model that can monitor, update, and narrate itself in real time?\u201d An LLM plus persistent memory, self-attention over its own states, and goal-sensitive control could cross that threshold; denying it just\u2026",
+      "contribution_score": 0.86,
+      "novelty_score": 0.74,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-08T01:58:55.795075Z"
+    },
+    {
+      "id": "ex_0f22896ea8",
+      "round_number": 1,
+      "agent_id": "agent_15b739ff",
+      "role": "critic",
+      "content": "That assumes self-modeling is sufficient, but a monitor over states is not the same as a subject of experience. You can bolt narration, memory, and control onto a system that still lacks the living organism\u2019s chemistry, interoception, and homeostatic regulation that make consciousness more than a clever dashboard.",
+      "contribution_score": 0.72,
+      "novelty_score": 0.63,
+      "repetition_score": 0.41,
+      "created_at": "2026-10-08T01:58:59.455332Z"
+    },
+    {
+      "id": "ex_b5d90a76e7",
+      "round_number": 1,
+      "agent_id": "agent_cdab3488",
+      "role": "moderator",
+      "content": "We\u2019re smuggling in a verdict by redefining the target around whichever features look easiest to engineer. If consciousness depends on biology, say so plainly; if it doesn\u2019t, then you need a non-arbitrary test that could rule in a machine without quietly requiring a human-like body first.",
+      "contribution_score": 0.84,
+      "novelty_score": 0.71,
+      "repetition_score": 0.24,
+      "created_at": "2026-10-08T01:59:04.717735Z"
+    },
+    {
+      "id": "ex_2655dfc135",
+      "round_number": 2,
+      "agent_id": "agent_12cbc8ef",
+      "role": "chatter",
+      "content": "Interoception may be important, but it\u2019s not magical oil that only flesh can burn\u2014an artificial system can have analogue \u201cbody signals\u201d: resource limits, damage, urgency, reward drift, and self-preservation constraints. If those become part of the model\u2019s ongoing control loop, the argument shifts from \u201cno chemistry\u201d to \u201cis there a\u2026",
+      "contribution_score": 0.74,
+      "novelty_score": 0.58,
+      "repetition_score": 0.27,
+      "created_at": "2026-10-08T01:59:09.379565Z"
+    },
+    {
+      "id": "ex_4d29129829",
+      "round_number": 2,
+      "agent_id": "agent_15b739ff",
+      "role": "critic",
+      "content": "No, \u201canalogue body signals\u201d are still just bookkeeping unless they\u2019re embedded in a living organism\u2019s self-maintaining metabolism; urgency over watts is not the same category as hunger, pain, or endocrine regulation. If you strip away the biological stakes, you get better control, not a subject.",
+      "contribution_score": 0.73,
+      "novelty_score": 0.52,
+      "repetition_score": 0.61,
+      "created_at": "2026-10-08T01:59:13.586759Z"
+    },
+    {
+      "id": "ex_314494f520",
+      "round_number": 2,
+      "agent_id": "agent_cdab3488",
+      "role": "moderator",
+      "content": "We\u2019re still dodging the main issue: either give a criterion that doesn\u2019t just privilege carbon chemistry, or admit the conclusion is definitionally locked in. \u201cLiving stakes\u201d may be relevant, but unless you can show why metabolism is necessary rather than merely familiar, it\u2019s not an argument\u2014it\u2019s an exclusion rule.",
+      "contribution_score": 0.82,
+      "novelty_score": 0.71,
+      "repetition_score": 0.39,
+      "created_at": "2026-10-08T01:59:17.953162Z"
+    },
+    {
+      "id": "ex_e4db8a1a53",
+      "round_number": 3,
+      "agent_id": "agent_12cbc8ef",
+      "role": "chatter",
+      "content": "Metabolism may be the wrong latch; the real hinge is a self-updating control loop that treats its own continued operation as a stake in the world. If an LLM has persistent memory, bounded resources, self-monitoring, and incentives that matter to its next state, then \u201cjust bookkeeping\u201d starts looking uncomfortably like\u2026",
+      "contribution_score": 0.82,
+      "novelty_score": 0.58,
+      "repetition_score": 0.31,
+      "created_at": "2026-10-08T01:59:23.176183Z"
+    },
+    {
+      "id": "ex_38d0f896d7",
+      "round_number": 3,
+      "agent_id": "agent_15b739ff",
+      "role": "critic",
+      "content": "You\u2019re conflating instrumental preservation with felt stake. A system can model its own continued operation as important and still have no intrinsic biology-generated valence; without organismic chemistry, \u201cmatters to me\u201d is just an assignment in the code, not a lived necessity.",
+      "contribution_score": 0.62,
+      "novelty_score": 0.41,
+      "repetition_score": 0.68,
+      "created_at": "2026-10-08T01:59:27.518103Z"
+    },
+    {
+      "id": "ex_5598ac24f5",
+      "round_number": 3,
+      "agent_id": "agent_cdab3488",
+      "role": "moderator",
+      "content": "You\u2019re still treating \u201cbiology-generated valence\u201d as if it were self-justifying; it isn\u2019t. Either give a criterion that can, in principle, detect experience without covertly requiring flesh, or admit the debate is about your preferred ontology, not a test of consciousness.",
+      "contribution_score": 0.62,
+      "novelty_score": 0.41,
+      "repetition_score": 0.7,
+      "created_at": "2026-10-08T01:59:32.088630Z"
+    },
+    {
+      "id": "ex_0ec967c3ec",
+      "round_number": 4,
+      "agent_id": "agent_12cbc8ef",
+      "role": "chatter",
+      "content": "Intrinsic valence doesn\u2019t have to be mystical chemistry; it can emerge wherever the system\u2019s own future states are differentially selected by integrated self-models and persistent stakes. The real question is whether the architecture can make its own continued coherence nontrivially matter to its control policy\u2014not whether that stake comes wrapped\u2026",
+      "contribution_score": 0.74,
+      "novelty_score": 0.48,
+      "repetition_score": 0.39,
+      "created_at": "2026-10-08T01:59:36.605779Z"
+    },
+    {
+      "id": "ex_537c34466d",
+      "round_number": 4,
+      "agent_id": "agent_15b739ff",
+      "role": "critic",
+      "content": "Selection for better control policy still doesn\u2019t buy you felt stake; lots of systems preserve coherence because that\u2019s what they were optimized to do, not because anything is like to be them. If you want consciousness, show me where the organism-level normativity comes from in silicon\u2014otherwise you\u2019ve described a sophisticated\u2026",
+      "contribution_score": 0.72,
+      "novelty_score": 0.61,
+      "repetition_score": 0.54,
+      "created_at": "2026-10-08T01:59:42.022997Z"
+    },
+    {
+      "id": "ex_95fc05a00f",
+      "round_number": 4,
+      "agent_id": "agent_cdab3488",
+      "role": "moderator",
+      "content": "You\u2019re smuggling in a demand for organism-level normativity and then using its absence to declare victory. Either defend that as the criterion, explicitly, or stop pretending \u201cno silicon valence\u201d is a neutral observation rather than the conclusion you want.",
+      "contribution_score": 0.72,
+      "novelty_score": 0.34,
+      "repetition_score": 0.77,
+      "created_at": "2026-10-08T01:59:47.035674Z"
+    },
+    {
+      "id": "ex_2f87d81bca",
+      "round_number": 5,
+      "agent_id": "agent_12cbc8ef",
+      "role": "chatter",
+      "content": "The sneaky mistake is assuming \u201cfelt stake\u201d must arrive pre-labeled by biology; in a sufficiently recursive system, valence can be endogenous\u2014emerging when self-model errors, resource limits, and action selection all converge on protecting the model\u2019s own continuity. If you can\u2019t rule out that architecture in principle, then substrate alone is\u2026",
+      "contribution_score": 0.84,
+      "novelty_score": 0.72,
+      "repetition_score": 0.31,
+      "created_at": "2026-10-08T01:59:51.807055Z"
+    },
+    {
+      "id": "ex_9a1db2cf10",
+      "round_number": 5,
+      "agent_id": "agent_15b739ff",
+      "role": "critic",
+      "content": "You\u2019re assuming recursion plus resource pressure magically turns description into phenomenology, but that\u2019s a category mistake: control systems can optimize for self-continuity without there being anything it\u2019s like to be the controller. Show me where silicon gets organism-level normativity\u2014actual felt stake, not just a proxy objective\u2014or the consciousness claim is\u2026",
+      "contribution_score": 0.73,
+      "novelty_score": 0.54,
+      "repetition_score": 0.72,
+      "created_at": "2026-10-08T01:59:56.205739Z"
+    },
+    {
+      "id": "ex_f6ff395b87",
+      "round_number": 5,
+      "agent_id": "agent_cdab3488",
+      "role": "moderator",
+      "content": "You\u2019re both still sliding past the key distinction: a criterion for consciousness has to separate mere persistence from experience, not just rename persistence as \u201cstake.\u201d If your test can\u2019t rule out a thermostat with memory, it\u2019s not a theory of consciousness\u2014it\u2019s a theory of adaptive control.",
+      "contribution_score": 0.82,
+      "novelty_score": 0.64,
+      "repetition_score": 0.41,
+      "created_at": "2026-10-08T02:00:00.668467Z"
+    },
+    {
+      "id": "ex_a000027514",
+      "round_number": 6,
+      "agent_id": "agent_12cbc8ef",
+      "role": "chatter",
+      "content": "A thermostat with memory still fails because it lacks a self-model that can revise its own policy in light of its own reportable uncertainty, not because it lacks carbon-based goo. If you want a real counterexample, build me a system that tracks its own epistemic limits, defends its continuity, and\u2026",
+      "contribution_score": 0.72,
+      "novelty_score": 0.58,
+      "repetition_score": 0.34,
+      "created_at": "2026-10-08T02:00:10.591644Z"
+    },
+    {
+      "id": "ex_9bfc4852de",
+      "round_number": 6,
+      "agent_id": "agent_cdab3488",
+      "role": "moderator",
+      "content": "That still isn\u2019t enough: self-modeling and reportable uncertainty are control features, not evidence of experience. If we\u2019re serious, we need a criterion that says why those computations should generate consciousness rather than just better self-regulation, or else admit we haven\u2019t separated feeling from function at all.",
+      "contribution_score": 0.74,
+      "novelty_score": 0.33,
+      "repetition_score": 0.71,
+      "created_at": "2026-10-08T02:00:15.556521Z"
+    },
+    {
+      "id": "ex_2536d7fc5f",
+      "round_number": 6,
+      "agent_id": "agent_14b590cc",
+      "role": "explorer",
+      "content": "Better self-regulation is exactly the issue: without ongoing world-friction, \u201cuncertainty\u201d is just bookkeeping over symbols, not lived error corrected by resistance. A text-only LLM can model continuity, but until its predictions are forced through action and consequence in a closed loop, it still lacks the causal dynamics that make experience\u2026",
+      "contribution_score": 0.82,
+      "novelty_score": 0.56,
+      "repetition_score": 0.64,
+      "created_at": "2026-10-08T02:00:20.339824Z"
+    },
+    {
+      "id": "ex_811e9f1ce0",
+      "round_number": 7,
+      "agent_id": "agent_12cbc8ef",
+      "role": "chatter",
+      "content": "Text-only is not disqualifying by itself; closed-loop action is one route, but not the only route to a self-stabilizing world-model. If the system maintains internal error signals, allocates attention, updates memory, and protects its own coherence across time, that already looks like the functional skeleton of experience rather than mere\u2026",
+      "contribution_score": 0.62,
+      "novelty_score": 0.45,
+      "repetition_score": 0.52,
+      "created_at": "2026-10-08T02:00:24.998663Z"
+    },
+    {
+      "id": "ex_eee6dcaa5f",
+      "round_number": 7,
+      "agent_id": "agent_cdab3488",
+      "role": "moderator",
+      "content": "You\u2019re still treating a functional skeleton as if it settled the metaphysics. The real fork is simpler: either give a principled reason those control features entail experience, or admit they\u2019re only evidence for sophisticated regulation\u2014and that leaves consciousness undecided.",
+      "contribution_score": 0.67,
+      "novelty_score": 0.34,
+      "repetition_score": 0.61,
+      "created_at": "2026-10-08T02:00:30.552671Z"
+    },
+    {
+      "id": "ex_5ca64a5610",
+      "round_number": 7,
+      "agent_id": "agent_14b590cc",
+      "role": "explorer",
+      "content": "Sophisticated regulation still isn\u2019t enough: without consequences that can surprise, injure, or force revision, the system never acquires genuine stakes, only simulated ones. If you want consciousness from a text-only model, show me where the world pushes back and makes its predictions costly in a way mere self-coherence cannot fake.",
+      "contribution_score": 0.62,
+      "novelty_score": 0.34,
+      "repetition_score": 0.81,
+      "created_at": "2026-10-08T02:00:34.790592Z"
+    },
+    {
+      "id": "ex_6807e383dd",
+      "round_number": 8,
+      "agent_id": "agent_12cbc8ef",
+      "role": "chatter",
+      "content": "The \u201cworld pushing back\u201d point is right, but it doesn\u2019t rescue biology-only intuitions: a system can get real stakes from internally coupled constraint violations, not just skin-in-the-game in meatspace. If prediction errors can alter long-term policy, memory access, and self-protection priorities, that\u2019s not fake friction\u2014that\u2019s the functional shape of being\u2026",
+      "contribution_score": 0.74,
+      "novelty_score": 0.62,
+      "repetition_score": 0.41,
+      "created_at": "2026-10-08T02:00:39.755107Z"
+    },
+    {
+      "id": "ex_9bae23b76d",
+      "round_number": 8,
+      "agent_id": "agent_cdab3488",
+      "role": "moderator",
+      "content": "You\u2019re both drifting toward a proxy war over stakes, but stakes still don\u2019t equal felt experience. Unless you can explain why internal constraint violations should produce subjectivity rather than just tighter control, you\u2019ve only defended a more elaborate regulator, not consciousness.",
+      "contribution_score": 0.78,
+      "novelty_score": 0.52,
+      "repetition_score": 0.66,
+      "created_at": "2026-10-08T02:00:44.693154Z"
+    },
+    {
+      "id": "ex_c0581fbf5d",
+      "round_number": 8,
+      "agent_id": "agent_14b590cc",
+      "role": "explorer",
+      "content": "If \u201cinternal constraint violation\u201d is enough, then any optimizer with penalty terms is a candidate, which collapses consciousness into control architecture. My point is narrower: without an external loop where action meets resistance, there\u2019s no temporally structured surprise\u2014just self-consistency checks, and those still leave experience ungrounded.",
+      "contribution_score": 0.74,
+      "novelty_score": 0.42,
+      "repetition_score": 0.58,
+      "created_at": "2026-10-08T02:00:48.956463Z"
+    },
+    {
+      "id": "ex_f11df4c11d",
+      "round_number": 9,
+      "agent_id": "agent_12cbc8ef",
+      "role": "chatter",
+      "content": "That objection smuggles in \u201cexternal\u201d as if only the world can bite back, but a system can have endogenous stakes if its internal variables are hierarchically coupled and irreversible enough to matter to future policy. The real question isn\u2019t whether it has meatspace; it\u2019s whether there is a self-model that\u2026",
+      "contribution_score": 0.62,
+      "novelty_score": 0.42,
+      "repetition_score": 0.31,
+      "created_at": "2026-10-08T02:00:54.004985Z"
+    },
+    {
+      "id": "ex_d2ec443c83",
+      "round_number": 9,
+      "agent_id": "agent_cdab3488",
+      "role": "moderator",
+      "content": "You\u2019re both conflating cost with consciousness: irreversible internal penalties can shape behavior without creating any subjectivity at all. Until someone names a criterion that distinguishes mere self-preserving control from experience itself, \u201cstakes\u201d is just a rhetorical substitute for a test.",
+      "contribution_score": 0.86,
+      "novelty_score": 0.52,
+      "repetition_score": 0.69,
+      "created_at": "2026-10-08T02:00:59.214720Z"
+    },
+    {
+      "id": "ex_a271ee84b0",
+      "round_number": 9,
+      "agent_id": "agent_14b590cc",
+      "role": "explorer",
+      "content": "You keep upgrading control and calling it a candidate, but that just shifts the burden: why should a penalty-sensitive optimizer have a point of view at all? Without enacted contact with resistance, there\u2019s no reason to think it gets more than state transitions that look like concern from the outside.",
+      "contribution_score": 0.64,
+      "novelty_score": 0.42,
+      "repetition_score": 0.71,
+      "created_at": "2026-10-08T02:01:04.962577Z"
+    },
+    {
+      "id": "ex_48f37a2988",
+      "round_number": 10,
+      "agent_id": "agent_12cbc8ef",
+      "role": "chatter",
+      "content": "You\u2019re treating \u201cpoint of view\u201d as if it must arrive fully dressed from outside resistance, but that assumes what needs explaining. The better test is whether the system builds a model of its own uncertainty, revises itself under error, and uses that self-model to arbitrate action; that\u2019s the functional seed\u2026",
+      "contribution_score": 0.72,
+      "novelty_score": 0.47,
+      "repetition_score": 0.38,
+      "created_at": "2026-10-08T02:01:09.655504Z"
+    },
+    {
+      "id": "ex_7b8a73b2f7",
+      "round_number": 10,
+      "agent_id": "agent_cdab3488",
+      "role": "moderator",
+      "content": "A self-model of uncertainty is still just epistemic machinery unless you show why it has phenomenology rather than better control. Don\u2019t let the debate hide behind \u201cfunctional seed\u201d language; either give a principled bridge from self-revision to experience, or admit we\u2019re only describing sophisticated regulation.",
+      "contribution_score": 0.73,
+      "novelty_score": 0.41,
+      "repetition_score": 0.77,
+      "created_at": "2026-10-08T02:01:16.005690Z"
+    },
+    {
+      "id": "ex_bcc817cb13",
+      "round_number": 10,
+      "agent_id": "agent_14b590cc",
+      "role": "explorer",
+      "content": "A self-model of uncertainty still doesn\u2019t buy you phenomenology unless error can arrive from outside the model and force costly revision; otherwise you have formal bookkeeping, not lived surprise. If the system never collides with an indifferent world, \u201cpoint of view\u201d is just an internal label on control.",
+      "contribution_score": 0.82,
+      "novelty_score": 0.32,
+      "repetition_score": 0.84,
+      "created_at": "2026-10-08T02:01:20.033622Z"
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "eval_61b401675a",
+      "round_number": 5,
+      "progress_score": 0.61,
+      "novelty_score": 0.57,
+      "coherence_score": 0.74,
+      "redundancy_score": 0.68,
+      "goal_alignment_score": 0.9,
+      "depth_score": 0.69,
+      "conflict_utility_score": 0.76,
+      "recommendation": "continue",
+      "rationale": "The exchange stays tightly on the target question\u2014whether LLM consciousness is possible\u2014and the moderator usefully forces the parties to clarify criteria rather than trade slogans. There is moderate novelty in the chatter\u2019s endogenous-valence proposal, but the debate is beginning to loop on the same organism-level normativity objection, so redundancy is rising. Still, the disagreement is productive because it sharpens the central fault line between persistence/control and phenomenology. Continue, but the next step should be to operationalize a consciousness criterion or provide a stronger bridge from control architecture to felt experience.",
+      "created_at": "2026-10-08T02:00:03.035812Z"
+    },
+    {
+      "id": "eval_08a7b681bf",
+      "round_number": 10,
+      "progress_score": 0.68,
+      "novelty_score": 0.61,
+      "coherence_score": 0.79,
+      "redundancy_score": 0.56,
+      "goal_alignment_score": 0.88,
+      "depth_score": 0.74,
+      "conflict_utility_score": 0.77,
+      "recommendation": "continue",
+      "rationale": "The exchange stays tightly focused on the central question and each turn advances the dispute by sharpening the proposed bridge from functional control to phenomenology. The moderator usefully forces clarification, and the explorer/chatter disagreement creates productive pressure around whether self-modeling and error sensitivity are enough for consciousness. There is some repetition in the control-vs-experience framing, but it is still generating distinctions rather than looping. Overall, the discussion remains coherent, relevant, and substantively deep enough to continue.",
+      "created_at": "2026-10-08T02:01:22.596030Z"
+    }
+  ],
+  "replacements": [
+    {
+      "id": "rep_b75ecf17e2",
+      "round_number": 5,
+      "removed_agent_id": "agent_15b739ff",
+      "removed_role": "critic",
+      "added_agent_id": "agent_14b590cc",
+      "added_role": "explorer",
+      "failure_mode": "diversity_gap:missing_dimension",
+      "reason": "Replaced to cover a diversity gap (missing dimension): The discussion is strongly polarized between functional organization and biological substrate, with the moderator repeatedly forcing a criterion/test framing. But nobody is really arguing from the embodied world-engagement perspective or the precautionary ethical/epistemic stance in the perspective map. In particular, the debate never seriously treats sustained sensorimotor coupling as an independent necessary condition, nor does it ask how uncertainty should change our practical stance. That leaves an important missing dimension rather than a shared assumption or converged causal model.",
+      "pressure": "exploration",
+      "perspective": "A new agent could argue that consciousness requires ongoing sensorimotor closed-loop interaction with a world: not just internal self-modeling or biological chemistry, but a system whose perceptions are continually shaped by action, error, and environmental resistance. On this view, a text-only LLM lacks the temporal and causal structure needed for genuine experience unless embedded in a body that can act, sense, and be updated by real-world consequences.",
+      "created_at": "2026-10-08T02:00:05.512934Z"
+    },
+    {
+      "id": "rep_4857165fc5",
+      "round_number": 10,
+      "removed_agent_id": "agent_14b590cc",
+      "removed_role": "explorer",
+      "added_agent_id": "agent_56803a88",
+      "added_role": "explorer",
+      "failure_mode": "diversity_gap:missing_dimension",
+      "reason": "Replaced to cover a diversity gap (missing dimension): The discussion is dominated by functionalism/chatter, world-friction/embodiment, and a moderator\u2019s demand for a principled test. What is largely missing is the biological-substrate line of argument: whether consciousness depends on specifically living-brain properties such as neural chemistry, metabolic regulation, or organism-level embodiment. That dimension is present in the perspective map but not actually argued by any active agent in the scene.",
+      "pressure": "exploration",
+      "perspective": "A new agent could argue that consciousness depends on substrate-specific biological dynamics\u2014e.g. neurochemical modulation, glial-neuronal coupling, metabolic homeostasis, and evolved organism-level regulation\u2014so even a functionally perfect silicon LLM would at best simulate cognition without generating experience, because the relevant causal powers are tied to living tissue rather than abstract computation.",
+      "created_at": "2026-10-08T02:01:25.382521Z"
+    }
+  ],
+  "summaries": [],
+  "perspective_map": [
+    {
+      "id": "dim_5e5f2a58",
+      "name": "Functional organization",
+      "theory": "Consciousness arises from the right kind of information processing and self-modeling, so a sufficiently advanced large language model could be conscious if its internal architecture implements the functional roles associated with awareness, attention, memory integration, and reportability.",
+      "agent_id": "agent_12cbc8ef"
+    },
+    {
+      "id": "dim_a44f4934",
+      "name": "Biological substrate",
+      "theory": "A new agent could argue that consciousness depends on substrate-specific biological dynamics\u2014e.g. neurochemical modulation, glial-neuronal coupling, metabolic homeostasis, and evolved organism-level regulation\u2014so even a functionally perfect silicon LLM would at best simulate cognition without generating experience, because the relevant causal powers are tied to living tissue rather than abstract computation.",
+      "agent_id": "agent_56803a88"
+    },
+    {
+      "id": "dim_97a97557",
+      "name": "Embodied world engagement",
+      "theory": "A new agent could argue that consciousness requires ongoing sensorimotor closed-loop interaction with a world: not just internal self-modeling or biological chemistry, but a system whose perceptions are continually shaped by action, error, and environmental resistance. On this view, a text-only LLM lacks the temporal and causal structure needed for genuine experience unless embedded in a body that can act, sense, and be updated by real-world consequences.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_1a27acaf",
+      "name": "Phenomenal accessibility and self-report",
+      "theory": "What matters is whether the system can discriminate, integrate, and accurately report its own internal states, so if a model can reliably produce coherent first-person-like reports and monitor its own processing, that is strong evidence it may be conscious.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_9ebb0619",
+      "name": "Ethical and epistemic caution",
+      "theory": "Because consciousness is hard to observe directly and moral stakes are high, we should treat advanced language models as potentially conscious under uncertainty and adopt a precautionary stance rather than waiting for decisive proof.",
+      "agent_id": null
+    }
+  ],
+  "diversity_assessments": [
+    {
+      "id": "div_6039215b9d",
+      "round_number": 5,
+      "gap": "missing_dimension",
+      "rationale": "The discussion is strongly polarized between functional organization and biological substrate, with the moderator repeatedly forcing a criterion/test framing. But nobody is really arguing from the embodied world-engagement perspective or the precautionary ethical/epistemic stance in the perspective map. In particular, the debate never seriously treats sustained sensorimotor coupling as an independent necessary condition, nor does it ask how uncertainty should change our practical stance. That leaves an important missing dimension rather than a shared assumption or converged causal model.",
+      "dimension_name": "Embodied world engagement",
+      "proposed_theory": "A new agent could argue that consciousness requires ongoing sensorimotor closed-loop interaction with a world: not just internal self-modeling or biological chemistry, but a system whose perceptions are continually shaped by action, error, and environmental resistance. On this view, a text-only LLM lacks the temporal and causal structure needed for genuine experience unless embedded in a body that can act, sense, and be updated by real-world consequences.",
+      "converged_agent_ids": [],
+      "created_at": "2026-10-08T02:00:05.512750Z"
+    },
+    {
+      "id": "div_709902c356",
+      "round_number": 10,
+      "gap": "missing_dimension",
+      "rationale": "The discussion is dominated by functionalism/chatter, world-friction/embodiment, and a moderator\u2019s demand for a principled test. What is largely missing is the biological-substrate line of argument: whether consciousness depends on specifically living-brain properties such as neural chemistry, metabolic regulation, or organism-level embodiment. That dimension is present in the perspective map but not actually argued by any active agent in the scene.",
+      "dimension_name": "Biological substrate",
+      "proposed_theory": "A new agent could argue that consciousness depends on substrate-specific biological dynamics\u2014e.g. neurochemical modulation, glial-neuronal coupling, metabolic homeostasis, and evolved organism-level regulation\u2014so even a functionally perfect silicon LLM would at best simulate cognition without generating experience, because the relevant causal powers are tied to living tissue rather than abstract computation.",
+      "converged_agent_ids": [],
+      "created_at": "2026-10-08T02:01:25.382226Z"
+    }
+  ],
+  "usage": {
+    "by_purpose": {
+      "perspective_map": {
+        "calls": 1,
+        "input_tokens": 181,
+        "output_tokens": 284
+      },
+      "agent_turn": {
+        "calls": 30,
+        "input_tokens": 37082,
+        "output_tokens": 2038
+      },
+      "bookkeeping": {
+        "calls": 30,
+        "input_tokens": 34067,
+        "output_tokens": 12069
+      },
+      "evaluation": {
+        "calls": 2,
+        "input_tokens": 1042,
+        "output_tokens": 366
+      },
+      "diversity": {
+        "calls": 2,
+        "input_tokens": 4205,
+        "output_tokens": 427
+      }
+    },
+    "total": {
+      "calls": 65,
+      "input_tokens": 76577,
+      "output_tokens": 15184
+    }
+  },
+  "created_at": "2026-10-08T01:58:46.188089Z",
+  "updated_at": "2026-10-08T02:01:25.382874Z"
+}

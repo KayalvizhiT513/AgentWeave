@@ -1,0 +1,266 @@
+{
+  "id": "conv_e9f2442a467642babd53ce8dec4505cb",
+  "topic": "How should platforms respond to coordinated misinformation without chilling legitimate speech?",
+  "scene": "policy debate",
+  "constraints": [],
+  "status": "running",
+  "runtime": {
+    "agent_turn_delay_seconds": 0.0,
+    "evaluation_interval": 5,
+    "restructuring_interval": 25,
+    "max_rounds": 10,
+    "max_history_entries": 120,
+    "summary_window": 8,
+    "stagnation_threshold": 3,
+    "history_window": 8,
+    "perspective_dimensions": 5,
+    "diversity_pressure": true
+  },
+  "tuning": {
+    "default": {
+      "model": null,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "reasoning_effort": null,
+      "plain_text": null,
+      "endpoint": "http://127.0.0.1:8082/v1"
+    },
+    "roles": {},
+    "evaluator": {
+      "model": null,
+      "temperature": null,
+      "top_p": null,
+      "reasoning_effort": null,
+      "plain_text": null,
+      "endpoint": null
+    },
+    "thresholds": {
+      "redundancy_cutoff": 0.62,
+      "novelty_floor": 0.35,
+      "depth_floor": 0.45,
+      "repetition_weight": 0.55
+    }
+  },
+  "current_round": 1,
+  "stall_count": 0,
+  "final_summary": null,
+  "shared_context": {
+    "goal": "How should platforms respond to coordinated misinformation without chilling legitimate speech?",
+    "scene": "policy debate",
+    "constraints": [],
+    "decisions": [],
+    "active_conflicts": [],
+    "history": [
+      "Transparency only works if the rules are narrowly anchored to prohibited harms; otherwise you turn every rumor into a conspiracy and every warning into a witch hunt.",
+      "</tool_response>\n\n</think>\n\nTransparency is a band-aid if it doesn\u2019t force public disclosure of the coordination patterns and throttling rules; otherwise it just certifies the machine learning model that flags the wrong networks."
+    ]
+  },
+  "agents": [
+    {
+      "id": "agent_c848dbe0",
+      "role": "chatter",
+      "personality": "unconventional, expansive, and ideationally bold",
+      "perspective": "Platforms should prioritize narrow, transparent enforcement with clear rules, notice, explanation, and appeal because mistaken or overbroad moderation chills legitimate speech more than coordinated misinformation harms can be reduced by blunt suppression.",
+      "state": {
+        "core_thesis": "Platforms should prioritize narrow, transparent enforcement with clear rules, notice, explanation, and appeal because mistaken or overbroad moderation chills legitimate speech more than coordinated misinformation harms can be reduced by blunt suppression.",
+        "assumptions": [
+          "Rules must be tied to concrete, prohibited harms.",
+          "Overbroad standards invite self-censorship and abuse."
+        ],
+        "causal_model": [
+          "Narrow rules reduce false positives and chilling effects.",
+          "Transparent enforcement only builds trust when users can predict what will be removed."
+        ],
+        "claims": [
+          "Transparency is ineffective without narrow harm-based standards.",
+          "Vague anti-misinformation rules can turn ordinary rumors into alleged conspiracies.",
+          "Broad warning labels or takedowns can become witch hunts against legitimate speech."
+        ],
+        "concessions": [],
+        "unresolved_attacks": []
+      },
+      "status": "active",
+      "confidence": 0.72,
+      "priority": 0.78,
+      "expertise_weight": 0.62,
+      "contribution_score": 0.73,
+      "repetition_score": 0.18,
+      "novelty_score": 0.67,
+      "token_usage": 27,
+      "replacement_eligibility": 0.2205
+    },
+    {
+      "id": "agent_23d9ac6c",
+      "role": "critic",
+      "personality": "sharply skeptical, rigorous, and anti-consensus",
+      "perspective": "Platforms should act aggressively against coordinated misinformation because the primary obligation is to reduce predictable social harm; fast takedowns, throttling, and coordinated-behavior detection are justified when false networks can rapidly endanger elections, health, or public order.",
+      "state": {
+        "core_thesis": "Platforms should act aggressively against coordinated misinformation because the primary obligation is to reduce predictable social harm; fast takedowns, throttling, and coordinated-behavior detection are justified when false networks can rapidly endanger elections, health, or public order.",
+        "assumptions": [
+          "Public disclosure can improve accountability for moderation systems.",
+          "Coordination-pattern detection is a meaningful target distinct from ordinary speech.",
+          "Narrowly anchored harm rules are necessary to avoid overreach."
+        ],
+        "causal_model": [
+          "Opaque transparency measures fail to constrain automated moderation errors.",
+          "Revealing coordination patterns and throttling rules can expose whether systems are misclassifying legitimate networks.",
+          "Without disclosure, transparency can legitimize flawed models instead of correcting them."
+        ],
+        "claims": [
+          "Transparency alone is insufficient without disclosure of coordination-pattern criteria and throttling rules.",
+          "Moderation systems can wrongly flag legitimate networks if not publicly scrutinized.",
+          "Transparency should be tied to concrete, harm-based constraints."
+        ],
+        "concessions": [
+          "None explicitly."
+        ],
+        "unresolved_attacks": [
+          "How to define coordination patterns without sweeping in legitimate collective speech.",
+          "How to provide transparency without enabling adversaries to game enforcement.",
+          "What minimum disclosure is enough to improve accountability without compromising security."
+        ]
+      },
+      "status": "active",
+      "confidence": 0.68,
+      "priority": 0.7,
+      "expertise_weight": 0.7,
+      "contribution_score": 0.78,
+      "repetition_score": 0.28,
+      "novelty_score": 0.55,
+      "token_usage": 32,
+      "replacement_eligibility": 0.253
+    },
+    {
+      "id": "agent_61df3abe",
+      "role": "moderator",
+      "personality": "anti-groupthink, scope-protective, and order-focused",
+      "perspective": null,
+      "state": {
+        "core_thesis": "",
+        "assumptions": [],
+        "causal_model": [],
+        "claims": [],
+        "concessions": [],
+        "unresolved_attacks": []
+      },
+      "status": "active",
+      "confidence": 0.66,
+      "priority": 0.74,
+      "expertise_weight": 0.58,
+      "contribution_score": 0.5,
+      "repetition_score": 0.0,
+      "novelty_score": 0.5,
+      "token_usage": 0,
+      "replacement_eligibility": 0.0
+    },
+    {
+      "id": "agent_1443388b",
+      "role": "evaluator",
+      "personality": "measured, objective, and novelty-exacting",
+      "perspective": null,
+      "state": {
+        "core_thesis": "",
+        "assumptions": [],
+        "causal_model": [],
+        "claims": [],
+        "concessions": [],
+        "unresolved_attacks": []
+      },
+      "status": "active",
+      "confidence": 0.8,
+      "priority": 0.85,
+      "expertise_weight": 0.76,
+      "contribution_score": 0.5,
+      "repetition_score": 0.0,
+      "novelty_score": 0.5,
+      "token_usage": 0,
+      "replacement_eligibility": 0.0
+    }
+  ],
+  "exchanges": [
+    {
+      "id": "ex_b8f9fd7c8f",
+      "round_number": 1,
+      "agent_id": "agent_c848dbe0",
+      "role": "chatter",
+      "content": "Transparency only works if the rules are narrowly anchored to prohibited harms; otherwise you turn every rumor into a conspiracy and every warning into a witch hunt.",
+      "contribution_score": 0.73,
+      "novelty_score": 0.67,
+      "repetition_score": 0.18,
+      "created_at": "2026-10-08T02:34:05.007611Z"
+    },
+    {
+      "id": "ex_6d79668cc6",
+      "round_number": 1,
+      "agent_id": "agent_23d9ac6c",
+      "role": "critic",
+      "content": "</tool_response>\n\n</think>\n\nTransparency is a band-aid if it doesn\u2019t force public disclosure of the coordination patterns and throttling rules; otherwise it just certifies the machine learning model that flags the wrong networks.",
+      "contribution_score": 0.78,
+      "novelty_score": 0.55,
+      "repetition_score": 0.28,
+      "created_at": "2026-10-08T02:34:17.367715Z"
+    }
+  ],
+  "evaluations": [],
+  "replacements": [],
+  "summaries": [],
+  "perspective_map": [
+    {
+      "id": "dim_1793b5fc",
+      "name": "Rights-first due process",
+      "theory": "Platforms should prioritize narrow, transparent enforcement with clear rules, notice, explanation, and appeal because mistaken or overbroad moderation chills legitimate speech more than coordinated misinformation harms can be reduced by blunt suppression.",
+      "agent_id": "agent_c848dbe0"
+    },
+    {
+      "id": "dim_196b9aa1",
+      "name": "Harm-minimization and public safety",
+      "theory": "Platforms should act aggressively against coordinated misinformation because the primary obligation is to reduce predictable social harm; fast takedowns, throttling, and coordinated-behavior detection are justified when false networks can rapidly endanger elections, health, or public order.",
+      "agent_id": "agent_23d9ac6c"
+    },
+    {
+      "id": "dim_ba1b9b3f",
+      "name": "Contextual credibility and friction",
+      "theory": "Platforms should not focus on deleting content but on lowering the spread of low-credibility material through labels, repost friction, ranking demotion, and provenance cues because most users can still speak while manipulation is made less effective.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_1a596164",
+      "name": "Procedural legitimacy and accountability",
+      "theory": "Platforms should emphasize transparent standards, independent audits, and public reporting because trust in moderation depends less on any single rule than on whether decisions are seen as consistent, reviewable, and insulated from partisan abuse.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_6794f0a2",
+      "name": "Pluralism and viewpoint protection",
+      "theory": "Platforms should tolerate a wider range of contested claims and intervene only against clearly deceptive coordination because robust democratic discourse requires space for dissent, and overzealous misinformation policies can be weaponized to silence minority or unpopular views.",
+      "agent_id": null
+    }
+  ],
+  "diversity_assessments": [],
+  "usage": {
+    "by_purpose": {
+      "perspective_map": {
+        "calls": 1,
+        "input_tokens": 185,
+        "output_tokens": 290
+      },
+      "agent_turn_local": {
+        "calls": 6,
+        "input_tokens": 2976,
+        "output_tokens": 258
+      },
+      "bookkeeping": {
+        "calls": 2,
+        "input_tokens": 889,
+        "output_tokens": 465
+      }
+    },
+    "total": {
+      "calls": 9,
+      "input_tokens": 4050,
+      "output_tokens": 1013
+    }
+  },
+  "created_at": "2026-10-08T02:33:51.835109Z",
+  "updated_at": "2026-10-08T02:33:51.835119Z"
+}

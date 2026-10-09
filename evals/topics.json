@@ -1,0 +1,8 @@
+[
+  {"id": "ai-consciousness", "topic": "Could a large language model ever be conscious?", "scene": "debate"},
+  {"id": "four-day-week", "topic": "Should a 200-person software company move to a four-day work week?", "scene": "decision"},
+  {"id": "antibiotic-resistance", "topic": "What is the most effective lever for slowing antibiotic resistance?", "scene": "debate"},
+  {"id": "offline-first-app", "topic": "Design the sync layer for an offline-first note-taking app used by teams.", "scene": "collaborative design"},
+  {"id": "misinformation", "topic": "How should platforms respond to coordinated misinformation without chilling legitimate speech?", "scene": "policy debate"},
+  {"id": "ill-posed", "topic": "Is it better to be efficient or effective?", "scene": "open discussion"}
+]

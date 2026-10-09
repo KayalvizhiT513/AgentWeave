@@ -1,28 +1,39 @@
 from __future__ import annotations
 
 import asyncio
+import logging
 from datetime import datetime
 
 from agentweave.core.enums import (
     AgentRole,
     AgentStatus,
     ConversationStatus,
+    DiversityGapType,
     EventType,
     EvaluationRecommendation,
+    ReplacementPressure,
 )
 from agentweave.core.models import (
     AgentProfile,
+    AgentState,
     Conversation,
     ConversationEvent,
+    DiversityAssessment,
     Exchange,
     MemorySummary,
+    PerspectiveDimension,
     ReplacementEvent,
     SharedContext,
 )
 from agentweave.services.event_stream import EventBus
 from agentweave.services.provider import AgentProvider
 from agentweave.services.store import ConversationStore
+from agentweave.tuning import TuningConfig
 
+logger = logging.getLogger(__name__)
+
+# Seats that carry a defended theory. Moderator and Evaluator stay perspective-invariant.
+PERSPECTIVE_SEATS = {AgentRole.CHATTER, AgentRole.CRITIC}
 
 ROLE_LIBRARY: dict[AgentRole, dict[str, float | str]] = {
     AgentRole.CHATTER: {
@@ -103,6 +114,12 @@ ROLE_LIBRARY: dict[AgentRole, dict[str, float | str]] = {
         "priority": 0.57,
         "expertise_weight": 0.66,
     },
+    AgentRole.EXPLORER: {
+        "personality": "theory-committed, assumption-challenging, and unwilling to concede without cause",
+        "confidence": 0.7,
+        "priority": 0.68,
+        "expertise_weight": 0.68,
+    },
 }
 
 REPLACEMENT_STRATEGY: dict[str, AgentRole] = {
@@ -117,10 +134,12 @@ REPLACEMENT_STRATEGY: dict[str, AgentRole] = {
 }
 
 
-def _make_agent(role: AgentRole) -> AgentProfile:
+def _make_agent(role: AgentRole, perspective: str | None = None) -> AgentProfile:
     profile = ROLE_LIBRARY[role]
     return AgentProfile(
         role=role,
+        perspective=perspective,
+        state=AgentState(core_thesis=perspective or ""),
         personality=str(profile["personality"]),
         confidence=float(profile["confidence"]),
         priority=float(profile["priority"]),
@@ -147,15 +166,18 @@ class ConversationOrchestrator:
         scene: str | None,
         constraints: list[str],
         runtime,
+        tuning: TuningConfig | None = None,
     ) -> Conversation:
         conversation = Conversation(
             topic=topic,
             scene=scene,
             constraints=constraints,
             runtime=runtime,
+            tuning=tuning or TuningConfig(),
             shared_context=SharedContext(goal=topic, scene=scene, constraints=constraints),
             agents=self._initial_agents(),
         )
+        await self._seed_perspectives(conversation)
         await self.store.create(conversation)
         await self._publish(EventType.CONVERSATION_CREATED, conversation, {"conversation": conversation})
         return conversation
@@ -222,9 +244,13 @@ class ConversationOrchestrator:
                 agent.novelty_score = response.novelty_score
                 agent.repetition_score = response.repetition_score
                 agent.token_usage += len(response.content.split())
+                if response.state_update is not None:
+                    agent.state.absorb(response.state_update)
+                repetition_weight = conversation.tuning.thresholds.repetition_weight
                 agent.replacement_eligibility = min(
                     1.0,
-                    (agent.repetition_score * 0.55) + ((1.0 - agent.contribution_score) * 0.45),
+                    (agent.repetition_score * repetition_weight)
+                    + ((1.0 - agent.contribution_score) * (1.0 - repetition_weight)),
                 )
 
                 exchange = Exchange(
@@ -313,45 +339,170 @@ class ConversationOrchestrator:
         )
         await self._publish(EventType.EVALUATION_CREATED, conversation, {"evaluation": evaluation})
 
+        # Quality pressure: repair conversation quality from the failure mode.
+        replaced = False
         if evaluation.recommendation == EvaluationRecommendation.REPLACE:
-            await self._replace_weakest_agent(conversation, "too_repetitive")
+            replaced = await self._replace_weakest_agent(conversation, "too_repetitive")
         elif evaluation.recommendation == EvaluationRecommendation.RESTRUCTURE:
             failure_mode = self._determine_failure_mode(conversation, evaluation)
-            await self._replace_weakest_agent(conversation, failure_mode)
+            replaced = await self._replace_weakest_agent(conversation, failure_mode)
         elif evaluation.recommendation == EvaluationRecommendation.STOP:
             await self._finish(conversation, evaluation.rationale)
+            return
 
-    async def _replace_weakest_agent(self, conversation: Conversation, failure_mode: str) -> None:
-        candidates = [
+        # Exploration pressure: repair missing reasoning space. At most one roster change per evaluation.
+        if not replaced and conversation.runtime.diversity_pressure:
+            await self._apply_exploration_pressure(conversation)
+
+    async def _seed_perspectives(self, conversation: Conversation) -> None:
+        count = conversation.runtime.perspective_dimensions
+        if count <= 0:
+            return
+        try:
+            dimensions = await self.provider.map_perspectives(conversation, count)
+        except Exception:
+            # Perspectives are an enhancement; a failed map must not block the conversation.
+            logger.warning("Perspective mapping failed; continuing with personality-only agents.", exc_info=True)
+            return
+        if not dimensions:
+            return
+        conversation.perspective_map = list(dimensions)
+        for agent in conversation.agents:
+            if agent.role in PERSPECTIVE_SEATS:
+                self._claim_next_dimension(conversation, agent)
+        await self._publish(
+            EventType.PERSPECTIVE_MAP_CREATED,
+            conversation,
+            {"perspective_map": conversation.perspective_map},
+        )
+
+    def _claim_next_dimension(self, conversation: Conversation, agent: AgentProfile) -> bool:
+        for dimension in conversation.perspective_map:
+            if dimension.agent_id is None:
+                dimension.agent_id = agent.id
+                agent.perspective = dimension.theory
+                agent.state.core_thesis = dimension.theory
+                return True
+        return False
+
+    def _release_dimension(self, conversation: Conversation, agent: AgentProfile) -> None:
+        for dimension in conversation.perspective_map:
+            if dimension.agent_id == agent.id:
+                dimension.agent_id = None
+
+    async def _apply_exploration_pressure(self, conversation: Conversation) -> None:
+        assessment = await self.provider.assess_diversity(conversation)
+        if assessment is None:
+            return
+        assessment.round_number = conversation.current_round
+        conversation.diversity_assessments.append(assessment)
+        await self._publish(EventType.DIVERSITY_ASSESSED, conversation, {"assessment": assessment})
+        if assessment.gap == DiversityGapType.NONE or not assessment.proposed_theory.strip():
+            return
+
+        candidates = self._replacement_candidates(conversation)
+        converged = [agent for agent in candidates if agent.id in set(assessment.converged_agent_ids)]
+        if assessment.gap == DiversityGapType.CONVERGED_MODELS and converged:
+            candidates = converged
+        if not candidates:
+            return
+        weakest = max(candidates, key=lambda agent: agent.replacement_eligibility)
+
+        theory = assessment.proposed_theory.strip()
+        replacement = _make_agent(AgentRole.EXPLORER, perspective=theory)
+        self._register_dimension(conversation, assessment, replacement)
+        self._swap_agent(
+            conversation,
+            weakest,
+            replacement,
+            failure_mode=f"diversity_gap:{assessment.gap.value}",
+            reason=f"Replaced to cover a diversity gap ({assessment.gap.value.replace('_', ' ')}): {assessment.rationale}".strip(),
+            pressure=ReplacementPressure.EXPLORATION,
+        )
+        await self._publish(
+            EventType.AGENT_REPLACED, conversation, {"replacement": conversation.replacements[-1]}
+        )
+
+    def _register_dimension(
+        self, conversation: Conversation, assessment: DiversityAssessment, agent: AgentProfile
+    ) -> None:
+        name = assessment.dimension_name.strip().lower()
+        for dimension in conversation.perspective_map:
+            if name and dimension.name.strip().lower() == name and dimension.agent_id is None:
+                dimension.agent_id = agent.id
+                dimension.theory = agent.perspective or dimension.theory
+                return
+        conversation.perspective_map.append(
+            PerspectiveDimension(
+                name=assessment.dimension_name.strip() or assessment.gap.value,
+                theory=agent.perspective or "",
+                agent_id=agent.id,
+            )
+        )
+
+    def _replacement_candidates(self, conversation: Conversation) -> list[AgentProfile]:
+        return [
             agent
             for agent in conversation.active_agents()
             if agent.role not in {AgentRole.MODERATOR, AgentRole.EVALUATOR}
         ]
+
+    async def _replace_weakest_agent(self, conversation: Conversation, failure_mode: str) -> bool:
+        candidates = self._replacement_candidates(conversation)
         if not candidates:
-            return
+            return False
         weakest = max(candidates, key=lambda agent: agent.replacement_eligibility)
-        weakest.status = AgentStatus.REPLACED
-        new_role = REPLACEMENT_STRATEGY[failure_mode]
-        replacement = _make_agent(new_role)
-        conversation.agents.append(replacement)
-        event = ReplacementEvent(
-            round_number=conversation.current_round,
-            removed_agent_id=weakest.id,
-            removed_role=weakest.role,
-            added_agent_id=replacement.id,
-            added_role=replacement.role,
+        replacement = _make_agent(REPLACEMENT_STRATEGY[failure_mode])
+        # Quality repair swaps the personality; the newcomer takes an unclaimed theory if the map has one.
+        # Claim before the swap releases the retired agent's theory, so it cannot inherit it.
+        self._claim_next_dimension(conversation, replacement)
+        self._swap_agent(
+            conversation,
+            weakest,
+            replacement,
             failure_mode=failure_mode,
             reason=f"Replaced due to {failure_mode.replace('_', ' ')} during evaluation.",
+            pressure=ReplacementPressure.QUALITY,
         )
-        conversation.replacements.append(event)
-        await self._publish(EventType.AGENT_REPLACED, conversation, {"replacement": event})
+        await self._publish(
+            EventType.AGENT_REPLACED, conversation, {"replacement": conversation.replacements[-1]}
+        )
+        return True
+
+    def _swap_agent(
+        self,
+        conversation: Conversation,
+        weakest: AgentProfile,
+        replacement: AgentProfile,
+        *,
+        failure_mode: str,
+        reason: str,
+        pressure: ReplacementPressure,
+    ) -> None:
+        weakest.status = AgentStatus.REPLACED
+        self._release_dimension(conversation, weakest)
+        conversation.agents.append(replacement)
+        conversation.replacements.append(
+            ReplacementEvent(
+                round_number=conversation.current_round,
+                removed_agent_id=weakest.id,
+                removed_role=weakest.role,
+                added_agent_id=replacement.id,
+                added_role=replacement.role,
+                failure_mode=failure_mode,
+                reason=reason,
+                pressure=pressure,
+                perspective=replacement.perspective,
+            )
+        )
 
     def _determine_failure_mode(self, conversation: Conversation, evaluation) -> str:
-        if evaluation.redundancy_score > 0.62:
+        thresholds = conversation.tuning.thresholds
+        if evaluation.redundancy_score > thresholds.redundancy_cutoff:
             return "too_repetitive"
-        if evaluation.novelty_score < 0.35:
+        if evaluation.novelty_score < thresholds.novelty_floor:
             return "no_creativity"
-        if evaluation.depth_score < 0.45:
+        if evaluation.depth_score < thresholds.depth_floor:
             return "too_shallow"
         if conversation.current_round >= conversation.runtime.restructuring_interval:
             return "too_theoretical"

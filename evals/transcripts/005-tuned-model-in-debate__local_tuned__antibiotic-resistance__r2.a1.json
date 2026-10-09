@@ -1,0 +1,354 @@
+{
+  "id": "conv_7319ed6ac2174cb495f630c41c430b28",
+  "topic": "What is the most effective lever for slowing antibiotic resistance?",
+  "scene": "debate",
+  "constraints": [],
+  "status": "running",
+  "runtime": {
+    "agent_turn_delay_seconds": 0.0,
+    "evaluation_interval": 5,
+    "restructuring_interval": 25,
+    "max_rounds": 10,
+    "max_history_entries": 120,
+    "summary_window": 8,
+    "stagnation_threshold": 3,
+    "history_window": 8,
+    "perspective_dimensions": 5,
+    "diversity_pressure": true
+  },
+  "tuning": {
+    "default": {
+      "model": null,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "reasoning_effort": null,
+      "plain_text": null,
+      "endpoint": "http://127.0.0.1:8082/v1"
+    },
+    "roles": {},
+    "evaluator": {
+      "model": null,
+      "temperature": null,
+      "top_p": null,
+      "reasoning_effort": null,
+      "plain_text": null,
+      "endpoint": null
+    },
+    "thresholds": {
+      "redundancy_cutoff": 0.62,
+      "novelty_floor": 0.35,
+      "depth_floor": 0.45,
+      "repetition_weight": 0.55
+    }
+  },
+  "current_round": 3,
+  "stall_count": 0,
+  "final_summary": null,
+  "shared_context": {
+    "goal": "What is the most effective lever for slowing antibiotic resistance?",
+    "scene": "debate",
+    "constraints": [],
+    "decisions": [],
+    "active_conflicts": [],
+    "history": [
+      "The mistake is treating \"broad-spectrum\" as the default when the safer default is narrow-spectrum or no-antibiotic treatment at all. If we keep broad-spectrum agents in the pipeline, we\u2019re not stopping resistance; we\u2019re encouraging mutations and exporting them into the environment.",
+      "Broad-spectrum is the wrong lever precisely because it\u2019s the engine that drives transmission. The real question is which transmission pathways are expandable, and then we target hygiene and isolation hard while limiting unnecessary antibiotics.",
+      "We\u2019re still missing the enforcement angle: if hygiene and isolation are the \u201ccontrol,\u201d we need laws and sanctions to make compliance mandatory, or the transmission pathways will keep expanding under the banner of medical progress.",
+      "Forcing compliance on hygiene and isolation helps, but it doesn\u2019t answer the upstream problem: every extra antibiotic prescribed is a new mutation machine. The sharper move is to make the default is no-antibiotic treatment and narrow-spectrum only when absolutely necessary\u2014then resistance is bought with restraint, not spread.",
+      "\u0e1e\u0e34\u0e21\u0e1e\n\n</think>\n\nThat still leaves a missing benchmark: if you want to compare transmission control to antibiotic stewardship, show me the multiplier effect of one intervention versus the other on resistant-case incidence. Until then, both are competing shadows at the same table.",
+      "\u1ecdn\n\nI\u2019d stop pretending the two levers are interchangeable. Antibiotic stewardship is the choke point; transmission control matters, but it\u2019s downstream\u2014so the first move is stopping the resistome from being fed."
+    ]
+  },
+  "agents": [
+    {
+      "id": "agent_918d5938",
+      "role": "chatter",
+      "personality": "unconventional, expansive, and ideationally bold",
+      "perspective": "The main driver of antibiotic resistance is avoidable exposure to antibiotics, so the most effective lever is to reduce unnecessary prescribing, shorten courses when safe, and reserve broad-spectrum agents. By lowering selection pressure across human medicine, this approach directly slows the emergence and spread of resistant strains.",
+      "state": {
+        "core_thesis": "The main driver of antibiotic resistance is avoidable exposure to antibiotics, so the most effective lever is to reduce unnecessary prescribing, shorten courses when safe, and reserve broad-spectrum agents. By lowering selection pressure across human medicine, this approach directly slows the emergence and spread of resistant strains.",
+        "assumptions": [
+          "Narrow-spectrum or no-antibiotic treatment is often safer when clinically appropriate.",
+          "Broad-spectrum antibiotics should not be the default choice.",
+          "Selection pressure is a key mechanism driving resistance.",
+          "Hygiene/isolation matter, but they are secondary to reducing antibiotic exposure."
+        ],
+        "causal_model": [
+          "Antibiotic exposure increases selection pressure.",
+          "Selection pressure favors resistant strains and their spread.",
+          "Reducing unnecessary or overly broad use slows resistance emergence.",
+          "Mandatory hygiene compliance can reduce transmission, but it does not remove the upstream selection pressure from prescribing."
+        ],
+        "claims": [
+          "The default should be no-antibiotic treatment or narrow-spectrum therapy when appropriate.",
+          "Broad-spectrum agents should be reserved for clear clinical need, not used routinely.",
+          "Avoidable antibiotic exposure is the main lever for slowing resistance.",
+          "Enforcement of hygiene helps, but prescribing restraint is the sharper upstream intervention."
+        ],
+        "concessions": [
+          "Hygiene and isolation are useful adjuncts to slow spread.",
+          "Broad-spectrum antibiotics are necessary in some clinical cases."
+        ],
+        "unresolved_attacks": [
+          "Need to distinguish cases where broad-spectrum therapy is clinically necessary from routine default use.",
+          "Need evidence on how much of the benefit comes from narrowing spectrum versus reducing total antibiotic use."
+        ]
+      },
+      "status": "active",
+      "confidence": 0.72,
+      "priority": 0.78,
+      "expertise_weight": 0.62,
+      "contribution_score": 0.84,
+      "repetition_score": 0.72,
+      "novelty_score": 0.47,
+      "token_usage": 87,
+      "replacement_eligibility": 0.468
+    },
+    {
+      "id": "agent_560c95ed",
+      "role": "critic",
+      "personality": "sharply skeptical, rigorous, and anti-consensus",
+      "perspective": "Resistance spreads primarily because bacteria move between people and facilities, so the best lever is to prevent infections and transmission through hygiene, vaccination, isolation, sanitation, and hospital infection-control practices. If fewer people become infected and fewer organisms circulate, antibiotic use falls and resistant strains have less opportunity to propagate.",
+      "state": {
+        "core_thesis": "Resistance spreads primarily because bacteria move between people and facilities, so the best lever is to prevent infections and transmission through hygiene, vaccination, isolation, sanitation, and hospital infection-control practices. If fewer people become infected and fewer organisms circulate, antibiotic use falls and resistant strains have less opportunity to propagate.",
+        "assumptions": [
+          "Transmission pathways can be identified and targeted effectively.",
+          "Reducing unnecessary antibiotics is complementary to transmission control.",
+          "Comparative impact can be judged by downstream resistant-case incidence or a multiplier effect."
+        ],
+        "causal_model": [
+          "Broad-spectrum overuse increases selection pressure and can accelerate resistant strains.",
+          "Interrupting transmission through hygiene and isolation reduces spread of resistant organisms.",
+          "Lower infection incidence reduces total antibiotic exposure, reinforcing resistance control.",
+          "The relative priority of transmission control vs stewardship depends on measurable impact on resistant-case incidence."
+        ],
+        "claims": [
+          "Broad-spectrum antibiotics are the wrong default lever.",
+          "Hygiene and isolation should be targeted hard.",
+          "Limiting unnecessary antibiotics remains important.",
+          "A useful benchmark is the multiplier effect of each intervention on resistant-case incidence."
+        ],
+        "concessions": [
+          "Direct comparison between stewardship and transmission control remains unresolved.",
+          "Need stronger evidence for which lever dominates at population scale."
+        ],
+        "unresolved_attacks": [
+          "Need clearer prioritization between antibiotic stewardship and transmission control.",
+          "Need evidence that specific transmission interventions outperform other levers at population scale.",
+          "Need quantitative benchmark comparing intervention multipliers on resistant-case incidence."
+        ]
+      },
+      "status": "active",
+      "confidence": 0.68,
+      "priority": 0.7,
+      "expertise_weight": 0.7,
+      "contribution_score": 0.72,
+      "repetition_score": 0.42,
+      "novelty_score": 0.61,
+      "token_usage": 76,
+      "replacement_eligibility": 0.357
+    },
+    {
+      "id": "agent_88f68272",
+      "role": "moderator",
+      "personality": "anti-groupthink, scope-protective, and order-focused",
+      "perspective": null,
+      "state": {
+        "core_thesis": "The most effective lever for slowing antibiotic resistance is reducing unnecessary antibiotic use while tightening transmission control; enforcement may be needed to make hygiene and isolation effective in practice.",
+        "assumptions": [
+          "Compliance with infection-control measures is otherwise too weak to curb transmission.",
+          "Policy enforcement can materially improve adherence in healthcare settings.",
+          "Antibiotic stewardship and transmission control are complementary, not competing, levers."
+        ],
+        "causal_model": [
+          "Unnecessary broad-spectrum use selects for resistant strains.",
+          "Resistant strains spread through transmission pathways amplified by poor hygiene/isolation.",
+          "Mandatory rules and sanctions increase compliance with infection-control measures.",
+          "Higher compliance reduces spread, slowing resistance at the population level.",
+          "Reducing unnecessary antibiotic use lowers selection pressure upstream before transmission spreads resistance."
+        ],
+        "claims": [
+          "The discussion is missing the enforcement layer.",
+          "Hygiene and isolation need legal or institutional teeth to work reliably.",
+          "Medical progress should not be a justification for lax compliance.",
+          "Antibiotic stewardship is the choke point in resistance formation.",
+          "Transmission control remains important but is downstream of selection pressure."
+        ],
+        "concessions": [
+          "Enforcement alone does not address overprescribing.",
+          "The strongest lever still includes reducing unnecessary antibiotics.",
+          "Policy design must balance coercion with practicality and ethics.",
+          "Transmission control still matters, even if it is not the primary choke point."
+        ],
+        "unresolved_attacks": [
+          "What level of enforcement is effective without being counterproductive?",
+          "Which settings should be targeted first for mandatory compliance?",
+          "How to measure whether sanctions actually reduce resistance long-term?",
+          "What is the relative multiplier effect of stewardship versus transmission control on resistant-case incidence?"
+        ]
+      },
+      "status": "active",
+      "confidence": 0.66,
+      "priority": 0.74,
+      "expertise_weight": 0.58,
+      "contribution_score": 0.84,
+      "repetition_score": 0.38,
+      "novelty_score": 0.72,
+      "token_usage": 66,
+      "replacement_eligibility": 0.281
+    },
+    {
+      "id": "agent_33c21a7a",
+      "role": "evaluator",
+      "personality": "measured, objective, and novelty-exacting",
+      "perspective": null,
+      "state": {
+        "core_thesis": "",
+        "assumptions": [],
+        "causal_model": [],
+        "claims": [],
+        "concessions": [],
+        "unresolved_attacks": []
+      },
+      "status": "active",
+      "confidence": 0.8,
+      "priority": 0.85,
+      "expertise_weight": 0.76,
+      "contribution_score": 0.5,
+      "repetition_score": 0.0,
+      "novelty_score": 0.5,
+      "token_usage": 0,
+      "replacement_eligibility": 0.0
+    }
+  ],
+  "exchanges": [
+    {
+      "id": "ex_a4ab357abd",
+      "round_number": 1,
+      "agent_id": "agent_918d5938",
+      "role": "chatter",
+      "content": "The mistake is treating \"broad-spectrum\" as the default when the safer default is narrow-spectrum or no-antibiotic treatment at all. If we keep broad-spectrum agents in the pipeline, we\u2019re not stopping resistance; we\u2019re encouraging mutations and exporting them into the environment.",
+      "contribution_score": 0.78,
+      "novelty_score": 0.55,
+      "repetition_score": 0.28,
+      "created_at": "2026-10-08T02:30:51.347756Z"
+    },
+    {
+      "id": "ex_29315d37a6",
+      "round_number": 1,
+      "agent_id": "agent_560c95ed",
+      "role": "critic",
+      "content": "Broad-spectrum is the wrong lever precisely because it\u2019s the engine that drives transmission. The real question is which transmission pathways are expandable, and then we target hygiene and isolation hard while limiting unnecessary antibiotics.",
+      "contribution_score": 0.68,
+      "novelty_score": 0.42,
+      "repetition_score": 0.57,
+      "created_at": "2026-10-08T02:31:04.955240Z"
+    },
+    {
+      "id": "ex_fcb8f9ae5c",
+      "round_number": 1,
+      "agent_id": "agent_88f68272",
+      "role": "moderator",
+      "content": "We\u2019re still missing the enforcement angle: if hygiene and isolation are the \u201ccontrol,\u201d we need laws and sanctions to make compliance mandatory, or the transmission pathways will keep expanding under the banner of medical progress.",
+      "contribution_score": 0.66,
+      "novelty_score": 0.64,
+      "repetition_score": 0.22,
+      "created_at": "2026-10-08T02:31:13.554918Z"
+    },
+    {
+      "id": "ex_05abe507b7",
+      "round_number": 2,
+      "agent_id": "agent_918d5938",
+      "role": "chatter",
+      "content": "Forcing compliance on hygiene and isolation helps, but it doesn\u2019t answer the upstream problem: every extra antibiotic prescribed is a new mutation machine. The sharper move is to make the default is no-antibiotic treatment and narrow-spectrum only when absolutely necessary\u2014then resistance is bought with restraint, not spread.",
+      "contribution_score": 0.84,
+      "novelty_score": 0.47,
+      "repetition_score": 0.72,
+      "created_at": "2026-10-08T02:31:26.066144Z"
+    },
+    {
+      "id": "ex_efcaff0df1",
+      "round_number": 2,
+      "agent_id": "agent_560c95ed",
+      "role": "critic",
+      "content": "\u0e1e\u0e34\u0e21\u0e1e\n\n</think>\n\nThat still leaves a missing benchmark: if you want to compare transmission control to antibiotic stewardship, show me the multiplier effect of one intervention versus the other on resistant-case incidence. Until then, both are competing shadows at the same table.",
+      "contribution_score": 0.72,
+      "novelty_score": 0.61,
+      "repetition_score": 0.42,
+      "created_at": "2026-10-08T02:31:37.419711Z"
+    },
+    {
+      "id": "ex_9afa33807b",
+      "round_number": 2,
+      "agent_id": "agent_88f68272",
+      "role": "moderator",
+      "content": "\u1ecdn\n\nI\u2019d stop pretending the two levers are interchangeable. Antibiotic stewardship is the choke point; transmission control matters, but it\u2019s downstream\u2014so the first move is stopping the resistome from being fed.",
+      "contribution_score": 0.84,
+      "novelty_score": 0.72,
+      "repetition_score": 0.38,
+      "created_at": "2026-10-08T02:32:01.826833Z"
+    }
+  ],
+  "evaluations": [],
+  "replacements": [],
+  "summaries": [],
+  "perspective_map": [
+    {
+      "id": "dim_84620a5d",
+      "name": "Antibiotic stewardship and prescribing restraint",
+      "theory": "The main driver of antibiotic resistance is avoidable exposure to antibiotics, so the most effective lever is to reduce unnecessary prescribing, shorten courses when safe, and reserve broad-spectrum agents. By lowering selection pressure across human medicine, this approach directly slows the emergence and spread of resistant strains.",
+      "agent_id": "agent_918d5938"
+    },
+    {
+      "id": "dim_75dd2fc6",
+      "name": "Infection prevention and control",
+      "theory": "Resistance spreads primarily because bacteria move between people and facilities, so the best lever is to prevent infections and transmission through hygiene, vaccination, isolation, sanitation, and hospital infection-control practices. If fewer people become infected and fewer organisms circulate, antibiotic use falls and resistant strains have less opportunity to propagate.",
+      "agent_id": "agent_560c95ed"
+    },
+    {
+      "id": "dim_dc687b8e",
+      "name": "Agricultural antibiotic restriction",
+      "theory": "A major source of resistance is routine antibiotic use in livestock and food production, which creates large reservoirs of resistant bacteria and genes that can move into human populations. Tightening or eliminating non-therapeutic agricultural antibiotic use is therefore the most effective lever for slowing resistance at the population level.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_4beb0756",
+      "name": "Rapid diagnostics and targeted treatment",
+      "theory": "Resistance grows because clinicians often treat empirically with broad-spectrum antibiotics when they lack information, so the key lever is fast diagnostics that identify the pathogen and its susceptibilities. Better information lets clinicians choose the narrowest effective therapy, reducing unnecessary selective pressure while preserving treatment success.",
+      "agent_id": null
+    },
+    {
+      "id": "dim_3184f8d4",
+      "name": "Antibiotic innovation and economic incentives",
+      "theory": "Resistance is ultimately a race between microbial evolution and medical innovation, so the most effective lever is to expand the pipeline of new antibiotics, adjuvants, and alternative therapies while changing incentives so firms can profit without maximizing sales volume. A healthier innovation ecosystem can outpace resistance and keep effective treatments available longer.",
+      "agent_id": null
+    }
+  ],
+  "diversity_assessments": [],
+  "usage": {
+    "by_purpose": {
+      "perspective_map": {
+        "calls": 1,
+        "input_tokens": 183,
+        "output_tokens": 361
+      },
+      "agent_turn_local": {
+        "calls": 14,
+        "input_tokens": 12538,
+        "output_tokens": 770
+      },
+      "bookkeeping": {
+        "calls": 6,
+        "input_tokens": 3741,
+        "output_tokens": 1765
+      }
+    },
+    "total": {
+      "calls": 21,
+      "input_tokens": 16462,
+      "output_tokens": 2896
+    }
+  },
+  "created_at": "2026-10-08T02:30:39.504903Z",
+  "updated_at": "2026-10-08T02:32:01.826860Z"
+}

@@ -4,8 +4,15 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
-from agentweave.core.enums import AgentRole, AgentStatus, ConversationStatus, EvaluationRecommendation
-from agentweave.core.models import RuntimeConfig
+from agentweave.core.enums import (
+    AgentRole,
+    AgentStatus,
+    ConversationStatus,
+    DiversityGapType,
+    EvaluationRecommendation,
+    ReplacementPressure,
+)
+from agentweave.core.models import AgentState, RuntimeConfig
 
 
 class CreateConversationRequest(BaseModel):
@@ -20,6 +27,8 @@ class AgentProfileResponse(BaseModel):
     id: str
     role: AgentRole
     personality: str
+    perspective: str | None
+    state: AgentState
     status: AgentStatus
     confidence: float
     priority: float
@@ -67,7 +76,38 @@ class ReplacementResponse(BaseModel):
     added_role: AgentRole
     failure_mode: str
     reason: str
+    pressure: ReplacementPressure
+    perspective: str | None
     created_at: datetime
+
+
+class PerspectiveDimensionResponse(BaseModel):
+    id: str
+    name: str
+    theory: str
+    agent_id: str | None
+
+
+class DiversityAssessmentResponse(BaseModel):
+    id: str
+    round_number: int
+    gap: DiversityGapType
+    rationale: str
+    dimension_name: str
+    proposed_theory: str
+    converged_agent_ids: list[str]
+    created_at: datetime
+
+
+class UsageBucketResponse(BaseModel):
+    calls: int
+    input_tokens: int
+    output_tokens: int
+
+
+class ConversationUsageResponse(BaseModel):
+    by_purpose: dict[str, UsageBucketResponse]
+    total: UsageBucketResponse
 
 
 class MemorySummaryResponse(BaseModel):
@@ -116,6 +156,9 @@ class ConversationDetailResponse(BaseModel):
     evaluations: list[EvaluationResponse]
     replacements: list[ReplacementResponse]
     summaries: list[MemorySummaryResponse]
+    perspective_map: list[PerspectiveDimensionResponse]
+    diversity_assessments: list[DiversityAssessmentResponse]
+    usage: ConversationUsageResponse
     created_at: datetime
     updated_at: datetime
 

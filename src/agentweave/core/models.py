@@ -4,15 +4,20 @@ from datetime import datetime, timezone
 from typing import Any
 from uuid import uuid4
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, computed_field
 
 from agentweave.config import DEFAULT_RUNTIME
 from agentweave.core.enums import (
     AgentRole,
     AgentStatus,
     ConversationStatus,
+    DiversityGapType,
     EvaluationRecommendation,
+    ReplacementPressure,
 )
+from agentweave.tuning import TuningConfig
+
+MAX_STATE_ITEMS = 6
 
 
 def utc_now() -> datetime:
@@ -39,12 +44,43 @@ class RuntimeConfig(BaseModel):
         default=DEFAULT_RUNTIME.stagnation_threshold,
         ge=1,
     )
+    history_window: int = Field(default=8, ge=1, le=50)
+    perspective_dimensions: int = Field(default=5, ge=0, le=10)
+    diversity_pressure: bool = True
+
+
+class AgentState(BaseModel):
+    """Private, persistent reasoning state. Conversation history is evidence for it, not its source."""
+
+    core_thesis: str = ""
+    assumptions: list[str] = Field(default_factory=list)
+    causal_model: list[str] = Field(default_factory=list)
+    claims: list[str] = Field(default_factory=list)
+    concessions: list[str] = Field(default_factory=list)
+    unresolved_attacks: list[str] = Field(default_factory=list)
+
+    def absorb(self, update: AgentState) -> None:
+        # The thesis anchors the agent's identity; an empty update never erases it.
+        if update.core_thesis.strip() and not self.core_thesis:
+            self.core_thesis = update.core_thesis.strip()
+        for name in ("assumptions", "causal_model", "claims", "concessions", "unresolved_attacks"):
+            items = [item.strip() for item in getattr(update, name) if item.strip()]
+            setattr(self, name, items[-MAX_STATE_ITEMS:])
+
+
+class PerspectiveDimension(BaseModel):
+    id: str = Field(default_factory=lambda: f"dim_{uuid4().hex[:8]}")
+    name: str
+    theory: str
+    agent_id: str | None = None
 
 
 class AgentProfile(BaseModel):
     id: str = Field(default_factory=lambda: f"agent_{uuid4().hex[:8]}")
     role: AgentRole
     personality: str
+    perspective: str | None = None
+    state: AgentState = Field(default_factory=AgentState)
     status: AgentStatus = AgentStatus.ACTIVE
     confidence: float = Field(default=0.5, ge=0.0, le=1.0)
     priority: float = Field(default=0.5, ge=0.0, le=1.0)
@@ -92,6 +128,19 @@ class ReplacementEvent(BaseModel):
     added_role: AgentRole
     failure_mode: str
     reason: str
+    pressure: ReplacementPressure = ReplacementPressure.QUALITY
+    perspective: str | None = None
+    created_at: datetime = Field(default_factory=utc_now)
+
+
+class DiversityAssessment(BaseModel):
+    id: str = Field(default_factory=lambda: f"div_{uuid4().hex[:10]}")
+    round_number: int = Field(ge=1)
+    gap: DiversityGapType = DiversityGapType.NONE
+    rationale: str = ""
+    dimension_name: str = ""
+    proposed_theory: str = ""
+    converged_agent_ids: list[str] = Field(default_factory=list)
     created_at: datetime = Field(default_factory=utc_now)
 
 
@@ -111,6 +160,33 @@ class SharedContext(BaseModel):
     history: list[str] = Field(default_factory=list)
 
 
+class UsageBucket(BaseModel):
+    calls: int = Field(default=0, ge=0)
+    input_tokens: int = Field(default=0, ge=0)
+    output_tokens: int = Field(default=0, ge=0)
+
+
+class ConversationUsage(BaseModel):
+    """Model-call cost, attributed by purpose: agent_turn, evaluation, diversity, perspective_map."""
+
+    by_purpose: dict[str, UsageBucket] = Field(default_factory=dict)
+
+    def record(self, purpose: str, input_tokens: int, output_tokens: int) -> None:
+        bucket = self.by_purpose.setdefault(purpose, UsageBucket())
+        bucket.calls += 1
+        bucket.input_tokens += max(input_tokens, 0)
+        bucket.output_tokens += max(output_tokens, 0)
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def total(self) -> UsageBucket:
+        return UsageBucket(
+            calls=sum(b.calls for b in self.by_purpose.values()),
+            input_tokens=sum(b.input_tokens for b in self.by_purpose.values()),
+            output_tokens=sum(b.output_tokens for b in self.by_purpose.values()),
+        )
+
+
 class Conversation(BaseModel):
     id: str = Field(default_factory=lambda: f"conv_{uuid4().hex}")
     topic: str
@@ -118,6 +194,7 @@ class Conversation(BaseModel):
     constraints: list[str] = Field(default_factory=list)
     status: ConversationStatus = ConversationStatus.DRAFT
     runtime: RuntimeConfig = Field(default_factory=RuntimeConfig)
+    tuning: TuningConfig = Field(default_factory=TuningConfig)
     current_round: int = Field(default=0, ge=0)
     stall_count: int = Field(default=0, ge=0)
     final_summary: str | None = None
@@ -127,6 +204,9 @@ class Conversation(BaseModel):
     evaluations: list[EvaluationSnapshot] = Field(default_factory=list)
     replacements: list[ReplacementEvent] = Field(default_factory=list)
     summaries: list[MemorySummary] = Field(default_factory=list)
+    perspective_map: list[PerspectiveDimension] = Field(default_factory=list)
+    diversity_assessments: list[DiversityAssessment] = Field(default_factory=list)
+    usage: ConversationUsage = Field(default_factory=ConversationUsage)
     created_at: datetime = Field(default_factory=utc_now)
     updated_at: datetime = Field(default_factory=utc_now)
 

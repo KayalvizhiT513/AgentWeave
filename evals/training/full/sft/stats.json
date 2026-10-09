@@ -1,0 +1,26 @@
+{
+ "samples": 1080,
+ "no_usable_reply": 297,
+ "skipped_by_filter": 0,
+ "train": 712,
+ "valid": 71,
+ "pairs": 175,
+ "by_selection": {
+  "compliance": 468,
+  "judge": 175,
+  "tie": 140
+ },
+ "by_role": {
+  "chatter": 174,
+  "moderator": 300,
+  "critic": 202,
+  "explorer": 97,
+  "contrarian": 10
+ },
+ "valid_topics": [
+  "car-free-centers",
+  "global-min-tax",
+  "lab-meat",
+  "newsroom-ai"
+ ]
+}

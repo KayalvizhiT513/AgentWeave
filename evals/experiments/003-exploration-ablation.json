@@ -1,0 +1,14 @@
+{
+  "id": "003-exploration-ablation",
+  "hypothesis": "Perspective seeding and diversity pressure each preserve disagreement. Prediction: removing both gives the lowest judge_disagreement_preserved and the highest sim_late; seeding alone recovers most of the gap.",
+  "primary_metrics": ["judge_disagreement_preserved", "sim_late", "judge_novelty"],
+  "reps": 2,
+  "runtime": {"max_rounds": 10, "agent_turn_delay_seconds": 0, "evaluation_interval": 3},
+  "baseline": "full",
+  "variants": {
+    "full": {},
+    "no_diversity_pressure": {"runtime": {"diversity_pressure": false}},
+    "no_perspectives": {"runtime": {"perspective_dimensions": 0}},
+    "neither": {"runtime": {"perspective_dimensions": 0, "diversity_pressure": false}}
+  }
+}

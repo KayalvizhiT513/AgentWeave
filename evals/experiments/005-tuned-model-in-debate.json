@@ -1,0 +1,13 @@
+{
+  "id": "005-tuned-model-in-debate",
+  "hypothesis": "A debate whose agents are all voiced by the tuned local model reads better than the same debate voiced by the untuned local model, and still worse than one voiced by the hosted model. Prediction: tuned beats untuned on at least 60% of clear whole-debate verdicts; hosted beats tuned on more than 70%; the tuned model has a lower cut_rate than the untuned one. All three arms speak plain text and share one hosted bookkeeping step, so only the speaker differs.",
+  "primary_metrics": ["pairwise win rate (tuned vs untuned, hosted vs tuned)", "cut_rate", "judge_disagreement_preserved"],
+  "reps": 2,
+  "runtime": {"max_rounds": 10, "agent_turn_delay_seconds": 0},
+  "baseline": "hosted_plain",
+  "variants": {
+    "hosted_plain": {"tuning": {"default": {"plain_text": true}}},
+    "local_untuned": {"tuning": {"default": {"endpoint": "http://127.0.0.1:8081/v1", "temperature": 0.7, "top_p": 0.95}}},
+    "local_tuned": {"tuning": {"default": {"endpoint": "http://127.0.0.1:8082/v1", "temperature": 0.7, "top_p": 0.95}}}
+  }
+}
