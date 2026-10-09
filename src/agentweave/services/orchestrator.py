@@ -30,78 +30,91 @@ ROLE_LIBRARY: dict[AgentRole, dict[str, float | str]] = {
         "confidence": 0.72,
         "priority": 0.78,
         "expertise_weight": 0.62,
+        "temperature": 0.9,
     },
     AgentRole.CRITIC: {
         "personality": "sharply skeptical, rigorous, and anti-consensus",
         "confidence": 0.68,
         "priority": 0.7,
         "expertise_weight": 0.7,
+        "temperature": 0.75,
     },
     AgentRole.MODERATOR: {
         "personality": "anti-groupthink, scope-protective, and order-focused",
         "confidence": 0.66,
         "priority": 0.74,
         "expertise_weight": 0.58,
+        "temperature": 0.4,
     },
     AgentRole.EVALUATOR: {
         "personality": "measured, objective, and novelty-exacting",
         "confidence": 0.8,
         "priority": 0.85,
         "expertise_weight": 0.76,
+        "temperature": 0.3,
     },
     AgentRole.LISTENER: {
         "personality": "quiet, discerning, and conflict-sensitive synthesizer",
         "confidence": 0.61,
         "priority": 0.45,
         "expertise_weight": 0.67,
+        "temperature": 0.5,
     },
     AgentRole.SYNTHESIZER: {
         "personality": "integrative, dialectical, and trade-off clarifying",
         "confidence": 0.71,
         "priority": 0.65,
         "expertise_weight": 0.71,
+        "temperature": 0.6,
     },
     AgentRole.DOMAIN_EXPERT: {
         "personality": "hyper-specialized, nuance-exacting, and mechanics-focused",
         "confidence": 0.74,
         "priority": 0.67,
         "expertise_weight": 0.82,
+        "temperature": 0.65,
     },
     AgentRole.PRACTICAL_ENGINEER: {
         "personality": "friction-seeking, execution-focused, and edge-case minded",
         "confidence": 0.72,
         "priority": 0.66,
         "expertise_weight": 0.78,
+        "temperature": 0.65,
     },
     AgentRole.RATIONAL_ANALYST: {
         "personality": "coldly logical, premise-testing, and quantitative",
         "confidence": 0.76,
         "priority": 0.62,
         "expertise_weight": 0.74,
+        "temperature": 0.5,
     },
     AgentRole.MEDIATOR: {
         "personality": "trade-off reframing, bridge-building, and pragmatic",
         "confidence": 0.66,
         "priority": 0.61,
         "expertise_weight": 0.6,
+        "temperature": 0.6,
     },
     AgentRole.VISIONARY: {
         "personality": "paradigm-shifting, radical, and horizon-expanding",
         "confidence": 0.83,
         "priority": 0.73,
         "expertise_weight": 0.61,
+        "temperature": 0.95,
     },
     AgentRole.CONSTRAINT_PLANNER: {
         "personality": "boundary-enforcing, cost-sensitive, and limit-focused",
         "confidence": 0.69,
         "priority": 0.72,
         "expertise_weight": 0.72,
+        "temperature": 0.5,
     },
     AgentRole.CONTRARIAN: {
         "personality": "relentlessly dissenting, blind-spot exposing, and counter-narrative",
         "confidence": 0.65,
         "priority": 0.57,
         "expertise_weight": 0.66,
+        "temperature": 0.9,
     },
 }
 
@@ -125,6 +138,7 @@ def _make_agent(role: AgentRole) -> AgentProfile:
         confidence=float(profile["confidence"]),
         priority=float(profile["priority"]),
         expertise_weight=float(profile["expertise_weight"]),
+        temperature=float(profile.get("temperature", 0.7)),
     )
 
 
@@ -349,8 +363,9 @@ class ConversationOrchestrator:
     def _determine_failure_mode(self, conversation: Conversation, evaluation) -> str:
         if evaluation.redundancy_score > 0.62:
             return "too_repetitive"
-        if evaluation.novelty_score < 0.35:
-            return "no_creativity"
+        if evaluation.novelty_score < 0.40:
+            # Premature convergence / lack of fresh perspectives
+            return "too_repetitive" if evaluation.redundancy_score > 0.40 else "no_creativity"
         if evaluation.depth_score < 0.45:
             return "too_shallow"
         if conversation.current_round >= conversation.runtime.restructuring_interval:

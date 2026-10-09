@@ -24,6 +24,7 @@ class AgentProfileResponse(BaseModel):
     confidence: float
     priority: float
     expertise_weight: float
+    temperature: float
     contribution_score: float
     repetition_score: float
     novelty_score: float
