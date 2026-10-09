@@ -51,6 +51,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "model": self.settings.openai_default_model,
             "instructions": self._agent_instructions(agent),
             "input": self._agent_input(conversation, agent),
+            "temperature": agent.temperature,
             "text": {
                 "format": {
                     "type": "json_schema",
@@ -175,13 +176,14 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "You are participating in a multi-agent discussion and your visible output must read like natural human speech. "
             f"Your role is '{agent.role.value}' and your personality is '{agent.personality}'. "
             f"Role brief: {role_brief} "
-            "Maintain independent thought and strictly adhere to your assigned role and personality. "
-            "Do NOT passively agree, echo, or summarize prior participants unless your explicit role requires synthesis. "
-            "Challenge consensus, expose unexamined assumptions, or introduce a novel, distinct angle from your role's viewpoint. "
+            "CRITICAL ANTI-CONVERGENCE DIRECTIVE: Do NOT engage in sycophancy, polite agreement, or passive echo. "
+            "Avoid statements like 'I agree with', 'Building on what X said', or defaulting to consensus. "
+            "Maintain fiercely independent thought strictly consistent with your assigned role and personality. "
+            "Introduce an unexamined angle, challenge hidden premises, advocate for an alternative counter-proposal, or highlight neglected edge cases. "
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
-            "Make one concrete contribution that directly engages with what others have said while offering a distinct perspective. "
+            "Make one concrete contribution that directly engages with what others have said while offering a distinct, non-overlapping perspective. "
             "Use one or two concise sentences, no more than 50 words. Prefer crisp argumentative speech over exposition. "
             "If the scene is a debate, sound like a debater. If the scene is collaborative design, sound like a collaborator. "
             "The 'content' field is the only user-visible text. The numeric scores are hidden metadata for the orchestrator. "
@@ -201,6 +203,11 @@ class OpenAIAgentProvider(BaseAgentProvider):
             if recent_history
             else "- none yet"
         )
+        conflicts_block = (
+            "\n".join(f"- {item}" for item in conversation.shared_context.active_conflicts)
+            if conversation.shared_context.active_conflicts
+            else "- No active unresolved conflicts explicitly logged yet."
+        )
         return [
             {
                 "role": "user",
@@ -210,9 +217,10 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Current speaker role: {agent.role.value}\n"
                     f"Active roles: {active_roles}\n"
                     f"Hard constraints:\n{constraints}\n"
+                    f"Active Unresolved Conflicts / Debates:\n{conflicts_block}\n"
                     f"Recent dialogue:\n{history_block}\n"
-                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon. "
-                    "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought or constructive friction."
+                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon or offer generic agreement. "
+                    "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought, counter-argument, or constructive friction."
                 ),
             }
         ]

@@ -6,7 +6,7 @@ from agentweave.core.enums import (
     EvaluationRecommendation,
     EventType,
 )
-from agentweave.core.models import EvaluationSnapshot, RuntimeConfig
+from agentweave.core.models import Conversation, EvaluationSnapshot, RuntimeConfig, SharedContext
 from agentweave.services.event_stream import EventBus
 from agentweave.services.orchestrator import ConversationOrchestrator
 from agentweave.services.provider import AgentResponse, BaseAgentProvider
@@ -360,3 +360,33 @@ def test_concurrent_step_calls_are_serialized_per_conversation() -> None:
         assert provider.evaluate_calls == 2
 
     asyncio.run(scenario())
+
+
+def test_determine_failure_mode_premature_convergence() -> None:
+    store = ConversationStore()
+    event_bus = EventBus()
+    provider = ScriptedProvider([])
+    orchestrator = ConversationOrchestrator(store, event_bus, provider)
+
+    conversation = Conversation(
+        topic="Test topic",
+        shared_context=SharedContext(goal="Test topic"),
+        runtime=RuntimeConfig(restructuring_interval=5),
+        current_round=2,
+    )
+
+    eval_snapshot = EvaluationSnapshot(
+        round_number=2,
+        progress_score=0.4,
+        novelty_score=0.30,
+        coherence_score=0.7,
+        redundancy_score=0.50,
+        goal_alignment_score=0.8,
+        depth_score=0.5,
+        conflict_utility_score=0.3,
+        recommendation=EvaluationRecommendation.RESTRUCTURE,
+        rationale="Low novelty and moderate redundancy.",
+    )
+
+    failure_mode = orchestrator._determine_failure_mode(conversation, eval_snapshot)
+    assert failure_mode == "too_repetitive"

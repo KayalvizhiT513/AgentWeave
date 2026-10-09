@@ -77,13 +77,15 @@ def test_openai_provider_respond(monkeypatch) -> None:
     assert response.contribution_score == 0.8
     assert FakeAsyncClient.calls[0]["headers"]["Authorization"] == "Bearer test-key"
     assert FakeAsyncClient.calls[0]["url"].endswith("/responses")
+    assert FakeAsyncClient.calls[0]["json"]["temperature"] == 0.7
     instructions = FakeAsyncClient.calls[0]["json"]["instructions"]
     assert "natural human speech" in instructions
     assert "Do not label yourself with prefixes" in instructions
-    assert "Maintain independent thought" in instructions
-    assert "Challenge consensus" in instructions
+    assert "CRITICAL ANTI-CONVERGENCE DIRECTIVE" in instructions
+    assert "Avoid statements like 'I agree with'" in instructions
     input_text = FakeAsyncClient.calls[0]["json"]["input"][0]["content"]
     assert "Recent dialogue:" in input_text
+    assert "Active Unresolved Conflicts / Debates:" in input_text
     assert "Analyze the recent dialogue through your unique role perspective" in input_text
 
 
