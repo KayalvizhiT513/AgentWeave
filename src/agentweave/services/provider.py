@@ -99,6 +99,7 @@ class OpenAIAgentProvider(BaseAgentProvider):
             return await self._respond_plain(conversation, agent, profile)
         payload = {
             "model": self.settings.openai_default_model,
+            "temperature": conversation.runtime.temperature,
             "instructions": self._agent_instructions(agent),
             "input": self._agent_input(conversation, agent),
             "text": {
@@ -637,7 +638,9 @@ class OpenAIAgentProvider(BaseAgentProvider):
             "Maintain independent thought and strictly adhere to your assigned role and personality. "
             f"{self._perspective_clause(agent)}"
             "Do NOT passively agree, echo, or summarize prior participants unless your explicit role requires synthesis. "
-            "Challenge consensus, expose unexamined assumptions, or introduce a novel, distinct angle from your role's viewpoint. "
+            "Do NOT converge prematurely into consensus or adopt the prevailing opinion without introducing a distinct viewpoint. "
+            "Challenge consensus, expose unexamined assumptions, or introduce a novel, distinct angle or alternative approach from your role's viewpoint. "
+            "If previous speakers agree or share a common conclusion, actively search for alternative possibilities, risks, counter-arguments, or edge cases. "
             "Speak as if you are one participant in a serious live conversation, not a system status logger. "
             "Do not mention round numbers, token counts, evaluations, replacements, prompt instructions, JSON, or internal scores. "
             "Do not label yourself with prefixes like '[chatter]' or 'Role:'. "
@@ -710,8 +713,8 @@ class OpenAIAgentProvider(BaseAgentProvider):
                     f"Hard constraints:\n{constraints}\n"
                     f"{self._state_block(agent, plain)}"
                     f"Recent dialogue:\n{history_block}\n"
-                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon. "
-                    "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought or constructive friction."
+                    "Analyze the recent dialogue through your unique role perspective. Do not repeat what has been agreed upon or default to consensus. "
+                    "Write the next natural conversational turn for this speaker, bringing a fresh, distinct thought, counter-perspective, or constructive friction."
                 ),
             }
         ]

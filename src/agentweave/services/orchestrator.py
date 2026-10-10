@@ -293,6 +293,7 @@ class ConversationOrchestrator:
         return [
             _make_agent(AgentRole.CHATTER),
             _make_agent(AgentRole.CRITIC),
+            _make_agent(AgentRole.CONTRARIAN),
             _make_agent(AgentRole.MODERATOR),
             _make_agent(AgentRole.EVALUATOR),
         ]
